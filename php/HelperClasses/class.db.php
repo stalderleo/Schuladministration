@@ -4,7 +4,7 @@
  * @date        1. April 2018
  *
  * Datenbankschnittstelle GIBS Solothurn.
- * Stellt grundlegende Datenbankfunktionen zur Verfügung.
+ * Stellt grundlegende Datenbankfunktionen zur VerfÃ¼gung.
  * In dieser Version wurde die MDB2-Schnittstelle (Pear) durch die PDO-Schnittstelle ersetzt. 
  *
  */
@@ -20,8 +20,8 @@ class db {
 	/**
 	 * Datenbankverbinndung herstellen
          * @param String $database Bezeichnung der Datenbank
-         * @param String $username Benutzername für den Zugriff auf die Datenbank
-         * @param String $password Kennwort für den Zugriff auf die Datenbank
+         * @param String $username Benutzername fÃ¼r den Zugriff auf die Datenbank
+         * @param String $password Kennwort fÃ¼r den Zugriff auf die Datenbank
 	 */
 	public static function connect( $database, $username, $password ) {   
             if (self::$dbhandle == Null) {
@@ -50,8 +50,8 @@ class db {
         }
         
 	/**
-	 * Übergebenen Select ausführen und Resultat im assoziativen Array speichern
-         * @param String $sql SQL-Select, welcher ausfgeführt werden soll
+	 * Ãœbergebenen Select ausfÃ¼hren und Resultat im assoziativen Array speichern
+         * @param String $sql SQL-Select, welcher ausfgefÃ¼hrt werden soll
 	 */
 	public function select( $sql ) {
             try {
@@ -63,8 +63,8 @@ class db {
 	}
 
 	/**
-	 * Query ( insert, update, delete )auf der Datenbank ausführen
-         * @param String $sql SQL-Anweisung, welche ausfgeführt werden soll
+	 * Query ( insert, update, delete )auf der Datenbank ausfÃ¼hren
+         * @param String $sql SQL-Anweisung, welche ausfgefÃ¼hrt werden soll
 	 */
 	public function query( $sql ) {
             try {

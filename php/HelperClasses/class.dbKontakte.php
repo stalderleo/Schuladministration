@@ -3,7 +3,7 @@
  * @author Daniel Mosimann
  * @date 1. April 2018
  *
- * Datenschnittstelle für die Anwendung MVC-GIBS.
+ * Datenschnittstelle fÃ¼r die Anwendung MVC-GIBS.
  *
  */
 
@@ -33,7 +33,7 @@ class dbKontakte extends db {
         }
 
         /**
-         *  Einen Kontakt in die Tabelle einfügen
+         *  Einen Kontakt in die Tabelle einfÃ¼gen
          */
 	public function insertKontakt( $kontakt ) {
             if ($kontakt instanceof  kontaktData) {
@@ -48,7 +48,7 @@ class dbKontakte extends db {
 	}
         
         /**
-         * Einen bestimmten Kontakt löschen
+         * Einen bestimmten Kontakt lÃ¶schen
          */
         public function deleteKontakt( $kid ) {
             $sql = "delete from kontakte where kid='$kid'";

@@ -2,7 +2,7 @@
  * @author Daniel Mosimann
  * @date 1. April 2018
  *
- * Menu-Template. Mit Toggler-Button für Smartphones.
+ * Menu-Template. Mit Toggler-Button fÃ¼r Smartphones.
  *
 -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">

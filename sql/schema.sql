@@ -2,12 +2,15 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 
-CREATE SCHEMA IF NOT EXISTS `schulAdministration` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci ;
+DROP SCHEMA IF EXISTS `schulAdministration` ;
+CREATE SCHEMA IF NOT EXISTS `schulAdministration` DEFAULT CHARACTER SET utf8 ;
 USE `schulAdministration` ;
 
 -- -----------------------------------------------------
 -- Table `schulAdministration`.`person`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `schulAdministration`.`person` ;
+
 CREATE  TABLE IF NOT EXISTS `schulAdministration`.`person` (
   `pid` INT NOT NULL ,
   `username` VARCHAR(100) NOT NULL ,
@@ -26,6 +29,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `schulAdministration`.`schueler`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `schulAdministration`.`schueler` ;
+
 CREATE  TABLE IF NOT EXISTS `schulAdministration`.`schueler` (
   `sid` INT NOT NULL ,
   INDEX `fk_schueler_person` (`sid` ASC) ,
@@ -41,6 +46,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `schulAdministration`.`lehrperson`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `schulAdministration`.`lehrperson` ;
+
 CREATE  TABLE IF NOT EXISTS `schulAdministration`.`lehrperson` (
   `lid` INT NOT NULL ,
   INDEX `fk_lehrperson_person1` (`lid` ASC) ,
@@ -56,6 +63,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `schulAdministration`.`angestellte`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `schulAdministration`.`angestellte` ;
+
 CREATE  TABLE IF NOT EXISTS `schulAdministration`.`angestellte` (
   `aid` INT NOT NULL ,
   INDEX `fk_angestellte_person1` (`aid` ASC) ,
@@ -71,6 +80,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `schulAdministration`.`fach`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `schulAdministration`.`fach` ;
+
 CREATE  TABLE IF NOT EXISTS `schulAdministration`.`fach` (
   `fid` INT NOT NULL AUTO_INCREMENT ,
   `kuerzel` VARCHAR(45) NULL ,
@@ -82,6 +93,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `schulAdministration`.`klasse`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `schulAdministration`.`klasse` ;
+
 CREATE  TABLE IF NOT EXISTS `schulAdministration`.`klasse` (
   `kid` INT NOT NULL AUTO_INCREMENT ,
   `kuerzel` VARCHAR(10) NULL ,
@@ -93,6 +106,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `schulAdministration`.`schueler_has_klasse`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `schulAdministration`.`schueler_has_klasse` ;
+
 CREATE  TABLE IF NOT EXISTS `schulAdministration`.`schueler_has_klasse` (
   `sid` INT NOT NULL ,
   `kid` INT NOT NULL ,
@@ -116,6 +131,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `schulAdministration`.`lehrperson_klasse_fach`
 -- -----------------------------------------------------
+DROP TABLE IF EXISTS `schulAdministration`.`lehrperson_klasse_fach` ;
+
 CREATE  TABLE IF NOT EXISTS `schulAdministration`.`lehrperson_klasse_fach` (
   `lid` INT NOT NULL ,
   `kid` INT NOT NULL ,
