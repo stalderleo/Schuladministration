@@ -1,27 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/xampp/htdocs/administration/Schuladministration/templates/php/DataClasses/class.kurs.php</file>
-            <file>file:/C:/xampp/htdocs/administration/Schuladministration/templates/update/update-lehrer.htm.php</file>
-            <file>file:/C:/xampp/htdocs/administration/Schuladministration/templates/add/add-kurs.htm.php</file>
-            <file>file:/C:/xampp/htdocs/administration/Schuladministration/templates/php/DataClasses/class.schueler.php</file>
-            <file>file:/C:/xampp/htdocs/administration/Schuladministration/templates/php/DataClasses/class.lehrer.php</file>
-            <file>file:/C:/xampp/htdocs/administration/Schuladministration/templates/add/add-schueler.htm.php</file>
-            <file>file:/C:/xampp/htdocs/administration/Schuladministration/templates/detail/detail-lehrer.htm.php</file>
-            <file>file:/C:/xampp/htdocs/administration/Schuladministration/templates/update/update-schueler.htm.php</file>
-            <file>file:/C:/xampp/htdocs/administration/Schuladministration/templates/php/DataClasses/class.person.php</file>
-            <file>file:/C:/xampp/htdocs/administration/Schuladministration/templates/php/DataClasses/class.klasse.php</file>
-            <file>file:/C:/xampp/htdocs/administration/Schuladministration/templates/liste/liste-schueler.htm.php</file>
-            <file>file:/C:/xampp/htdocs/administration/Schuladministration/templates/detail/detail-kurs.htm.php</file>
-            <file>file:/C:/xampp/htdocs/administration/Schuladministration/templates/detail/detail-schueler.htm.php</file>
-            <file>file:/C:/xampp/htdocs/administration/Schuladministration/templates/php/HelperClasses/class.dbKontakte.php</file>
-            <file>file:/C:/xampp/htdocs/administration/Schuladministration/templates/add/add-lehrer.htm.php</file>
-            <file>file:/C:/xampp/htdocs/administration/Schuladministration/templates/detail/detail-klasse.htm.php</file>
-            <file>file:/C:/xampp/htdocs/administration/Schuladministration/templates/php/DataClasses/class.angestellter.php</file>
-            <file>file:/C:/xampp/htdocs/administration/Schuladministration/templates/add/add-klasse.htm.php</file>
-            <file>file:/C:/xampp/htdocs/administration/Schuladministration/templates/update/update-kurs.htm.php</file>
-            <file>file:/C:/xampp/htdocs/administration/Schuladministration/templates/update/update-klasse.htm.php</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

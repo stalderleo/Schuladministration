@@ -78,10 +78,10 @@ class db {
         public function preparedStatementQuery($sql, $params) {
             try {
                 $params = $this->escapeAll($params);
-                self::$dbhandle->prepare($sql);
-                return self::$dbhandle->execute($params);
+                $statement = self::$dbhandle->prepare($sql);
+                return $statement->execute($params);
             } catch (PDOException $ex) {
-                throw new Exception(get_class.': Fehler in Prepared Statement Query: ' . $e->getMessage()."<pre>".$sql."</pre>");
+                throw new Exception(get_class.': Fehler in Prepared Statement Query: ' . $ex->getMessage()."<pre>".$sql."</pre>");
             }
         }
         

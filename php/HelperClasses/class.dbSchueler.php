@@ -29,11 +29,34 @@ class dbSchueler extends db {
     }
     
     public function modifySchueler($schueler) {
-        assertInstanceOf($schueler, schueler);
-        $pid = $this->escape($schueler->pid);
+        basic::assertInstanceOf($schueler, schueler);
         $sql = "UPDATE person "
                 . "SET `username` = ?, `password` = ?, `name` = ?,`vorname` = ?, `geburtsdatum` = ?, "
                 . "`geschlecht` = ?, `kuerzel` = ?, `mail` = ?, `status` = ? "
                 . "WHERE person.pid = ?";
+        $params = array($schueler->username, $schueler->password, $schueler->name, 
+            $schueler->vorname, $schuler->geburtsdatum, $schueler->geschlecht, $schueler->kuerzel, $schueler->mail,
+            $schueler->status, $schueler->pid);
+        $this->preparedStatementQuery($sql, $params);
+    }
+    
+    public function insertSchueler($schueler) {
+        basic::assertInstanceOf($schueler, schueler);
+        echo $schueler->pid;
+        $sql = "INSERT INTO `person` "
+                . "(`pid`, `username`, `password`, `name`, `vorname`, `geburtsdatum`, `geschlecht`, `kuerzel`, `mail`, `status`) "
+                . "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $params = array($schueler->getPid(), $schueler->getUsername(), $schueler->getPassword(), $schueler->getName(), 
+            $schueler->getVorname(), $schuler->getGeburtstag(), $schueler->getGeschlecht(), $schueler->getKuerzel(), $schueler->getMail(),
+            $schueler->getStatus());
+        var_dump($params);
+        $this->preparedStatementQuery($sql, $params);
+    }
+    
+    public function deleteSchueler($sid) {
+        $sid = $this->escape($sid);
+        $sql = "DELETE FROM schueler WHERE schueler.sid = ?";
+        $params = array($sid);
+        $this->preparedStatementQuery($sql, $params);
     }
 }
