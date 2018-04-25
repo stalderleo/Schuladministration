@@ -14,7 +14,7 @@
         <tbody
 <?php foreach ( $this->data->getKontaktListe() as $kontakt ): ?>
             <tr>
-                <td data-label="Löschen"><a href="<?php echo $this->phpmodule?>&kid=<?php echo $kontakt->getKid()?>"><img src="<?php echo config::IMAGE_PATH?>/delete.png" border=\"no\"></a>
+                <td data-label="LÃ¶schen"><a href="<?php echo $this->phpmodule?>&kid=<?php echo $kontakt->getKid()?>"><img src="<?php echo config::IMAGE_PATH?>/delete.png" border=\"no\"></a>
                 <td data-label="Name"><?php echo $kontakt->getName()?></td>
                 <td data-label="Vorname"><?php echo $kontakt->getVorname()?></td>
                 <td data-label="Strasse"><?php echo $kontakt->getStrasse()?></td>
