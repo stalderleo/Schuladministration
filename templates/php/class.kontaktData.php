@@ -3,7 +3,7 @@
  * @author Daniel Mosimann.
  * @date 1. April 2018
  * 
- * Datenstruktur für Kontaktdaten
+ * Datenstruktur fÃ¼r Kontaktdaten
  */
 class kontaktData {
     private $kid;

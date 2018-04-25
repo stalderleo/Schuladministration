@@ -3,21 +3,21 @@
  * @autor Daniel Mosimann.
  * @date 1. April 2018
  *
- * Der Controller nimmt http-Anfragen entgegen, ruft die gewünschten Subcontroller auf, 
- * nimmt den von den Subcontrollern produzierte Output entgegen, fügt diesen in an der
+ * Der Controller nimmt http-Anfragen entgegen, ruft die gewÃ¼nschten Subcontroller auf, 
+ * nimmt den von den Subcontrollern produzierte Output entgegen, fÃ¼gt diesen in an der
  * entsprechenden Position im Haupttemplate ein und sendet die gesamte HTML-Seite dem Browser.
  * 
- * Subcontroller werden über die Methode register_class() registriert. Der erste Parameter weist
+ * Subcontroller werden Ã¼ber die Methode register_class() registriert. Der erste Parameter weist
  * den Namen der Klasse auf, welche den Subcontroller implementiert, der zweite Parameter bestimmt,
- * ob ein Subcontroller immer (permanent) oder nur, falls über die URL verlangt, ausgeführt wird.
+ * ob ein Subcontroller immer (permanent) oder nur, falls Ã¼ber die URL verlangt, ausgefÃ¼hrt wird.
  *
  * Der Output der Subcontroller wird mit dem Befehl $this->content( $class ) in das
- * Haupttemplate eingefügt, wobei der Parameter den Subcontroller identifiziert. Wird
+ * Haupttemplate eingefÃ¼gt, wobei der Parameter den Subcontroller identifiziert. Wird
  * $this->content() ohne Parameter aufgerufen, wird der Output des "verlangten" Subcontrollers
- * eingefügt, was sich typischerweise für den Inhaltsbereich eignet.  
+ * eingefÃ¼gt, was sich typischerweise fÃ¼r den Inhaltsbereich eignet.  
  * 
- * Der "verlangte" Subcontroller via Parameter "show" oder "id" in der URL übergeben.
- * Beispiel: Die URL "http://.../controller.php?show=beispielclasse" führt zur Instanzierung der Klasse
+ * Der "verlangte" Subcontroller via Parameter "show" oder "id" in der URL Ã¼bergeben.
+ * Beispiel: Die URL "http://.../controller.php?show=beispielclasse" fÃ¼hrt zur Instanzierung der Klasse
  * "beispielklasse", welche im Modul "beispielklasse.php" definiert ist.  
  *
  * Der Controller kann direkt instanziert werden, oder als Basisklasse dienen.
@@ -26,13 +26,13 @@
 class controller {
 	private $dispatch_classes = array();        // Liste mit den registrierten Subcontrollern
 	private $active_objects = array();          // Liste mit den Objekten der aktiven Subcontroller
-        private $requested_subcontroller = NULL;    // Der Subcontroller, welcher ausgeführt wird (URL oder default)
+        private $requested_subcontroller = NULL;    // Der Subcontroller, welcher ausgefÃ¼hrt wird (URL oder default)
         private $template_layout = NULL;            // Dateiname des Haupttmplates
 	private $template_path = "";                // Pfad zum Haupttemplate
 	private $class_path = "";                   // Pfad zu den Subcontrollern
 	
 	/**
-	 * Konstruktor. Das Haupttemplate MUSS als Parameter übergeben werden!
+	 * Konstruktor. Das Haupttemplate MUSS als Parameter Ã¼bergeben werden!
 	 * @param $template Dateiname des Haupttemplates
 	 * @param $template_path Verzeichnispfad zu den Templates (php-Dateieb)
 	 * @param $class_path Verzeichnispfad zu den Klassen (php-Dateien)
@@ -45,10 +45,10 @@ class controller {
 	
 	/**
 	 * Mit dieser Methode lassen sich "Subcontroller" registrieren.
-	 * Die Subcontroller-Klassen müssen die Schnittstelle "subcontroller" implementieren.
+	 * Die Subcontroller-Klassen mÃ¼ssen die Schnittstelle "subcontroller" implementieren.
 	 *
 	 * @param $class Name der zu registrierenden Klasse
-	 * @param $always Falls true: Der Subcontroller wird IMMER ausgeführt, auch wenn nicht über die URL verlangt
+	 * @param $always Falls true: Der Subcontroller wird IMMER ausgefÃ¼hrt, auch wenn nicht Ã¼ber die URL verlangt
 	 * @param $menuoption Text, welcher im Menu angezeigt wird, falls leer: Subcontroller wird im Menu nicht angezeigt
 	 */
 	function registerSubcontroller( $class, $menuoption="", $always=false ) {
@@ -57,16 +57,16 @@ class controller {
 	}
 	
 	/**
-	 * Der Dispatcher instanziert die entsprechenden Subkontroller und führt
+	 * Der Dispatcher instanziert die entsprechenden Subkontroller und fÃ¼hrt
 	 * diese aus ( runSubcontroller() ).
 	 */
 	function dispatch() {
                 $url_subcontroller = "";
-                // Der Name des Subcontrollers wird über die URL, via Parameter "show" oder "id" übergeben
+                // Der Name des Subcontrollers wird Ã¼ber die URL, via Parameter "show" oder "id" Ã¼bergeben
                 if ( isset($_REQUEST['show']) ) $url_subcontroller = $_REQUEST['show'];
                 if ( isset($_REQUEST['id']) ) $url_subcontroller = $_REQUEST['id'];
 
-                // Alle "permanenten" Subcontroller und der via URL übergebene Subcontroller werden ausgeführt
+                // Alle "permanenten" Subcontroller und der via URL Ã¼bergebene Subcontroller werden ausgefÃ¼hrt
 		foreach( $this->dispatch_classes as $dclass ) {
 			if ( ($dclass['always'] == true) || ($url_subcontroller == $dclass['class']) ) {
 				$this->runSubcontroller( $dclass['class'] );
@@ -76,7 +76,7 @@ class controller {
 			}
 		}
 
-                // Falls die Variable $requested_object immer noch nicht initialisiert ist, wird der zuerst registrierte Subcontroller ausgeführt
+                // Falls die Variable $requested_object immer noch nicht initialisiert ist, wird der zuerst registrierte Subcontroller ausgefÃ¼hrt
                 // Das ist der Fall, wenn in der URL kein oder ein falscher Subcontroller angegeben wurde
                 if ( $this->requested_subcontroller == NULL ) {
 		//if ( $this->active_objects[$this->requested_subcontroller] == NULL ) {
@@ -86,7 +86,7 @@ class controller {
 	}
 	
 	/**
-	 *  Instanzieren ( new $class() ) und ausführen ( run() ) der Subcontroller.
+	 *  Instanzieren ( new $class() ) und ausfÃ¼hren ( run() ) der Subcontroller.
 	 */	
 	private function runSubcontroller( $class ) {
 		require_once( "class.".$class.".php" );
@@ -96,7 +96,7 @@ class controller {
 	
 	/**
 	 * Diese Methode wird im Haupttemplate aufgerufen um dynamischen Inhalt
-	 * einzufügen.
+	 * einzufÃ¼gen.
 	 * @param $class Subcontroller (Klasse), welcher den Inhalt liefert
 	 */
 	function content( $class=NULL ) {
@@ -112,7 +112,7 @@ class controller {
 	}
 
 	/**
-	 * Beliebige Funktion des Subcontrollers ausführen.
+	 * Beliebige Funktion des Subcontrollers ausfÃ¼hren.
 	 * @param $func Name der Funktion
 	 * @param $param Parameter der Funktion $func
 	 */	

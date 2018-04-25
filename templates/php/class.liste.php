@@ -3,7 +3,7 @@
  * @author Daniel Mosimann.
  * @date 1. April 2018
  * 
- * Liste (Tabelle) mit Kontakten ausgeben - einzelne Kontakte löschen
+ * Liste (Tabelle) mit Kontakten ausgeben - einzelne Kontakte lÃ¶schen
  */
 require_once("interface.subcontroller.php");
 
@@ -25,7 +25,7 @@ class liste implements subcontroller {
 	}
 	
 	/*
-         * Kontakte aus der DB auslesen - Einzelne Kontakte löschen
+         * Kontakte aus der DB auslesen - Einzelne Kontakte lÃ¶schen
          */
 	public function run() {
                 $this->db = new dbKontakte();
@@ -34,7 +34,7 @@ class liste implements subcontroller {
 	}
 
         /*
-         * Template ausführen, Kontaktliste ausgeben
+         * Template ausfÃ¼hren, Kontaktliste ausgeben
          */
 	public function getOutput(){
                 if ( count($this->data->getKontaktListe()) ) include($this->template_path."/"."liste-stacked-table.htm.php");

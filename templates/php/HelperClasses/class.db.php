@@ -39,9 +39,16 @@ class db {
 	 * @param String $value, wert der Escaped wird (Referenz)
 	 */
 	public function escape( $value ) {
-            return self::$dbhandle->quote($value);
+            return htmlspecialchars(self::$dbhandle->quote($value));
 	}
-
+        
+        public function escapeAll($params) {
+            foreach ($params as $param) {
+                $param = $this->escape($param);
+            }
+            return $params;
+        }
+        
 	/**
 	 * Übergebenen Select ausführen und Resultat im assoziativen Array speichern
          * @param String $sql SQL-Select, welcher ausfgeführt werden soll
@@ -67,5 +74,36 @@ class db {
             }        
             return self::$dbhandle->lastInsertId();
 	}
+        
+        public function preparedStatementQuery($sql, $params) {
+            try {
+                $params = $this->escapeAll($params);
+                self::$dbhandle->prepare($sql);
+                return self::$dbhandle->execute($params);
+            } catch (PDOException $ex) {
+                throw new Exception(get_class.': Fehler in Prepared Statement Query: ' . $e->getMessage()."<pre>".$sql."</pre>");
+            }
+        }
+        
+        public function preparedStatementSelect($sql, $params) {
+            try {
+                $statement = $this->preparedStatementQuery($sql, $params);
+                return $statement->fetchAll();
+            } catch (PDOException $ex) {
+                throw new Exception(get_class.': Fehler in Prepared Statement Select: ' . $e->getMessage()."<pre>".$sql."</pre>");
+            }
+        }
+        
+        public function beginTransaction() {
+            return $this->beginTransaction();
+        }
+        
+        public function commit() {
+            return $this->commit();
+        }
+        
+        public function rollback() {
+            return $this->rollback();
+        }
 }
 
