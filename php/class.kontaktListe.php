@@ -3,7 +3,7 @@
  * @author Daniel Mosimann.
  * @date 1. April 2018
  * 
- * Datensrtruktur für eine Liste mit Kontktdaten (kontaktData)
+ * Datensrtruktur fÃ¼r eine Liste mit Kontktdaten (kontaktData)
  */
 class kontaktListe {
     private $kontakt_liste = array();

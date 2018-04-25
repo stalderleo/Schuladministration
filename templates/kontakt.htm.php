@@ -47,7 +47,7 @@
         </div>
     </div>
         <div class="form-group row">
-        <label for="telgesch" class="col-sm-2 col-form-label">Telefon Gesch‰ft</label>
+        <label for="telgesch" class="col-sm-2 col-form-label">Telefon Gesch√§ft</label>
         <div class="col-sm-10">
             <input class="form-control" type="text" id="telgesch" name="tgesch" value="<?php echo $v->getData("tgesch")?>">
         </div>

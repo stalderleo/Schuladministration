@@ -3,24 +3,24 @@
  * @author Daniel Mosimann
  * @date 21. November 2016
  *
- *  Schnittstelle für die "Subcontroller". Diese Schnittstelle
+ *  Schnittstelle fÃ¼r die "Subcontroller". Diese Schnittstelle
  *  muss von den Klassen implementiert werden, welche beim 
  *  Controller (Klasse controller) registriert werden.
  *	
  */
 interface subcontroller {
 	/**
-	 * Die DB-Connection wird als Parameter dem Konsstruktoren übergeben.
+	 * Die DB-Connection wird als Parameter dem Konsstruktoren Ã¼bergeben.
 	 */	
 	function __construct( $template_path );
 
 	/**
-	 * Führt den Subcontroller aus.
+	 * FÃ¼hrt den Subcontroller aus.
 	 */
 	function run();
 	
 	/**
-	 * Gibt den vom Subcontroller produzierten Output (HTML) zurück.
+	 * Gibt den vom Subcontroller produzierten Output (HTML) zurÃ¼ck.
 	 */
 	function getOutput();
 }

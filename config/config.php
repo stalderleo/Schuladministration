@@ -15,10 +15,10 @@ class config {
         // Bildpfad
         const IMAGE_PATH =  '../images';
 	
-	// Benutzername für den Datenbankzugriff
+	// Benutzername fÃ¼r den Datenbankzugriff
 	const SQL_USER = 'root';
 	
-	// Passwort für den Datenbankzugriff
+	// Passwort fÃ¼r den Datenbankzugriff
 	const SQL_PASSWORD = '';
 	
 	// Datenbankname

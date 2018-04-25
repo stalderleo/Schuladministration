@@ -3,7 +3,7 @@
  * @author Daniel Mosimann.
  * @date 1. April 2018
  *
- * Implementiert die anwendungslogik für das Kontaktformular.
+ * Implementiert die anwendungslogik fÃ¼r das Kontaktformular.
  *
  */
 //require_once("class.basic.php");
@@ -17,7 +17,7 @@ class kontakt implements subcontroller {
 	// Pfad zum Template-Verzeichnis
 	private $template_path = "";
 
-	// Default CSS-Klassen für alle Eingabefelder
+	// Default CSS-Klassen fÃ¼r alle Eingabefelder
 	private $input_classes = array( 'name' => config::INPUT_CLASS_N, 
 					'vorname' => config::INPUT_CLASS_N, 
 					'email' => config::INPUT_CLASS_N );
@@ -31,7 +31,7 @@ class kontakt implements subcontroller {
 	}
 	
 	/*
-         *  Entsprechende Methode ausföhren (je nachdem welcher Schaltknopf betätigt wurde)
+         *  Entsprechende Methode ausfÃ¶hren (je nachdem welcher Schaltknopf betÃ¤tigt wurde)
          */
 	public function run() {
 		if ( isset($this->params['senden']) ) {
@@ -45,7 +45,7 @@ class kontakt implements subcontroller {
 	}
 
         /*
-         * Template ausführen, Kontaktformular anzeigen
+         * Template ausfÃ¼hren, Kontaktformular anzeigen
          */
 	public function getOutput(){
 		$v =& $this;
@@ -53,7 +53,7 @@ class kontakt implements subcontroller {
 	}
 	
 	/*
-         * Wert für das gewünschte Feld zurückgeben
+         * Wert fÃ¼r das gewÃ¼nschte Feld zurÃ¼ckgeben
          */
 	public function getData( $field ) {
             if ( empty($this->params[$field]) ) return ""; 
@@ -61,7 +61,7 @@ class kontakt implements subcontroller {
 	}
 
 	/*
-         * Aktive Klasse für das übergebene Feld zurückgeben
+         * Aktive Klasse fÃ¼r das Ã¼bergebene Feld zurÃ¼ckgeben
          */
 	public function getCssClass( $field ) {
 		return $this->input_classes[$field];
@@ -76,7 +76,7 @@ class kontakt implements subcontroller {
 	}
 	
 	/*
-         * Benutzereingaben prüfen
+         * Benutzereingaben prÃ¼fen
          */
 	private function checkInput() {
 		$input_ok = true;
