@@ -29,7 +29,7 @@ class db {
                     self::$dbhandle = new PDO('mysql:host=localhost;dbname='.$database, $username, $password);
                     self::$dbhandle->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
                 } catch (PDOException $e) {
-                    throw new Exception (get_class.': Connection failed: ' . $e->getMessage());
+                    throw new Exception (get_class($this).': Connection failed: ' . $e->getMessage());
                 }
             }
 	}
@@ -58,7 +58,7 @@ class db {
                 $sth = self::$dbhandle->query($sql);
                 return $sth->fetchAll(PDO::FETCH_OBJ);
             } catch (PDOException $e) {
-                throw new Exception (get_class.': Fehler in Select: '.$e->getMessage());
+                throw new Exception (get_class($this).': Fehler in Select: '.$e->getMessage());
             }
 	}
 
@@ -70,7 +70,7 @@ class db {
             try {
                 self::$dbhandle->query($sql);
             } catch (PDOException $e) {
-                throw new Exception(get_class.': Fehler in Query: ' . $e->getMessage()."<pre>".$sql."</pre>");
+                throw new Exception(get_class($this).': Fehler in Query: ' . $e->getMessage()."<pre>".$sql."</pre>");
             }        
             return self::$dbhandle->lastInsertId();
 	}
@@ -79,31 +79,38 @@ class db {
             try {
                 $params = $this->escapeAll($params);
                 $statement = self::$dbhandle->prepare($sql);
-                return $statement->execute($params);
+                $statement->execute($params);
+                return $statement;
             } catch (PDOException $ex) {
-                throw new Exception(get_class.': Fehler in Prepared Statement Query: ' . $ex->getMessage()."<pre>".$sql."</pre>");
+                throw new Exception(get_class($this).': Fehler in Prepared Statement Query: ' . $ex->getMessage()."<pre>".$sql."</pre>");
             }
         }
         
         public function preparedStatementSelect($sql, $params) {
             try {
                 $statement = $this->preparedStatementQuery($sql, $params);
-                return $statement->fetchAll();
+                if ($statement) {
+                    return $statement->fetchAll(PDO::FETCH_OBJ);
+                }
             } catch (PDOException $ex) {
-                throw new Exception(get_class.': Fehler in Prepared Statement Select: ' . $e->getMessage()."<pre>".$sql."</pre>");
+                throw new Exception(get_class($this).': Fehler in Prepared Statement Select: ' . $e->getMessage()."<pre>".$sql."</pre>");
             }
         }
         
-        public function beginTransaction() {
-            return $this->beginTransaction();
+        public function lastId() {
+            return self::$dbhandle->lastInsertId();
+        }
+        
+        public function startTransaction() {
+            return self::$dbhandle->beginTransaction();
         }
         
         public function commit() {
-            return $this->commit();
+            return self::$dbhandle->commit();
         }
         
         public function rollback() {
-            return $this->rollback();
+            self::$dbhandle->rollBack();
         }
 }
 

@@ -113,9 +113,6 @@ class person /*implements subcontroller */{
     function setStatus($status) {
         $this->status = $status;
     }
-
-
-
 }
 
 ?>
