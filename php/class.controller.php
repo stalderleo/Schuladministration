@@ -89,7 +89,7 @@ class controller {
 	 *  Instanzieren ( new $class() ) und ausführen ( run() ) der Subcontroller.
 	 */	
 	private function runSubcontroller( $class ) {
-		require_once( "class.".$class.".php" );
+		require_once( __DIR__."/ViewClasses/".$class.".php" );
 		$this->active_objects[$class] = new $class( $this->template_path );
 		$this->active_objects[$class]->run();
 	}
@@ -101,7 +101,9 @@ class controller {
 	 */
 	function content( $class=NULL ) {
 		if ( $class == NULL ) return $this->active_objects[$this->requested_subcontroller]->getOutput();
-		else return $this->active_objects[$class]->getOutput();
+		else {
+                    return $this->active_objects[$class]->getOutput();
+                }
 	}
 	
 	/**
