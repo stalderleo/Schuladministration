@@ -23,7 +23,7 @@ class login implements subcontroller {
     private $validation = "failed";
     private $username;
     private $password;
-    private $login;
+    private $login = false;
     
     public $title;
     
@@ -32,28 +32,57 @@ class login implements subcontroller {
         $this->template_path = $template_path;
         $this->title = "Log In";
             
-        if(isset( $_REQUEST["remember_me"])){
+        if(isset( $this->params["remember_me"] )){
             $_SESSION["username"] = $this->params["username"];
             $_SESSION["password"] = $this->params["password"];
         }
     }
 
     public function getOutput() {
-        $v =& $this;
-        include($this->template_path."/"."login.htm.php");
+        $v =& $this;$
+        $this->login instanceof boolean;
+        if($this->login){
+            header("location: /schuelerView.php");
+        }else
+        {
+            include($this->template_path."/"."login.htm.php");
+        }
     }
 
     public function run() {
+        $dbschueler = new dbSchueler();
+        $dblehrer = new dbLehrperson();
+        
         if(isset($_REQUEST['username']) && isset($_REQUEST['password']))
         {
             $this->username = htmlspecialchars($_REQUEST['username']);
             $this->password = htmlspecialchars($_REQUEST['password']);
             
             //Abfrage Schuler
-            
+            $schuler = $dbschueler->checkUser($this->username, $this->password);
+                    
             //Abfrage Lehrer
+            $lehrer = $dblehrer->checkUser($this->username, $this->password);
             
-            //$this->validation = "failed";
+            if($schuler != null || $lehrer != null)
+            {
+                if( $schuler != null ) 
+                {
+                    $_SESSION["role"] = "schueler";
+                }
+                
+                if( $lehrer != null ) 
+                {
+                    $_SESSION["role"] = "admin";
+                }
+                
+                $this->login = true;
+            }
+            else
+            {
+                $this->validation = "failed";
+                $this->login = false;
+            }
         }
         else if (isset( $_SESSION["username"] ) && isset( $_SESSION["password"] ))
         {
@@ -61,10 +90,32 @@ class login implements subcontroller {
             $this->password = htmlspecialchars($_SESSION['password']);
             
             //Abfrage Schuler
-            
+            $schuler = $dbschueler->checkUser($this->username, $this->password);
+                    
             //Abfrage Lehrer
+            $lehrer = $dblehrer->checkUser($this->username, $this->password);
             
-            //$this->validation = "failed";
+            if($schuler != null || $lehrer != null)
+            {
+                if( $schuler != null ) 
+                {
+                    $_SESSION["role"] = "schueler";
+                }
+                
+                if( $lehrer != null ) 
+                {
+                    $_SESSION["role"] = "admin";
+                }
+                
+                $this->login = true;
+            }
+            else
+            {
+                $this->validation = "failed";
+                $this->login = false;
+            }
+        }else{
+            $this->login = false;
         }
     }
 

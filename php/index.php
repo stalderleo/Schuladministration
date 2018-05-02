@@ -22,6 +22,10 @@ require_once './DataClasses/class.person.php';
 require_once("HelperClasses/class.dbKontakte.php");
 require_once("./DataClasses/class.angestellter.php");
 require_once("HelperClasses/class.dbAngestellter.php");
+require_once("./DataClasses/class.lehrer.php");
+require_once("HelperClasses/class.dbLehrperson.php");
+require_once("./DataClasses/class.schueler.php");
+require_once("HelperClasses/class.dbSchueler.php");
 
 $c = new controller("index.htm.php", config::TEMPLATE_PATH );
 $c->registerSubcontroller("lehrerView", "Lehrer", false);
