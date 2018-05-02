@@ -26,7 +26,7 @@
             <?php echo $this->menu_bootstrap(config::MENU_TEMPLATE);?>
             <div class="row m-3">
                 <div class="col-12" style="overflow: auto">
-                    <?php $this->content('login'); ?>
+                    <?php $this->content(); ?>
                 </div>
             </div>
         </div>
