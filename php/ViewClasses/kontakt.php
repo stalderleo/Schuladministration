@@ -13,7 +13,7 @@ require_once("interface.subcontroller.php");
 class kontakt implements subcontroller {
 	// Assoziativer Array mit Parametern (Ueblicherweise $_REQUEST)
 	private $params = NULL;
-	
+	public $title;
 	// Pfad zum Template-Verzeichnis
 	private $template_path = "";
 
@@ -28,6 +28,7 @@ class kontakt implements subcontroller {
 	public function __construct( $template_path ) {
 		$this->params = $_REQUEST;
 		$this->template_path = $template_path;
+                $this->title = "Kontakt";
 	}
 	
 	/*
