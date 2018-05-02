@@ -24,6 +24,7 @@ $c->registerSubcontroller("faecherView", "Fächer", false);
 $c->registerSubcontroller("importView", "Import", false);
 
 //$c->registerSubcontroller("datum", "", true);
+
 $c->dispatch();
 $c->sendOutput();
 
