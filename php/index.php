@@ -21,7 +21,12 @@ require_once("HelperClasses/class.db.php");
 require_once './DataClasses/class.person.php';
 require_once("HelperClasses/class.dbKontakte.php");
 require_once("./DataClasses/class.angestellter.php");
+require_once("DataClasses/class.lehrer.php");
+require_once("DataClasses/class.klasse.php");
+require_once("DataClasses/class.kursInstanz.php");
 require_once("HelperClasses/class.dbAngestellter.php");
+require_once("HelperClasses/class.dbLehrperson.php");
+require_once("HelperClasses/class.dbKlasse.php");
 
 $c = new controller("index.htm.php", config::TEMPLATE_PATH );
 $c->registerSubcontroller("lehrerView", "Lehrer", false);
@@ -34,4 +39,17 @@ $c->registerSubcontroller("importView", "Import", false);
 $c->dispatch();
 $c->sendOutput();
 
+$dbLehrer = new dbLehrperson();
+$dbKlasse = new dbKlasse();
+$lehrer = $dbLehrer->selectLehrer(1);
+if ($lehrer == null) {
+    echo "fuck";
+}
+$kursInstanzen = $dbKlasse->selectKlassenFromLehrer($lehrer);
+
+echo $lehrer->getName() . " " . $lehrer->getVorname() . "<br>";
+foreach ($kursInstanzen as $kursInstanz) {
+    $klasse = $kursInstanz->getKlasse();
+    echo $klasse->getKid() . " " . $klasse->getKuerzel() ." ". $klasse->getBezeichnung() . "<br>";
+}
 ?>
