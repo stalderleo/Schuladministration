@@ -1,6 +1,40 @@
+.page-title {
+    text-align: center;
+    width: 100%;
+    display: inline-block;
+    padding: 30px 0;
+}
+
 /* Bootstrap Navigation */
-.nav-tabs .nav-link { color: #495057}
-.nav-tabs .nav-link.active { color:#dc3545}
+.nav-item {
+    width: 100%;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+}
+.nav-item:last-of-type{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+.nav-tabs {
+    border-left: 1px solid;
+    border-right: 1px solid;
+    border-bottom: 1px solid;
+    display: block;
+    height: calc(100vh - 170px);
+    position: relative;
+    min-height: 210px;
+}
+.nav-tabs .nav-link {
+    color: #495057;
+    border: 0;
+    border-radius: 0;
+}
+.nav-tabs .nav-link.active {
+    color:#dc3545;
+    background-color: lightgray;
+    border-radiûs: 0;
+}
 
 /* Stacked Table */
 table.tstacked * {
@@ -71,3 +105,37 @@ table.tstacked th {
 }
 
 /* End Stacked Table */
+.upload-card {
+    display: block;
+    padding: 60px;
+    box-shadow: 0px 0px 10px 2px gray;
+}
+.upload-card__text {
+    font-size: 25px;
+    color: lightgray;
+    font-weight: bold;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+.upload-card input {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    cursor: pointer;
+}/*CHANGE STYLE WHEN INPUT.VAL() ISSET */
+
+.absolute-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding-bottom: 10px;
+}
+body {
+    position: relative;
+    height: 100vh;
+}

@@ -21,11 +21,13 @@ class lehrerView implements subcontroller {
         $this->template_path = $template_path;
         $this->title = "Lehrer";
     }
-
+    public function getKontaktListe(){
+        //a person object should be returned here
+    }
     public function run() {
     }
     
     public function getOutput(){
-        include($this->template_path."/"."sidebar.html");
+        include($this->template_path."/liste/liste-lehrer.htm.php");
     }
 }

@@ -7,25 +7,25 @@
  */
 
 /**
- * Description of importView
+ * Description of schuelerView
  *
  * @author larschristian.berg
  */
 require_once("interface.subcontroller.php");
 
-class faecherView implements subcontroller {
+class logout implements subcontroller {
     //put your code here
     private $template_path;
     public $title;
     public function __construct( $template_path ) {
         $this->template_path = $template_path;
-        $this->title = "Fächer";
+        $this->title = "Schüler";
     }
 
     public function run() {
     }
     
     public function getOutput(){
-        include($this->template_path."/liste/liste-kurs.htm.php");
+        include($this->template_path."/logout.htm.php");
     }
 }
