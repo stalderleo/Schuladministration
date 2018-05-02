@@ -15,6 +15,7 @@ class db {
          * Konstruktor
          */
         public function __construct() {
+            db::connect( config::SQL_DATABASE, config::SQL_USER, config::SQL_PASSWORD );
         }
 
 	/**
@@ -88,6 +89,7 @@ class db {
         
         public function preparedStatementSelect($sql, $params) {
             try {
+                $params = $this->escapeAll($params);
                 $statement = $this->preparedStatementQuery($sql, $params);
                 if ($statement) {
                     return $statement->fetchAll(PDO::FETCH_OBJ);
