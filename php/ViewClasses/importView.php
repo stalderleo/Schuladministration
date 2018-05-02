@@ -26,6 +26,6 @@ class importView implements subcontroller {
     }
     
     public function getOutput(){
-        include($this->template_path."/"."sidebar.html");
+        include($this->template_path."/"."import.htm.php");
     }
 }
