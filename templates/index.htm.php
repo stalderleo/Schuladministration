@@ -15,10 +15,10 @@
         <div class="card text-left bg-light">
             <div class="row align-items-center">
                 <div class="col">
-                    <h1>MVC GIBS - Kontakte</h1>
+                    <h1><?php echo $this->active_objects[array_keys($this->active_objects)[0]]->title ?></h1>
                 </div>
                 <div class="col">
-                    <p class="text-right"><?php $this->content('datum'); ?></p>
+                    <p class="text-right"><?php //$this->content('datum'); ?></p>
                 </div>
             </div>
         </div>
