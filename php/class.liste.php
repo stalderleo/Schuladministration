@@ -19,7 +19,7 @@ class liste implements subcontroller {
          */
 	public function __construct( $template_path ) {
 		$this->template_path = $template_path;
-                $this->phpmodule = $_SERVER['SCRIPT_NAME']."?id=".get_class();
+                $this->phpmodule = $_SERVER['SCRIPT_NAME']."?id=".get_class($this);
                 $this->params = $_REQUEST;
                 
 	}

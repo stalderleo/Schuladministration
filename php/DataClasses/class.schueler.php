@@ -24,7 +24,5 @@ class schueler extends person {
     public function run() {
         parent::run();
     }
-    
-    
 }
 
