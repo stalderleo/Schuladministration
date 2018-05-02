@@ -7,7 +7,7 @@ class dbLehrperson extends db {
      * @param type $row - Data from DB (single row)
      * @return \schueler - returns object from type lehrer
      */
-    public function newObjLehrer($row) {
+    private function newObjLehrer($row) {
         return new lehrer($row->pid, $row->username, $row->password, $row->name, $row->vorname, $row->geburtstag, $row->geschlecht, $row->kuerzel, $row->mail, $row->status);
     }
     
@@ -16,7 +16,7 @@ class dbLehrperson extends db {
      * @param type $lehrer - object from type lehrer
      * @return type - returns array
      */
-    public function objToArray(lehrer $lehrer, $pidLast) {
+    private function objToArray(lehrer $lehrer, $pidLast) {
         basic::assertInstanceOf($lehrer, lehrer);
         if (!$pidLast) {
             return array($lehrer->getPid(), $lehrer->getUsername(), $lehrer->getPassword(), $lehrer->getName(), 
@@ -31,7 +31,7 @@ class dbLehrperson extends db {
     }
     
     // If id is set on Object --> get Id from Object | else get last inserted id from DB!
-    public function getIdfromDBorObj(person $obj) {
+    private function getIdfromDBorObj(person $obj) {
         basic::assertInstanceOf($obj, person);
         if ($obj->getPid() == null or $obj->getPid() == 0) {
             return $this->lastId();
@@ -43,8 +43,8 @@ class dbLehrperson extends db {
     
     public function selectAllLehrer() {
         $liste = array();
-        $result = $this->select( "SELECT * FROM lehrer "
-                . "LEFT JOIN person ON lehrer.lid = person.pid "
+        $result = $this->select( "SELECT * FROM lehrperson "
+                . "LEFT JOIN person ON lehrperson.lid = person.pid "
                 . "order by pid");
         if (count($result)) {
             foreach ($result as $row ) {
@@ -56,10 +56,10 @@ class dbLehrperson extends db {
     
     public function selectLehrer($lid) {
         $lehrer = null;
-        $sql = "SELECT * FROM lehrer "
-                . "LEFT JOIN person ON lehrer.lid = person.pid "
-                . "WHERE lehrer.lid = ?";
-        $params = array($sid);
+        $sql = "SELECT * FROM lehrperson "
+                . "LEFT JOIN person ON lehrperson.lid = person.pid "
+                . "WHERE lehrperson.lid = ?";
+        $params = array($lid);
         $result = $this->preparedStatementSelect($sql, $params);
         if (sizeof($result) == 1) {
             $row = reset($result);
@@ -70,8 +70,8 @@ class dbLehrperson extends db {
     
     public function checkUser($username, $password) {
         $lehrer = null;
-        $sql = "SELECT * FROM lehrer "
-                . "LEFT JOIN person ON lehrer.lid = person.pid "
+        $sql = "SELECT * FROM lehrperson "
+                . "LEFT JOIN person ON lehrperson.lid = person.pid "
                 . "WHERE person.username = ? "
                 . "AND person.password = ?";
         $params = array($username, $password);
@@ -97,7 +97,7 @@ class dbLehrperson extends db {
         $sql = "INSERT INTO `person` "
                 . "(`pid`, `username`, `password`, `name`, `vorname`, `geburtsdatum`, `geschlecht`, `kuerzel`, `mail`, `status`) "
                 . "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        $sql2 = "INSERT INTO lehrer (lid) VALUES (?)";
+        $sql2 = "INSERT INTO lehrperson (lid) VALUES (?)";
         
         $this->startTransaction();
         try {
