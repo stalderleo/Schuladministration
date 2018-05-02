@@ -12,7 +12,7 @@
  *
  * @author aaron.studer
  */
-class angestellter extends person implements subcontroller {
+class angestellter extends person {
     public function __construct($pid, $username, $password, $name, $vorname, $geburtstag, $geschlecht, $kuerzel, $mail, $status) {
         parent::__construct($pid, $username, $password, $name, $vorname, $geburtstag, $geschlecht, $kuerzel, $mail, $status);
     }
