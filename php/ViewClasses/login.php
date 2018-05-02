@@ -20,7 +20,7 @@ class login implements subcontroller {
     
     public $css_Classes = array("failed" => 'is-invalid', "correct" => 'is-valid');
     
-    private $validation = "failed";
+    private $validation = "";
     private $username;
     private $password;
     private $login = false;
@@ -39,10 +39,10 @@ class login implements subcontroller {
     }
 
     public function getOutput() {
-        $v =& $this;$
+        $v =& $this;
         $this->login instanceof boolean;
         if($this->login){
-            header("location: /schuelerView.php");
+            header("location: ". $_REQUEST["PHP_SELF"] . "?id=schuelerView");
         }else
         {
             include($this->template_path."/"."login.htm.php");
@@ -114,8 +114,6 @@ class login implements subcontroller {
                 $this->validation = "failed";
                 $this->login = false;
             }
-        }else{
-            $this->login = false;
         }
     }
 

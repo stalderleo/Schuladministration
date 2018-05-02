@@ -31,8 +31,7 @@ $c->registerSubcontroller("schuelerView", "Schüler", false);
 $c->registerSubcontroller("faecherView", "Fächer", false);
 $c->registerSubcontroller("importView", "Import", false);
 $c->registerSubcontroller("logout", "Logout", false);
-
-//$c->registerSubcontroller("datum", "", true);
+$c->registerSubcontroller("login", "LogIn", false);
 
 $c->dispatch();
 $c->sendOutput();
