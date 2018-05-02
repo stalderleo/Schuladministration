@@ -26,6 +26,6 @@ class schuelerView implements subcontroller {
     }
     
     public function getOutput(){
-        include($this->template_path."/"."sidebar.html");
+        include($this->template_path."/liste/liste-schueler.htm.php");
     }
 }
