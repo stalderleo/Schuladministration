@@ -5,7 +5,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+require_once("interface.subcontroller.php");
 
 /**
  * Description of class
@@ -22,9 +22,17 @@ class login implements subcontroller {
     private $password;
     private $login;
     
+    public $title;
+    
     public function __construct($template_path) {
         $this->params = $_REQUEST;
         $this->template_path = $template_path;
+        $this->title = "Log In";
+        
+        if(isset( $_REQUEST["remember_me"])){
+            $_SESSION["username"] = $this->params["username"];
+            $_SESSION["password"] = $this->params["password"];
+        }
     }
 
     public function getOutput() {
@@ -33,9 +41,23 @@ class login implements subcontroller {
     }
 
     public function run() {
-        if(isset($_REQUEST['username']) && isset($_REQUEST['password'])){
+        if(isset($_REQUEST['username']) && isset($_REQUEST['password']))
+        {
             $this->username = htmlspecialchars($_REQUEST['username']);
-            $this->username = htmlspecialchars($_REQUEST['password']);
+            $this->password = htmlspecialchars($_REQUEST['password']);
+            
+            //Abfrage Schuler
+            
+            //Abfrage Lehrer
+        }
+        else if (isset( $_SESSION["username"] ) && isset( $_SESSION["password"] ))
+        {
+            $this->username = htmlspecialchars($_SESSION['username']);
+            $this->password = htmlspecialchars($_SESSION['password']);
+            
+            //Abfrage Schuler
+            
+            //Abfrage Lehrer
         }
     }
 

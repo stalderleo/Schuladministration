@@ -19,7 +19,7 @@ require_once("HelperClasses/class.dbKontakte.php");
 
 $c = new controller("index.htm.php", config::TEMPLATE_PATH );
 $c->registerSubcontroller("kontakt", "Kontaktformular", false);
-$c->registerSubcontroller("liste", "Kontaktliste", false);
+$c->registerSubcontroller("login", "Login", false);
 $c->registerSubcontroller("datum", "", true);
 $c->dispatch();
 $c->sendOutput();
