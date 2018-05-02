@@ -14,12 +14,12 @@ session_start();
 require_once("class.controller.php");
 require_once("../config/config.php");
 require_once("class.basic.php");
-require_once("class.db.php");
-require_once("class.dbKontakte.php");
+require_once("HelperClasses/class.db.php");
+require_once("HelperClasses/class.dbKontakte.php");
 
 $c = new controller("index.htm.php", config::TEMPLATE_PATH );
 $c->registerSubcontroller("kontakt", "Kontaktformular", false);
-$c->registerSubcontroller("liste", "Kontaktliste", false);
+$c->registerSubcontroller("login", "Login", false);
 $c->registerSubcontroller("datum", "", true);
 $c->dispatch();
 $c->sendOutput();
