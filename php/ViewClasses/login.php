@@ -18,6 +18,9 @@ class login implements subcontroller {
     // Pfad zum Template-Verzeichnis
     private $template_path = "";
     
+    public $css_Classes = array("failed" => 'is-invalid', "correct" => 'is-valid');
+    
+    private $validation = "failed";
     private $username;
     private $password;
     private $login;
@@ -28,7 +31,7 @@ class login implements subcontroller {
         $this->params = $_REQUEST;
         $this->template_path = $template_path;
         $this->title = "Log In";
-        
+            
         if(isset( $_REQUEST["remember_me"])){
             $_SESSION["username"] = $this->params["username"];
             $_SESSION["password"] = $this->params["password"];
@@ -49,6 +52,8 @@ class login implements subcontroller {
             //Abfrage Schuler
             
             //Abfrage Lehrer
+            
+            //$this->validation = "failed";
         }
         else if (isset( $_SESSION["username"] ) && isset( $_SESSION["password"] ))
         {
@@ -57,9 +62,9 @@ class login implements subcontroller {
             
             //Abfrage Schuler
             
-            
-            
             //Abfrage Lehrer
+            
+            //$this->validation = "failed";
         }
     }
 

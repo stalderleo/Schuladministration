@@ -1,7 +1,7 @@
 <form action="./index.php?id=login" method="POST">
   <div class="form-group">
     <label for="Username">Username</label>
-    <input type="text" name="username" class="form-control is-valid" id="username" aria-describedby="emailHelp" placeholder="Enter Username">
+    <input type="text" name="username" class="form-control <?php echo $v->css_Classes[$v->validation] ?>" id="username" aria-describedby="emailHelp" placeholder="Enter Username">
     <div class="valid-feedback">
         Looks good!
     </div>
@@ -11,7 +11,7 @@
   </div>
   <div class="form-group">
     <label for="password">Password</label>
-    <input type="password" name="password" class="form-control is-invalid" id="password" placeholder="Enter Password">
+    <input type="password" name="password" class="form-control <?php echo $v->css_Classes[$v->validation] ?>" id="password" placeholder="Enter Password">
     <div class="valid-feedback">
         Looks good!
     </div>
