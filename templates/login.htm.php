@@ -1,4 +1,4 @@
-<form action="./" method="POST">
+<form action="./index.php?id=login" method="POST">
   <div class="form-group">
     <label for="Username">Username</label>
     <input type="text" name="username" class="form-control is-valid" id="username" aria-describedby="emailHelp" placeholder="Enter Username">

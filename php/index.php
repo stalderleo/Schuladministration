@@ -7,10 +7,8 @@
  * Instanziert den Controller und registriert die Subcontroller.
  *
  */
-
 error_reporting(E_ALL & ~E_NOTICE);
-
-header('Content-Type: text/html; charset=iso-8859-1');
+header('Content-Type: text/html; charset=UTF-8');
 require_once ("class.kontaktData.php");
 require_once ("/class.kontaktListe.php");
 session_start();
@@ -33,6 +31,7 @@ $c->registerSubcontroller("lehrerView", "Lehrer", false);
 $c->registerSubcontroller("schuelerView", "Schüler", false);
 $c->registerSubcontroller("faecherView", "Fächer", false);
 $c->registerSubcontroller("importView", "Import", false);
+$c->registerSubcontroller("logout", "Logout", false);
 
 //$c->registerSubcontroller("datum", "", true);
 

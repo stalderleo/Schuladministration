@@ -13,25 +13,22 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
     
     <div class="container">
-        <div class="card text-left bg-light">
+        <div class="text-left bg-light">
             <div class="row align-items-center">
-                <div class="col">
-                    <h1><?php echo $this->active_objects[array_keys($this->active_objects)[0]]->title ?></h1>
-                </div>
-                <div class="col">
-                    <p class="text-right"><?php //$this->content('datum'); ?></p>
-                </div>
+                <h1 class="page-title"><?php echo $this->active_objects[array_keys($this->active_objects)[0]]->title ?></h1>
             </div>
         </div>
-        <div class="card text-left">
+        <div class="row">
+            <div class="col-sm-3">
             <?php echo $this->menu_bootstrap(config::MENU_TEMPLATE);?>
-            <div class="row m-3">
-                <div class="col-12" style="overflow: auto">
-                    <?php $this->content('login'); ?>
+            </div>
+            <div class="col-sm-9">
+                <div class="col-12" style="overflow: visible">
+                    <?php $this->content(); ?>
                 </div>
             </div>
         </div>
-        <div class="card text-center bg-light">
+        <div class="text-center bg-light absolute-bottom">
             <span class="small">&copy; Copyright GIBS Solothurn</span>
         </div>
     </div>
