@@ -8,7 +8,7 @@ class dbKlasse extends db {
     private function objToArray(klasse $klasse, $kidLast) {
         basic::assertInstanceOf($klasse, klasse, true);
         if (!$kidLast) {
-            
+            return array($klasse->getKid(), $klasse->getKuerzel(), $klasse->getBezeichnung());
         }
         else {
             return array($klasse->getKuerzel(), $klasse->getBezeichnung(), $klasse->getKid());
@@ -39,22 +39,6 @@ class dbKlasse extends db {
         return $liste;
     }
     
-    public function selectKlassenFromLehrer(lehrer $lehrer) {
-        basic::assertInstanceOf($lehrer, lehrer, true);
-        $liste = array();
-        $sql = "SELECT lkf.kid FROM lehrperson_klasse_fach lkf "
-                . "WHERE lkf.lid = ?";
-        $params = array($lehrer->getPid());
-        $result = $this->preparedStatementSelect($sql, $params);
-        if (count($result)) {
-            foreach ($result as $row) {
-                array_push($liste, new kursInstanz($lehrer, $this->selectKlasse($row->kid), null));
-            }
-        }
-        return $liste;
-    }
-    
-    
     public function selectKlasse($kid) {
         $klasse = null;
         $sql = "SELECT * FROM klasse "
@@ -68,5 +52,29 @@ class dbKlasse extends db {
         return $klasse;
     }
     
+    public function insertKlasse(klasse $klasse) {
+        basic::assertInstanceOf($klasse, klasse, true);
+        $sql = "INSERT INTO `klasse`"
+                . "(`kid`, `kuerzel`, `bezeichnung`) "
+                . "VALUES (?, ?, ?)";
+        $this->preparedStatementQuery($sql, $this->objToArray($klasse, false));       // Insert Data into table klasse
+    }
     
+    public function modifyKlasse(klasse $klasse) {
+        basic::assertInstanceOf($klasse, klasse, true);
+        $sql = "UPDATE klasse "
+                . "SET kuerzel = ?, bezeichnung = ? "
+                . "WHERE kid = ?";
+        $this->preparedStatementQuery($sql, $this->objToArray($klasse, true));
+    }
+    
+    public function deleteKlasse(klasse $klasse) {
+        basic::assertInstanceOf($klasse, klasse, true);
+        $sql = "DELETE FROM klasse WHERE klasse.kid = ?";
+        
+        if ($klasse->getKid() != null or $klasse->getKid() != 0) {
+            $params = array($klasse->getKid());
+            $this->preparedStatementQuery($sql, $params);
+        }   
+    }
 }

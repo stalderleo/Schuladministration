@@ -10,7 +10,7 @@
 error_reporting(E_ALL & ~E_NOTICE);
 header('Content-Type: text/html; charset=UTF-8');
 require_once ("class.kontaktData.php");
-require_once ("/class.kontaktListe.php");
+require_once ("class.kontaktListe.php");
 session_start();
 require_once("class.controller.php");
 require_once("../config/config.php");
@@ -22,9 +22,14 @@ require_once("./DataClasses/class.angestellter.php");
 require_once("DataClasses/class.lehrer.php");
 require_once("DataClasses/class.klasse.php");
 require_once("DataClasses/class.kursInstanz.php");
+require_once("DataClasses/class.kurs.php");
+require_once("HelperClasses/class.dbSchueler.php");
 require_once("HelperClasses/class.dbAngestellter.php");
 require_once("HelperClasses/class.dbLehrperson.php");
+require_once("HelperClasses/class.dbKurs.php");
 require_once("HelperClasses/class.dbKlasse.php");
+require_once("HelperClasses/class.dbKursInstanz.php");
+
 
 $c = new controller("index.htm.php", config::TEMPLATE_PATH );
 $c->registerSubcontroller("lehrerView", "Lehrer", false);
@@ -33,22 +38,27 @@ $c->registerSubcontroller("faecherView", "Fächer", false);
 $c->registerSubcontroller("importView", "Import", false);
 $c->registerSubcontroller("logout", "Logout", false);
 
+$dbLehrer = new dbLehrperson();
+$dbKlasse = new dbKlasse();
+$dbKurs = new dbKurs();
+$dbKursInstanz = new dbKursInstanz();
+$lehrer = $dbLehrer->selectLehrer(1);
+$klasse = $dbKlasse->selectKlasse(1);
+$kurs = $dbKurs->selectKurs(1);
+$kursInssanz = new kursInstanz($lehrer, $klasse, $kurs);
+//$dbKursInstanz->insertInstanz($kursInssanz);
+
+$kursInstanz = $dbKursInstanz->selectInstanzenByLehrer($lehrer);
+foreach ($kursInstanz as $instanz) {
+    echo "Instanz<br>";
+    echo $instanz->getLehrer()->getName() . "<br>";
+    echo $instanz->getKlasse()->getKuerzel(). " <br>";
+    echo $instanz->getKurs()->getKuerzel(). "<br>";
+}
+
 //$c->registerSubcontroller("datum", "", true);
 
 $c->dispatch();
 $c->sendOutput();
 
-$dbLehrer = new dbLehrperson();
-$dbKlasse = new dbKlasse();
-$lehrer = $dbLehrer->selectLehrer(1);
-if ($lehrer == null) {
-    echo "fuck";
-}
-$kursInstanzen = $dbKlasse->selectKlassenFromLehrer($lehrer);
-
-echo $lehrer->getName() . " " . $lehrer->getVorname() . "<br>";
-foreach ($kursInstanzen as $kursInstanz) {
-    $klasse = $kursInstanz->getKlasse();
-    echo $klasse->getKid() . " " . $klasse->getKuerzel() ." ". $klasse->getBezeichnung() . "<br>";
-}
 ?>
