@@ -3,19 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/Schuladministration/php/DataClasses/class.kurs.php</file>
+            <file>file:/C:/xampp/htdocs/Schuladministration/php/HelperClasses/class.dbLehrperson.php</file>
+            <file>file:/C:/xampp/htdocs/Schuladministration/php/HelperClasses/class.db.php</file>
+            <file>file:/C:/xampp/htdocs/Schuladministration/php/HelperClasses/class.dbSchueler.php</file>
+            <file>file:/C:/xampp/htdocs/Schuladministration/php/HelperClasses/class.dbAngestellter.php</file>
+            <file>file:/C:/xampp/htdocs/Schuladministration/php/DataClasses/class.angestellter.php</file>
             <file>file:/C:/xampp/htdocs/Schuladministration/php/index.php</file>
-            <file>file:/C:/xampp/htdocs/Schuladministration/php/HelperClasses/class.dbKurs.php</file>
-            <file>file:/C:/xampp/htdocs/Schuladministration/templates/dataimport.htm.php</file>
-            <file>file:/C:/xampp/htdocs/Schuladministration/php/class.importData.php</file>
-            <file>file:/C:/xampp/htdocs/administration/Schuladministration/php/class.basic.php</file>
-            <file>file:/C:/xampp/htdocs/administration/Schuladministration/php/index.php</file>
-            <file>file:/C:/xampp/htdocs/administration/Schuladministration/php/HelperClasses/class.dbLehrperson.php</file>
-            <file>file:/C:/xampp/htdocs/administration/Schuladministration/php/HelperClasses/class.dbSchueler.php</file>
-            <file>file:/C:/xampp/htdocs/administration/Schuladministration/php/ViewClasses/login.php</file>
-            <file>file:/C:/xampp/htdocs/administration/Schuladministration/php/DataClasses/class.schueler.php</file>
-            <file>file:/C:/xampp/htdocs/administration/Schuladministration/templates/index.htm.php</file>
-            <file>file:/C:/xampp/htdocs/administration/Schuladministration/php/class.controller.php</file>
         </group>
     </open-files>
 </project-private>

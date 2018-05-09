@@ -140,7 +140,8 @@ class dbLehrperson extends db {
         $this->startTransaction();
         try {
             $this->preparedStatementQuery($sql, $this->objToArray($lehrer, true));       // Insert Data into table person
-            $newLehrer = selectLehrerByUsername($lehrer->getUsername());
+            $this->preparedStatementQuery($sql2, array($this->getIdfromDBorObj($lehrer)));
+            $newLehrer = $this->selectLehrer($this->getIdfromDBorObj($lehrer));
             $this->commit();
         } catch (Exception $ex) {
             $this->rollback();
