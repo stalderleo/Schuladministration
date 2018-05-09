@@ -1,13 +1,17 @@
-<?php
+<!--
+ * @author Leo Stalder
+ * @date 2. Mai 2018
+ *
+ * Template für den Datenimport
+ *
+-->
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-?>
 <div class="col-sm-12 offset-sm-0 card upload-card">
-    <p class="upload-card__text">Import Datei Wählen</p>
-    <input type="file" name="import">
-</div>
+    <form enctype="multipart/form-data" action="<?php echo $_SERVER['SCRIPT_NAME'] ?>?id=importView" method="post" id="importDataForm">
+        <div class="form-group">
+            <label for="dataExport">Laden Sie ein File hoch:</label>
+            <input type="file" class="form-control-file" name="dataExport" id="dataExport">
+        </div>
+    </form>
+</div> 
+<input name="submit" form="importDataForm" type="submit" value="Hochladen">
