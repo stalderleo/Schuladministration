@@ -3,13 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/Schuladministration/php/DataClasses/class.person.php</file>
-            <file>file:/C:/xampp/htdocs/Schuladministration/php/HelperClasses/class.db.php</file>
+            <file>file:/C:/xampp/htdocs/Schuladministration/php/DataClasses/class.kurs.php</file>
             <file>file:/C:/xampp/htdocs/Schuladministration/php/HelperClasses/class.dbSchueler.php</file>
-            <file>file:/C:/xampp/htdocs/Schuladministration/php/DataClasses/class.schueler.php</file>
-            <file>file:/C:/xampp/htdocs/Schuladministration/php/HelperClasses/class.dbKontakte.php</file>
-            <file>file:/C:/xampp/htdocs/Schuladministration/php/class.liste.php</file>
+            <file>file:/C:/xampp/htdocs/Schuladministration/php/HelperClasses/class.dbKursInstanz.php</file>
+            <file>file:/C:/xampp/htdocs/Schuladministration/php/HelperClasses/class.dbKlasse.php</file>
+            <file>file:/C:/xampp/htdocs/Schuladministration/php/DataClasses/class.kursInstanz.php</file>
             <file>file:/C:/xampp/htdocs/Schuladministration/php/index.php</file>
+            <file>file:/C:/xampp/htdocs/Schuladministration/php/HelperClasses/class.dbKurs.php</file>
         </group>
     </open-files>
 </project-private>

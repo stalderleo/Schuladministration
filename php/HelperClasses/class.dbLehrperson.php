@@ -17,7 +17,7 @@ class dbLehrperson extends db {
      * @return type - returns array
      */
     private function objToArray(lehrer $lehrer, $pidLast) {
-        basic::assertInstanceOf($lehrer, lehrer);
+        basic::assertInstanceOf($lehrer, lehrer, true);
         if (!$pidLast) {
             return array($lehrer->getPid(), $lehrer->getUsername(), $lehrer->getPassword(), $lehrer->getName(), 
                 $lehrer->getVorname(), $lehrer->getGeburtstag(), $lehrer->getGeschlecht(), $lehrer->getKuerzel(), $lehrer->getMail(),
@@ -32,7 +32,7 @@ class dbLehrperson extends db {
     
     // If id is set on Object --> get Id from Object | else get last inserted id from DB!
     private function getIdfromDBorObj(person $obj) {
-        basic::assertInstanceOf($obj, person);
+        basic::assertInstanceOf($obj, person, true);
         if ($obj->getPid() == null or $obj->getPid() == 0) {
             return $this->lastId();
         }
@@ -84,7 +84,7 @@ class dbLehrperson extends db {
     }
     
     public function modifyLehrer(lehrer $lehrer) {
-        basic::assertInstanceOf($lehrer, lehrer);
+        basic::assertInstanceOf($lehrer, lehrer, true);
         $sql = "UPDATE person "
                 . "SET `username` = ?, `password` = ?, `name` = ?,`vorname` = ?, `geburtsdatum` = ?, "
                 . "`geschlecht` = ?, `kuerzel` = ?, `mail` = ?, `status` = ? "
@@ -93,7 +93,7 @@ class dbLehrperson extends db {
     }
     
     public function insertLehrer(lehrer $lehrer) {
-        basic::assertInstanceOf($lehrer, lehrer);
+        basic::assertInstanceOf($lehrer, lehrer, true);
         $sql = "INSERT INTO `person` "
                 . "(`pid`, `username`, `password`, `name`, `vorname`, `geburtsdatum`, `geschlecht`, `kuerzel`, `mail`, `status`) "
                 . "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -111,7 +111,7 @@ class dbLehrperson extends db {
     }
     
     public function deleteLehrer(lehrer $lehrer) {
-        basic::assertInstanceOf($lehrer, lehrer);
+        basic::assertInstanceOf($lehrer, lehrer, true);
         $sql = "DELETE FROM person WHERE person.pid = ?";
         
         if ($lehrer->getPid() != null or $lehrer->getPid() != 0) {
