@@ -27,4 +27,4 @@
             </tr>
 <?php endforeach; ?>
         </tbody>
-    </table>
+    </table>        <button class="add"><i class="fas fa-plus"></i></button>
