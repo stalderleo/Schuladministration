@@ -18,13 +18,16 @@ class dbAngestellter extends db {
      */
     private function objToArray(angestellter $angestellter, $pidLast) {
         basic::assertInstanceOf($angestellter, angestellter, true);
+        $passwordHandler = new passwordHandler($angestellter->getUsername());
+        $password = $passwordHandler->hashPW($angestellter->getPassword());
+        
         if (!$pidLast) {
-            return array($angestellter->getPid(), $angestellter->getUsername(), $angestellter->getPassword(), $angestellter->getName(), 
+            return array($angestellter->getPid(), $angestellter->getUsername(), $password, $angestellter->getName(), 
                 $angestellter->getVorname(), $angestellter->getGeburtstag(), $angestellter->getGeschlecht(), $angestellter->getKuerzel(), $angestellter->getMail(),
                 $angestellter->getStatus());
         }
         else {
-            return array($angestellter->getUsername(), $angestellter->getPassword(), $angestellter->getName(), 
+            return array($angestellter->getUsername(), $password, $angestellter->getName(), 
                 $angestellter->getVorname(), $angestellter->getGeburtstag(), $angestellter->getGeschlecht(), $angestellter->getKuerzel(), $angestellter->getMail(),
                 $angestellter->getStatus(), $angestellter->getPid());
         }
@@ -67,21 +70,23 @@ class dbAngestellter extends db {
         }
         return $angestellte;
     }
-    
+    /*
     public function checkUser($username, $password) {
         $angestellte = null;
         $sql = "SELECT * FROM angestellte "
                 . "LEFT JOIN person ON angestellte.aid = person.pid "
-                . "WHERE person.username = ? "
-                . "AND person.password = ?";
+                . "WHERE person.username = ? ";
         $params = array($username, $password);
         $result = $this->preparedStatementSelect($sql, $params);
         if (sizeof($result) == 1) {
             $row = reset($result);
-            $angestellte = $this->newObjAngestellte($row);
+            $passwordHandler = new passwordHandler($row->username);
+            if ($passwordHandler->isPWCorrect($password(), $row->password)) {
+                return $row->aid;
+            }
         }
-        return $lehrer;
-    }
+        return -1;
+    }*/
     
     public function modifyAngestellter(angestellter $angestellte) {
         basic::assertInstanceOf($angestellte, angestellter, true);

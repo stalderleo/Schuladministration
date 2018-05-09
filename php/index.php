@@ -24,13 +24,14 @@ require_once("DataClasses/class.kurs.php");
 require_once("DataClasses/class.klassenBesuch.php");
 
 require_once("HelperClasses/class.db.php");
+require_once("HelperClasses/class.passwordHandler.php");
 require_once("HelperClasses/class.dbSchueler.php");
 require_once("HelperClasses/class.dbAngestellter.php");
 require_once("HelperClasses/class.dbLehrperson.php");
 require_once("HelperClasses/class.dbKurs.php");
 require_once("HelperClasses/class.dbKlasse.php");
 require_once("HelperClasses/class.dbKursInstanz.php");
-
+require_once("HelperClasses/class.dbKlassenBesuch.php");
 
 $c = new controller("index.htm.php", config::TEMPLATE_PATH );
 $c->registerSubcontroller("lehrerView", "Lehrer", false);
@@ -38,25 +39,6 @@ $c->registerSubcontroller("schuelerView", "Schüler", false);
 $c->registerSubcontroller("faecherView", "Fächer", false);
 $c->registerSubcontroller("importView", "Import", false);
 $c->registerSubcontroller("logout", "Logout", false);
-
-$dbLehrer = new dbLehrperson();
-$dbKlasse = new dbKlasse();
-$dbKurs = new dbKurs();
-$dbKursInstanz = new dbKursInstanz();
-$lehrer = $dbLehrer->selectLehrer(1);
-$klasse = $dbKlasse->selectKlasse(1);
-$kurs = $dbKurs->selectKurs(1);
-$kursInssanz = new kursInstanz($lehrer, $klasse, $kurs);
-//$dbKursInstanz->insertInstanz($kursInssanz);
-
-$kursInstanz = $dbKursInstanz->selectInstanzenByLehrer($lehrer);
-//$kursInstanz = $dbKursInstanz->selectInstanzenByKlasse  ($klasse);
-foreach ($kursInstanz as $instanz) {
-    echo "Instanz (". $instanz->getLehrer()->getPid() ."-". $instanz->getKlasse()->getKid() ."-". $instanz->getKurs()->getFid() .")<br>&emsp;";
-    echo "Lehrer: " . $instanz->getLehrer()->getName() . "<br>&emsp;";
-    echo "Klasse: " . $instanz->getKlasse()->getKuerzel(). " <br>&emsp;";
-    echo "Kurs: " . $instanz->getKurs()->getKuerzel(). "<br>";
-}
 
 //$c->registerSubcontroller("datum", "", true);
 

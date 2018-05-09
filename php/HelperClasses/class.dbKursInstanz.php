@@ -13,14 +13,14 @@ class dbKursInstanz extends db {
         $this->dbKurs = new dbKurs();
     }
 
-    private function newObjKursInstanz($lehrer, $klasse, $kurs) {
+    private function newObjKursInstanz(lehrer $lehrer, klasse $klasse, kurs $kurs) {
         basic::assertInstanceOf($lehrer, lehrer, true);
         basic::assertInstanceOf($klasse, klasse, true);
         basic::assertInstanceOf($kurs, kurs, false);
         return new kursInstanz($lehrer, $klasse, $kurs);
     }
     
-    private function objToArray($kursInstanz) {
+    private function objToArray(kursInstanz $kursInstanz) {
         basic::assertInstanceOf($kursInstanz, kursInstanz, true);
         return array($kursInstanz->getLehrer()->getPid(), $kursInstanz->getKlasse()->getKid(), $kursInstanz->getKurs()->getFid());
     }

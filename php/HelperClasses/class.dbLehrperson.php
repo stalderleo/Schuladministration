@@ -18,13 +18,16 @@ class dbLehrperson extends db {
      */
     private function objToArray(lehrer $lehrer, $pidLast) {
         basic::assertInstanceOf($lehrer, lehrer, true);
+        $passwordHandler = new passwordHandler($lehrer->getUsername());
+        $password = $passwordHandler->hashPW($lehrer->getPassword());
+        
         if (!$pidLast) {
-            return array($lehrer->getPid(), $lehrer->getUsername(), $lehrer->getPassword(), $lehrer->getName(), 
+            return array($lehrer->getPid(), $lehrer->getUsername(), $password, $lehrer->getName(), 
                 $lehrer->getVorname(), $lehrer->getGeburtstag(), $lehrer->getGeschlecht(), $lehrer->getKuerzel(), $lehrer->getMail(),
                 $lehrer->getStatus());
         }
         else {
-            return array($lehrer->getUsername(), $lehrer->getPassword(), $lehrer->getName(), 
+            return array($lehrer->getUsername(), $password, $lehrer->getName(), 
                 $lehrer->getVorname(), $lehrer->getGeburtstag(), $lehrer->getGeschlecht(), $lehrer->getKuerzel(), $lehrer->getMail(),
                 $lehrer->getStatus(), $lehrer->getPid());
         }
@@ -72,15 +75,17 @@ class dbLehrperson extends db {
         $lehrer = null;
         $sql = "SELECT * FROM lehrperson "
                 . "LEFT JOIN person ON lehrperson.lid = person.pid "
-                . "WHERE person.username = ? "
-                . "AND person.password = ?";
-        $params = array($username, $password);
+                . "WHERE person.username = ? ";
+        $params = array($username);
         $result = $this->preparedStatementSelect($sql, $params);
         if (sizeof($result) == 1) {
             $row = reset($result);
-            $lehrer = $this->newObjLehrer($row);
+            $passwordHandler = new passwordHandler($row->username);
+            if ($passwordHandler->isPWCorrect($password, $row->password)) {
+                return $row->lid;
+            }
         }
-        return $lehrer;
+        return -1;
     }
     
     public function modifyLehrer(lehrer $lehrer) {
