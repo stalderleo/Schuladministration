@@ -7,7 +7,7 @@ class dbAngestellter extends db {
      * @param type $row - Data from DB (single row)
      * @return \schueler - returns object from type angestellter
      */
-    public function newObjAngestellte($row) {
+    private function newObjAngestellte($row) {
         return new angestellter($row->pid, $row->username, $row->password, $row->name, $row->vorname, $row->geburtstag, $row->geschlecht, $row->kuerzel, $row->mail, $row->status);
     }
     
@@ -16,8 +16,8 @@ class dbAngestellter extends db {
      * @param type $lehrer - object from type angestellter
      * @return type - returns array
      */
-    public function objToArray(angestellter $angestellter, $pidLast) {
-        basic::assertInstanceOf($angestellter, angestellter);
+    private function objToArray(angestellter $angestellter, $pidLast) {
+        basic::assertInstanceOf($angestellter, angestellter, true);
         if (!$pidLast) {
             return array($angestellter->getPid(), $angestellter->getUsername(), $angestellter->getPassword(), $angestellter->getName(), 
                 $angestellter->getVorname(), $angestellter->getGeburtstag(), $angestellter->getGeschlecht(), $angestellter->getKuerzel(), $angestellter->getMail(),
@@ -31,8 +31,8 @@ class dbAngestellter extends db {
     }
     
     // If id is set on Object --> get Id from Object | else get last inserted id from DB!
-    public function getIdfromDBorObj(person $obj) {
-        basic::assertInstanceOf($obj, person);
+    private function getIdfromDBorObj(person $obj) {
+        basic::assertInstanceOf($obj, person, true);
         if ($obj->getPid() == null or $obj->getPid() == 0) {
             return $this->lastId();
         }
@@ -84,7 +84,7 @@ class dbAngestellter extends db {
     }
     
     public function modifyAngestellter(angestellter $angestellte) {
-        basic::assertInstanceOf($angestellte, angestellter);
+        basic::assertInstanceOf($angestellte, angestellter, true);
         $sql = "UPDATE person "
                 . "SET `username` = ?, `password` = ?, `name` = ?,`vorname` = ?, `geburtsdatum` = ?, "
                 . "`geschlecht` = ?, `kuerzel` = ?, `mail` = ?, `status` = ? "
@@ -93,7 +93,7 @@ class dbAngestellter extends db {
     }
     
     public function insertAngestellter(angestellter $angestellte) {
-        basic::assertInstanceOf($angestellte, angestellter);
+        basic::assertInstanceOf($angestellte, angestellter, true);
         $sql = "INSERT INTO `person` "
                 . "(`pid`, `username`, `password`, `name`, `vorname`, `geburtsdatum`, `geschlecht`, `kuerzel`, `mail`, `status`) "
                 . "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -111,7 +111,7 @@ class dbAngestellter extends db {
     }
     
     public function deleteAngestellter(angestellter $angestellte) {
-        basic::assertInstanceOf($angestellte, angestellter);
+        basic::assertInstanceOf($angestellte, angestellter, true);
         $sql = "DELETE FROM person WHERE person.pid = ?";
         
         if ($angestellte->getPid() != null or $angestellte->getPid() != 0) {

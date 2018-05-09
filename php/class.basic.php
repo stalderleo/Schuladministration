@@ -37,8 +37,8 @@ class basic {
         else return false;
     }
     
-    public static function assertInstanceOf($object, $type) {
-        if (!($object instanceof $type) || $object == NULL) {
+    public static function assertInstanceOf($object, $type, $checkNull) {
+        if ((!($object instanceof $type) && $checkNull) || ($object == NULL && $checkNull)) {
             throw new Exception("Object ist nicht vom Typ " . $type . " oder NULL");
             die();
         }

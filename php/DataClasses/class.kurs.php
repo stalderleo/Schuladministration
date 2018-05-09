@@ -12,7 +12,7 @@
  *
  * @author aaron.studer
  */
-class kurs implements subcontroller {
+class kurs {
     private $fid;
     private $kuerzel;
     private $bezeichnung;
@@ -21,14 +21,6 @@ class kurs implements subcontroller {
         $this->fid = $fid;
         $this->kuerzel = $kuerzel;
         $this->bezeichnung = $bezeichnung;
-    }
-
-    public function getOutput() {
-        
-    }
-
-    public function run() {
-        
     }
     
     function getFid() {
