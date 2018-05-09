@@ -52,12 +52,39 @@ class dbKurs extends db {
         return $klasse;
     }
     
+    public function selectKursByKuerzel($kuerzel) {
+        $kurs = null;
+        $sql = "SELECT * FROM fach "
+                . "WHERE fach.kuerzel = ?";
+        $params = array($kuerzel);
+        $result = $this->preparedStatementSelect($sql, $params);
+        if (sizeof($result) == 1) {
+            $row = reset($result);
+            $klasse = $this->newObjKurs($row);
+        }
+        return $klasse;
+    }
+    
     public function insertKurs(kurs $kurs) {
         basic::assertInstanceOf($kurs, kurs, true);
         $sql = "INSERT INTO `fach`"
                 . "(`fid`, `kuerzel`, `bezeichnung`) "
                 . "VALUES (?, ?, ?)";
         $this->preparedStatementQuery($sql, $this->objToArray($kurs, false));       // Insert Data into table klasse
+    }
+    
+    public function insertKursAI(kurs $kurs) {
+        basic::assertInstanceOf($kurs, kurs, true);
+        $kurs = selectKursByKuerzel($kurs->getKuerzel());
+        
+        if($kurs == null) return;
+        
+        $sql = "INSERT INTO `fach`"
+                . "(`kuerzel`, `bezeichnung`) "
+                . "VALUES (?, ?)";
+        $this->preparedStatementQuery($sql, $this->objToArray($kurs, false));       // Insert Data into table klasse
+    
+        return selectKursByKuerzel($kurs->getKuerzel());
     }
     
     public function modifyKurs(kurs $kurs) {

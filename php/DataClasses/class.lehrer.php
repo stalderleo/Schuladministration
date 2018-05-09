@@ -17,6 +17,10 @@ class lehrer extends person {
         parent::__construct($pid, $username, $password, $name, $vorname, $geburtstag, $geschlecht, $kuerzel, $mail, $status);
     }
     
+    public function __constructOI($username, $password, $name, $vorname, $geburtstag, $geschlecht, $kuerzel, $mail, $status) {
+        parent::__constructOI($username, $password, $name, $vorname, $geburtstag, $geschlecht, $kuerzel, $mail, $status);
+    }
+    
     public function getOutput() {
         parent::getOutput();
     }

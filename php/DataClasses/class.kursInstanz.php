@@ -23,6 +23,17 @@ class kursInstanz {
         $this->old_fid = $this->kurs->getFid();
     }
     
+    public function __constructOI(lehrer $lehrer, klasse $klasse) {
+        basic::assertInstanceOf($lehrer, lehrer, true);
+        basic::assertInstanceOf($klasse, klasse, true);
+        $this->lehrer = $lehrer;
+        $this->klasse = $klasse;
+        $this->kurs = $this;
+        
+        $this->old_lid = $this->lehrer->getPid();
+        $this->old_kid = $this->klasse->getKid();
+    }
+    
     function getOldKeys() {
         return array($this->old_lid, $this->old_kid, $this->old_fid);
     }
