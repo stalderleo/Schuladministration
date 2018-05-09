@@ -45,24 +45,6 @@ else
 {
     $c->registerSubcontroller("login", "LogIn", false);
 }
-
-$dbLehrer = new dbLehrperson();
-$dbKlasse = new dbKlasse();
-$dbKurs = new dbKurs();
-$dbKursInstanz = new dbKursInstanz();
-$lehrer = $dbLehrer->selectLehrer(1);
-$klasse = $dbKlasse->selectKlasse(1);
-$kurs = $dbKurs->selectKurs(1);
-$kursInssanz = new kursInstanz($lehrer, $klasse, $kurs);
-//$dbKursInstanz->insertInstanz($kursInssanz);
-
-$kursInstanz = $dbKursInstanz->selectInstanzenByLehrer($lehrer);
-//$kursInstanz = $dbKursInstanz->selectInstanzenByKlasse  ($klasse);
-foreach ($kursInstanz as $instanz) {
-    echo "Instanz (". $instanz->getLehrer()->getPid() ."-". $instanz->getKlasse()->getKid() ."-". $instanz->getKurs()->getFid() .")<br>&emsp;";
-    echo "Lehrer: " . $instanz->getLehrer()->getName() . "<br>&emsp;";
-    echo "Klasse: " . $instanz->getKlasse()->getKuerzel(). " <br>&emsp;";
-    echo "Kurs: " . $instanz->getKurs()->getKuerzel(). "<br>";
 }
 
 //$c->registerSubcontroller("datum", "", true);
