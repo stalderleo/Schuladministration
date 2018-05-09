@@ -37,25 +37,14 @@ $c->registerSubcontroller("lehrerView", "Lehrer", false);
 $c->registerSubcontroller("schuelerView", "Schüler", false);
 $c->registerSubcontroller("faecherView", "Fächer", false);
 $c->registerSubcontroller("importView", "Import", false);
-$c->registerSubcontroller("logout", "Logout", false);
-
-$dbLehrer = new dbLehrperson();
-$dbKlasse = new dbKlasse();
-$dbKurs = new dbKurs();
-$dbKursInstanz = new dbKursInstanz();
-$lehrer = $dbLehrer->selectLehrer(1);
-$klasse = $dbKlasse->selectKlasse(1);
-$kurs = $dbKurs->selectKurs(1);
-$kursInssanz = new kursInstanz($lehrer, $klasse, $kurs);
-//$dbKursInstanz->insertInstanz($kursInssanz);
-
-$kursInstanz = $dbKursInstanz->selectInstanzenByLehrer($lehrer);
-//$kursInstanz = $dbKursInstanz->selectInstanzenByKlasse  ($klasse);
-foreach ($kursInstanz as $instanz) {
-    echo "Instanz (". $instanz->getLehrer()->getPid() ."-". $instanz->getKlasse()->getKid() ."-". $instanz->getKurs()->getFid() .")<br>&emsp;";
-    echo "Lehrer: " . $instanz->getLehrer()->getName() . "<br>&emsp;";
-    echo "Klasse: " . $instanz->getKlasse()->getKuerzel(). " <br>&emsp;";
-    echo "Kurs: " . $instanz->getKurs()->getKuerzel(). "<br>";
+if( isset($_SESSION["role"] ))
+{
+    $c->registerSubcontroller("logout", "Logout", false); 
+}
+else
+{
+    $c->registerSubcontroller("login", "LogIn", false);
+}
 }
 
 //$c->registerSubcontroller("datum", "", true);
