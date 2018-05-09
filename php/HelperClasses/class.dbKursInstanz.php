@@ -45,6 +45,7 @@ class dbKursInstanz extends db {
     }
     
     public function selectInstanzenByLehrer(lehrer $lehrer) {
+        basic::assertInstanceOf($lehrer, lehrer, true);
         $sql = "SELECT * FROM lehrperson_klasse_fach "
                 . "WHERE lid = ?";
         $result = $this->preparedStatementSelect($sql, array($lehrer->getPid()));
@@ -52,6 +53,7 @@ class dbKursInstanz extends db {
     }
     
     public function selectInstanzenByKlasse(klasse $klasse) {
+        basic::assertInstanceOf($klasse, klasse, true);
         $sql = "SELECT * FROM lehrperson_klasse_fach "
                 . "WHERE kid = ?";
         $result = $this->preparedStatementSelect($sql, array($klasse->getKid()));
@@ -59,6 +61,7 @@ class dbKursInstanz extends db {
     }
     
     public function selectInstanzenByKurs(kurs $kurs) {
+        basic::assertInstanceOf($kurs, kurs, true);
         $sql = "SELECT * FROM lehrperson_klasse_fach "
                 . "WHERE fid = ?";
         $result = $this->preparedStatementSelect($sql, array($kurs->getFid()));

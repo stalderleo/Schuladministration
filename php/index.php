@@ -9,20 +9,21 @@
  */
 error_reporting(E_ALL & ~E_NOTICE);
 header('Content-Type: text/html; charset=UTF-8');
-require_once ("class.kontaktData.php");
-require_once ("class.kontaktListe.php");
 session_start();
 require_once("class.controller.php");
 require_once("../config/config.php");
 require_once("class.basic.php");
-require_once("HelperClasses/class.db.php");
+
 require_once './DataClasses/class.person.php';
-require_once("HelperClasses/class.dbKontakte.php");
 require_once("./DataClasses/class.angestellter.php");
 require_once("DataClasses/class.lehrer.php");
+require_once("DataClasses/class.schueler.php");
 require_once("DataClasses/class.klasse.php");
 require_once("DataClasses/class.kursInstanz.php");
 require_once("DataClasses/class.kurs.php");
+require_once("DataClasses/class.klassenBesuch.php");
+
+require_once("HelperClasses/class.db.php");
 require_once("HelperClasses/class.dbSchueler.php");
 require_once("HelperClasses/class.dbAngestellter.php");
 require_once("HelperClasses/class.dbLehrperson.php");
@@ -48,11 +49,12 @@ $kurs = $dbKurs->selectKurs(1);
 $kursInssanz = new kursInstanz($lehrer, $klasse, $kurs);
 //$dbKursInstanz->insertInstanz($kursInssanz);
 
-$kursInstanz = $dbKursInstanz->selectInstanzenByLehrer($lehrer);
+//$kursInstanz = $dbKursInstanz->selectInstanzenByLehrer($lehrer);
+$kursInstanz = $dbKursInstanz->selectInstanzenByKlasse  ($klasse);
 foreach ($kursInstanz as $instanz) {
-    echo "Instanz<br>";
-    echo $instanz->getLehrer()->getName() . "<br>";
-    echo $instanz->getKlasse()->getKuerzel(). " <br>";
+    echo "Instanz (". $instanz->getLehrer()->getPid() ."-". $instanz->getKlasse()->getKid() ."-". $instanz->getKurs()->getFid() .")<br>&emsp;";
+    echo $instanz->getLehrer()->getName() . "<br>&emsp;";
+    echo $instanz->getKlasse()->getKuerzel(). " <br>&emsp;";
     echo $instanz->getKurs()->getKuerzel(). "<br>";
 }
 
