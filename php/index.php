@@ -49,13 +49,13 @@ $kurs = $dbKurs->selectKurs(1);
 $kursInssanz = new kursInstanz($lehrer, $klasse, $kurs);
 //$dbKursInstanz->insertInstanz($kursInssanz);
 
-//$kursInstanz = $dbKursInstanz->selectInstanzenByLehrer($lehrer);
-$kursInstanz = $dbKursInstanz->selectInstanzenByKlasse  ($klasse);
+$kursInstanz = $dbKursInstanz->selectInstanzenByLehrer($lehrer);
+//$kursInstanz = $dbKursInstanz->selectInstanzenByKlasse  ($klasse);
 foreach ($kursInstanz as $instanz) {
     echo "Instanz (". $instanz->getLehrer()->getPid() ."-". $instanz->getKlasse()->getKid() ."-". $instanz->getKurs()->getFid() .")<br>&emsp;";
-    echo $instanz->getLehrer()->getName() . "<br>&emsp;";
-    echo $instanz->getKlasse()->getKuerzel(). " <br>&emsp;";
-    echo $instanz->getKurs()->getKuerzel(). "<br>";
+    echo "Lehrer: " . $instanz->getLehrer()->getName() . "<br>&emsp;";
+    echo "Klasse: " . $instanz->getKlasse()->getKuerzel(). " <br>&emsp;";
+    echo "Kurs: " . $instanz->getKurs()->getKuerzel(). "<br>";
 }
 
 //$c->registerSubcontroller("datum", "", true);

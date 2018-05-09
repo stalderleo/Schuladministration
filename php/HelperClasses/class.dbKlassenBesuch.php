@@ -22,9 +22,6 @@ class dbKlassenBesuch extends db {
         return array($klassenBesuch->getSchueler()->getPid(), $klassenBesuch->getKlasse()->getKid(), $klassenBesuch->getIsZweitausbildung());
     }
     
-    
-    
-    
     public function resultToArray($result) {
         $liste = array();
         if (count($result)) {
@@ -67,10 +64,23 @@ class dbKlassenBesuch extends db {
         $this->preparedStatementQuery($sql, $this->objToArray($kursInstanz));       // Insert Data into table schueler_has_klasse
     }
     
+    public function modifyKlassenBesuch(klassenBesuch $klassenBesuch) {
+        basic::assertInstanceOf($klassenBesuch, klassenBesuch, true);
+        $this->startTransaction();
+        try {
+            $this->deleteBesuch($klassenBesuch);
+            $this->insertBesuch($klassenBesuch);
+            $this->commit();
+        } catch (Exception $ex) {
+            $this->rollback();
+            throw new Exception(get_class($this).': Fehler beim Modifiziern der Zwischentabelle schueler_has_klasse: ' . $ex->getMessage());
+        }
+    }
+    
     public function deleteBesuch(klassenBesuch $klassenBesuch) {
         basic::assertInstanceOf($klassenBesuch, klassenBesuch, true);
         $sql = "DELETE FROM schueler_has_klasse "
                 . "WHERE sid = ? AND kid = ? AND isZweitausbildung = ?";
-        $this->preparedStatementQuery($sql, $this->objToArray($kursInstanz));
+        $this->preparedStatementQuery($sql, $klassenBesuch->getOldKeys());
     }
 }

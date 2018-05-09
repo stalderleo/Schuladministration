@@ -76,10 +76,23 @@ class dbKursInstanz extends db {
         $this->preparedStatementQuery($sql, $this->objToArray($kursInstanz));       // Insert Data into table KursInstanz
     }
     
+    public function modifyKursInstanz(kursInstanz $kursInstanz) {
+        basic::assertInstanceOf($kursInstanz, kursInstanz, true);
+        $this->startTransaction();
+        try {
+            $this->deleteInstanz($kursInstanz);
+            $this->insertInstanz($kursInstanz);
+            $this->commit();
+        } catch (Exception $ex) {
+            $this->rollback();
+            throw new Exception(get_class($this).': Fehler beim Modifiziern der Zwischentabelle lehrperson_klasse_fach: ' . $ex->getMessage());
+        }
+    }
+    
     public function deleteInstanz(kursInstanz $kursInstanz) {
         basic::assertInstanceOf($kursInstanz, kursInstanz, true);
         $sql = "DELETE FROM lehrperson_klasse_fach "
                 . "WHERE lid = ? AND kid = ? AND fid = ?";
-        $this->preparedStatementQuery($sql, $this->objToArray($kursInstanz));
+        $this->preparedStatementQuery($sql, $kursInstanz->getOldKeys());
     }
 }

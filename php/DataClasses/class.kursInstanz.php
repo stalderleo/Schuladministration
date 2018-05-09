@@ -5,13 +5,26 @@ class kursInstanz {
     private $klasse = null;
     private $kurs = null;
     
-    public function __construct(lehrer $lehrer, klasse $klasse, kurs $kurs = null) {
+    // Um Zwischentabelle zu modifizieren --> final Werte im Konstruktor schreiben
+    private $old_lid = 0;
+    private $old_kid = 0;
+    private $old_fid = 0;
+    
+    public function __construct(lehrer $lehrer, klasse $klasse, kurs $kurs) {
         basic::assertInstanceOf($lehrer, lehrer, true);
         basic::assertInstanceOf($klasse, klasse, true);
-        basic::assertInstanceOf($kurs, kurs, false);
+        basic::assertInstanceOf($kurs, kurs, true);
         $this->lehrer = $lehrer;
         $this->klasse = $klasse;
         $this->kurs = $kurs;
+        
+        $this->old_lid = $this->lehrer->getPid();
+        $this->old_kid = $this->klasse->getKid();
+        $this->old_fid = $this->kurs->getFid();
+    }
+    
+    function getOldKeys() {
+        return array($this->old_lid, $this->old_kid, $this->old_fid);
     }
     
     function getLehrer() {
@@ -41,5 +54,5 @@ class kursInstanz {
         $this->kurs = $kurs;
     }
 
-
+    
 }
