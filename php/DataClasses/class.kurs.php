@@ -23,6 +23,11 @@ class kurs {
         $this->bezeichnung = $bezeichnung;
     }
     
+    function __constructOI($kuerzel, $bezeichnung) {
+        $this->kuerzel = $kuerzel;
+        $this->bezeichnung = $bezeichnung;
+    }
+    
     function getFid() {
         return $this->fid;
     }

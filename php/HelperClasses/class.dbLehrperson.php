@@ -68,6 +68,20 @@ class dbLehrperson extends db {
         return $lehrer;
     }
     
+    public function selectLehrerByUsername($username) {
+        $lehrer = null;
+        $sql = "SELECT * FROM lehrperson "
+                . "LEFT JOIN person ON lehrperson.id = person.id "
+                . "WHERE lehrperson.username = ?";
+        $params = array($username);
+        $result = $this->preparedStatementSelect($sql, $params);
+        if (sizeof($result) == 1) {
+            $row = reset($result);
+            $lehrer = $this->newObjLehrer($row);
+        }
+        return $lehrer;
+    }
+    
     public function checkUser($username, $password) {
         $lehrer = null;
         $sql = "SELECT * FROM lehrperson "
@@ -108,6 +122,27 @@ class dbLehrperson extends db {
             $this->rollback();
             throw new Exception(get_class($this).': Fehler beim Erstellen eines Lehrers: ' . $ex->getMessage());
         }    
+    }
+    
+    public function insertLehrerAI(lehrer $lehrer) {
+        $newLehrer = null;
+        basic::assertInstanceOf($lehrer, lehrer, true);
+        $sql = "INSERT INTO `person` "
+                . "(`username`, `password`, `name`, `vorname`, `geburtsdatum`, `geschlecht`, `kuerzel`, `mail`, `status`) "
+                . "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql2 = "INSERT INTO lehrperson (lid) VALUES (?)";
+        
+        $this->startTransaction();
+        try {
+            $this->preparedStatementQuery($sql, $this->objToArray($lehrer, true));       // Insert Data into table person
+            $newLehrer = selectLehrerByUsername($lehrer->getUsername());
+            $this->commit();
+        } catch (Exception $ex) {
+            $this->rollback();
+            throw new Exception(get_class($this).': Fehler beim Erstellen eines Lehrers: ' . $ex->getMessage());
+        }    
+        
+        return $newLehrer;
     }
     
     public function deleteLehrer(lehrer $lehrer) {
