@@ -26,7 +26,7 @@
             <?php echo $this->menu_bootstrap(config::MENU_TEMPLATE);?>
             </div>
             <div class="col-sm-9">
-                <div class="col-12" style="overflow: visible">
+                <div class="col-12 flex" style="overflow: visible">
                     <?php $this->content(); ?>
                 </div>
             </div>

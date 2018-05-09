@@ -32,5 +32,4 @@ $c->registerSubcontroller("logout", "Logout", false);
 
 $c->dispatch();
 $c->sendOutput();
-
 ?>

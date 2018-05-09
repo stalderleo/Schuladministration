@@ -28,3 +28,61 @@
 <?php endforeach; ?>
         </tbody>
     </table>
+
+    <div class="btn-container">
+        <button title="Neuer Schüler" data-toggle="modal" data-target="#student_modal" class="add"><i class="fas fa-plus"></i></button>
+    </div>
+
+    <!-- Button trigger modal -->
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="student_modal" tabindex="-1" role="dialog" aria-labelledby="Schüler-Modal" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="Schüler-Modal">Neuer Schüler</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <form method="post" id="modal-form">
+                  <input type="text" placeholder="Name" name="s_name">
+                  <input type="text" placeholder="E-mail" name="s_mail">
+
+                  <?php //loop threw all fächer ?>
+              </form>
+          </div>
+          <div class="modal-footer">
+            <button title="Neue Klasse" data-toggle="modal" data-target="#class_modal" class="add"><i class="fas fa-plus"></i></button>
+            <span class="seperator"></span>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <input form="modal-form" type="submit" class="btn btn-primary" value="Save changes">
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="class_modal" tabindex="-1" role="dialog" aria-labelledby="Class-Modal" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="Class-Modal">Neue Klasse</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <form method="post" id="modal-form-class" >
+                  <input type="text" placeholder="Name" name="class">
+              </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <input form="modal-form-class" type="submit" class="btn btn-primary" value="Save changes">
+          </div>
+        </div>
+      </div>
+    </div>

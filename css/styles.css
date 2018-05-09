@@ -43,7 +43,7 @@ table.tstacked * {
 }
 
 table.tstacked {
-	width:100%;
+	width:80%;
 }
 
 table.tstacked, table.tstacked td, table.tstacked tr, table.tstacked th {
@@ -110,6 +110,7 @@ table.tstacked th {
     display: block;
     padding: 60px;
     box-shadow: 0px 0px 10px 2px gray;
+    margin-bottom: 20px;    
 }
 .upload-card__text {
     font-size: 25px;
@@ -142,6 +143,10 @@ body {
 }
 
 /*buttons*/
+.btn-container {
+    max-width: 20%;
+}
+
 button.add {
     display: block;
     width: 50px;
@@ -150,4 +155,25 @@ button.add {
     background-color: white;
     border: 1px solid;
     font-size: 30px;
+    cursor: pointer;
+}
+
+.btn {
+    background-color: lightgray;
+    color: #495057;
+}
+.btn:hover {
+    background-color: gray;
+}
+a {
+    transition: all 350ms ease-in-out;
+}
+.nav-item:hover > a {
+    background-color: gray;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
