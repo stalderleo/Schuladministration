@@ -22,6 +22,12 @@ class klasse {
         $this->kuerzel = $kuerzel;
         $this->bezeichnung = $bezeichnung;
     }
+    
+    function __constructOI($kuerzel, $bezeichnung) {
+        $this->kuerzel = $kuerzel;
+        $this->bezeichnung = $bezeichnung;
+    }
+
 
     function getKid() {
         return $this->kid;

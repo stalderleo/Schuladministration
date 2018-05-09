@@ -43,8 +43,7 @@ if( isset($_SESSION["role"] ))
 }
 else
 {
-    $c->registerSubcontroller("login", "LogIn", false);
-}
+    $c->registerSubcontroller("login", "Log In", false);
 }
 
 //$c->registerSubcontroller("datum", "", true);
