@@ -52,12 +52,41 @@ class dbKlasse extends db {
         return $klasse;
     }
     
+    public function selectKlasseByKuerzel($kuerzel) {
+        $klasse = null;
+        $sql = "SELECT * FROM klasse "
+                . "WHERE klasse.kuerzel = ?";
+        $params = array($kuerzel);
+        $result = $this->preparedStatementSelect($sql, $params);
+        if (sizeof($result) == 1) {
+            $row = reset($result);
+            $klasse = $this->newObjKlasse($row);
+        }
+        return $klasse;
+    }
+    
     public function insertKlasse(klasse $klasse) {
         basic::assertInstanceOf($klasse, klasse, true);
         $sql = "INSERT INTO `klasse`"
                 . "(`kid`, `kuerzel`, `bezeichnung`) "
                 . "VALUES (?, ?, ?)";
         $this->preparedStatementQuery($sql, $this->objToArray($klasse, false));       // Insert Data into table klasse
+    }
+    
+    public function insertKlasseAI(klasse $klasse) {
+        basic::assertInstanceOf($klasse, klasse, true);
+        $klasse = selectKlasseByKuerzel($klasse->getKuerzel());
+        
+        if($klasse == null) return;
+        
+        $sql = "INSERT INTO `klasse`"
+                . "(`kuerzel`, `bezeichnung`) "
+                . "VALUES (?, ?)";
+        $this->preparedStatementQuery($sql, array($klasse->getKuerzel(), $klasse->getBezeichnung()));       // Insert Data into table klasse
+    
+        $newKlasse = selectKlasseByKuerzel($klasse->getKuerzel());
+        
+        return $newKlasse;
     }
     
     public function modifyKlasse(klasse $klasse) {
