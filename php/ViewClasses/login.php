@@ -31,7 +31,10 @@ class login implements subcontroller {
         $this->params = $_REQUEST;
         $this->template_path = $template_path;
         $this->title = "Log In";
-            
+        $this->username = $this->params["username"];
+        $this->password = $this->params["password"];    
+        
+        
         if(isset( $this->params["remember_me"] )){
             $_SESSION["username"] = $this->params["username"];
             $_SESSION["password"] = $this->params["password"];
@@ -69,11 +72,15 @@ class login implements subcontroller {
                 if( $schuler != null ) 
                 {
                     $_SESSION["role"] = "schueler";
+                    $_SESSION["username"] = $this->username;
+                    $_SESSION["password"] = $this->password;
                 }
                 
                 if( $lehrer != null ) 
                 {
                     $_SESSION["role"] = "admin";
+                    $_SESSION["username"] = $this->username;
+                    $_SESSION["password"] = $this->password;
                 }
                 
                 $this->login = true;

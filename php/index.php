@@ -30,8 +30,15 @@ $c->registerSubcontroller("lehrerView", "Lehrer", false);
 $c->registerSubcontroller("schuelerView", "Schüler", false);
 $c->registerSubcontroller("faecherView", "Fächer", false);
 $c->registerSubcontroller("importView", "Import", false);
-$c->registerSubcontroller("logout", "Logout", false);
-$c->registerSubcontroller("login", "LogIn", false);
+if( isset($_SESSION["role"] ))
+{
+    $c->registerSubcontroller("logout", "Logout", false); 
+}
+else
+{
+    $c->registerSubcontroller("login", "LogIn", false);
+}
+
 
 $c->dispatch();
 $c->sendOutput();
