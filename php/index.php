@@ -45,7 +45,6 @@ else
 {
     $c->registerSubcontroller("login", "LogIn", false);
 }
-}
 
 //$c->registerSubcontroller("datum", "", true);
 
