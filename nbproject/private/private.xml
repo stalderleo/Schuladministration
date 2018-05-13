@@ -6,8 +6,9 @@
             <file>file:/C:/xampp/htdocs/Schuladministration/php/HelperClasses/class.dbLehrperson.php</file>
             <file>file:/C:/xampp/htdocs/Schuladministration/php/HelperClasses/class.db.php</file>
             <file>file:/C:/xampp/htdocs/Schuladministration/php/HelperClasses/class.dbSchueler.php</file>
-            <file>file:/C:/xampp/htdocs/Schuladministration/php/HelperClasses/class.dbAngestellter.php</file>
-            <file>file:/C:/xampp/htdocs/Schuladministration/php/DataClasses/class.angestellter.php</file>
+            <file>file:/C:/xampp/htdocs/Schuladministration/php/DataClasses/class.klassenBesuch.php</file>
+            <file>file:/C:/xampp/htdocs/Schuladministration/php/HelperClasses/class.dbKursInstanz.php</file>
+            <file>file:/C:/xampp/htdocs/Schuladministration/php/HelperClasses/class.dbKlassenBesuch.php</file>
             <file>file:/C:/xampp/htdocs/Schuladministration/php/index.php</file>
         </group>
     </open-files>
