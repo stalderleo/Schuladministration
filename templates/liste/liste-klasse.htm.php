@@ -8,7 +8,7 @@
 <table class="tstacked">
         <thead>
             <tr>
-                <th></th><th>Bezeichnung</th><th>Kürzel</th>
+               <th>Bezeichnung</th><th>Kürzel</th>
             </tr>
         </thead>
         
@@ -17,7 +17,14 @@
             <tr>
                 <td><a href="#<?php echo $klasse->getKid() ?>"><?= $klasse->getBezeichnung() ?></td>
                 <td><?= $klasse->getKuerzel() ?></td>
+                <?php echo $v->editEntry; ?>
             </tr>
 <?php endforeach; ?>
        </tbody>
 </table>
+
+<div class="btn-container">
+    <button title="Neue Klasse" data-toggle="modal" data-target="#class_modal" class="add"><i class="fas fa-users"></i></button>
+</div>
+
+<?php include $this->template_path.'/modals/modal-klasse.html'; ?>

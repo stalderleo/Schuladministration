@@ -205,13 +205,13 @@ a {
 .fullsize {
     display: block;
     width: 100%;
+    padding: 10px 5px;
 }
 table.tstacked [data-label="Löschen"], table.tstacked [data-label="Bearbeiten"] {
     padding: 0;
 }
 [title="Löschen"] img, [title="Bearbeiten"] img {
     width: 20px;
-    padding: 10px 5px;
     height: 20px;
     display: block;
 }
