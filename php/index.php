@@ -53,5 +53,4 @@ else
 
 $c->dispatch();
 $c->sendOutput();
-
 ?>
