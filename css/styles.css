@@ -60,11 +60,6 @@ table.tstacked th {
 	background:#eee;
 	font-weight: bold;
 }
-table.tstacked td img {
-    display: block;
-    width: 30px;
-    height: 30px;
-}
 
 @media screen and (max-width:700px) {
 	
@@ -203,4 +198,20 @@ a {
 
 .btn.btn-secondary {
     margin-left: auto;
+}
+
+
+
+.fullsize {
+    display: block;
+    width: 100%;
+    padding: 10px 5px;
+}
+table.tstacked [data-label="Löschen"], table.tstacked [data-label="Bearbeiten"] {
+    padding: 0;
+}
+[title="Löschen"] img, [title="Bearbeiten"] img {
+    width: 20px;
+    height: 20px;
+    display: block;
 }

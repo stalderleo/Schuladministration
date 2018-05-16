@@ -36,8 +36,8 @@ require_once("HelperClasses/class.dbKlassenBesuch.php");
 $c = new controller("index.htm.php", config::TEMPLATE_PATH );
 $c->registerSubcontroller("lehrerView", "Lehrer", false);
 $c->registerSubcontroller("schuelerView", "Schüler", false);
-$c->registerSubcontroller("faecherView", "Fächer", false);
 $c->registerSubcontroller("klasseView", "Klassen", false);
+$c->registerSubcontroller("faecherView", "Fächer", false);
 $c->registerSubcontroller("importView", "Import", false);
 if( isset($_SESSION["role"] ))
 {
@@ -47,6 +47,7 @@ else
 {
     $c->registerSubcontroller("login", "Log In", false);
 }
+
 
 //$c->registerSubcontroller("datum", "", true);
 
