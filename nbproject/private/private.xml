@@ -7,6 +7,27 @@
             <file>file:/C:/xampp/htdocs/Schuladministration/php/HelperClasses/class.dbSchueler.php</file>
             <file>file:/C:/xampp/htdocs/Schuladministration/php/HelperClasses/class.dbAngestellter.php</file>
             <file>file:/C:/xampp/htdocs/Schuladministration/php/index.php</file>
+            <file>file:/C:/xampp/htdocs/Schuladministration/php/HelperClasses/class.dbKurs.php</file>
+            <file>file:/C:/xampp/htdocs/Schuladministration/templates/dataimport.htm.php</file>
+            <file>file:/C:/xampp/htdocs/Schuladministration/php/class.importData.php</file>
+            <file>file:/C:/xampp/htdocs/administration/Schuladministration/php/class.basic.php</file>
+            <file>file:/C:/xampp/htdocs/administration/Schuladministration/php/index.php</file>
+            <file>file:/C:/xampp/htdocs/administration/Schuladministration/php/HelperClasses/class.dbLehrperson.php</file>
+            <file>file:/C:/xampp/htdocs/administration/Schuladministration/php/HelperClasses/class.dbSchueler.php</file>
+            <file>file:/C:/xampp/htdocs/administration/Schuladministration/php/ViewClasses/login.php</file>
+            <file>file:/C:/xampp/htdocs/administration/Schuladministration/php/DataClasses/class.schueler.php</file>
+            <file>file:/C:/xampp/htdocs/administration/Schuladministration/templates/index.htm.php</file>
+            <file>file:/C:/xampp/htdocs/administration/Schuladministration/php/class.controller.php</file>
+            <file>file:/C:/xampp/htdocs/projects/Schuladministration/config/config.php</file>
+            <file>file:/C:/xampp/htdocs/projects/Schuladministration/sql/schema.sql</file>
+            <file>file:/C:/xampp/htdocs/projects/Schuladministration/php/class.kontakt.php</file>
+            <file>file:/C:/xampp/htdocs/projects/Schuladministration/php/class.basic.php</file>
+            <file>file:/C:/xampp/htdocs/projects/Schuladministration/templates/kontakt.htm.php</file>
+            <file>file:/C:/xampp/htdocs/projects/Schuladministration/php/index.php</file>
+            <file>file:/C:/xampp/htdocs/projects/Schuladministration/php/class.controller.php</file>
+            <file>file:/C:/xampp/htdocs/projects/Schuladministration/php/ViewClasses/lehrerView.php</file>
+            <file>file:/C:/xampp/htdocs/projects/Schuladministration/templates/sidebar.html</file>
+            <file>file:/C:/xampp/htdocs/projects/Schuladministration/php/DataClasses/class.lehrer.php</file>
         </group>
     </open-files>
 </project-private>
