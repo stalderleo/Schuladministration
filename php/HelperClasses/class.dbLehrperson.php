@@ -112,7 +112,9 @@ class dbLehrperson extends db {
     }
     
     public function insertLehrer(lehrer $lehrer) {
+        $newLehrer = null;
         basic::assertInstanceOf($lehrer, lehrer, true);
+        $sqlCheck = "SELECT username FROM person WHERE username = ?";
         $sql = "INSERT INTO `person` "
                 . "(`pid`, `username`, `password`, `name`, `vorname`, `geburtsdatum`, `geschlecht`, `kuerzel`, `mail`, `status`) "
                 . "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -120,18 +122,28 @@ class dbLehrperson extends db {
         
         $this->startTransaction();
         try {
-            $this->preparedStatementQuery($sql, $this->objToArray($lehrer, false));       // Insert Data into table person
-            $this->preparedStatementQuery($sql2, array($this->getIdfromDBorObj($lehrer)));   // Create entry on table schueler linked by foreign key
-            $this->commit();
+            $result = $this->preparedStatementSelect($sqlCheck, array($lehrer->getUsername()));
+            if (count($result) == 0) {
+                $this->preparedStatementQuery($sql, $this->objToArray($lehrer, false));       // Insert Data into table person
+                $this->preparedStatementQuery($sql2, array($this->getIdfromDBorObj($lehrer)));   // Create entry on table schueler linked by foreign key
+                $newLehrer = $this->selectLehrer($this->getIdfromDBorObj($lehrer));
+                $this->commit();
+            }
+            else {
+                $this->rollback();
+                echo "Username schon vorhanden Person wird nicht erstellt.";
+            }
         } catch (Exception $ex) {
             $this->rollback();
             throw new Exception(get_class($this).': Fehler beim Erstellen eines Lehrers: ' . $ex->getMessage());
         }    
+        return $newLehrer;
     }
     
     public function insertLehrerAI(lehrer $lehrer) {
         $newLehrer = null;
         basic::assertInstanceOf($lehrer, lehrer, true);
+        $sqlCheck = "SELECT username FROM person WHERE username = ?";
         $sql = "INSERT INTO `person` "
                 . "(`username`, `password`, `name`, `vorname`, `geburtsdatum`, `geschlecht`, `kuerzel`, `mail`, `status`) "
                 . "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -139,15 +151,21 @@ class dbLehrperson extends db {
         
         $this->startTransaction();
         try {
-            $this->preparedStatementQuery($sql, $this->objToArray($lehrer, true));       // Insert Data into table person
-            $this->preparedStatementQuery($sql2, array($this->getIdfromDBorObj($lehrer)));
-            $newLehrer = $this->selectLehrer($this->getIdfromDBorObj($lehrer));
-            $this->commit();
+            $result = $this->preparedStatementSelect($sqlCheck, array($lehrer->getUsername()));
+            if (count($result) == 0) {
+                $this->preparedStatementQuery($sql, $this->objToArray($lehrer, false));       // Insert Data into table person
+                $this->preparedStatementQuery($sql2, array($this->getIdfromDBorObj($lehrer)));   // Create entry on table schueler linked by foreign key
+                $newLehrer = $this->selectLehrer($this->getIdfromDBorObj($lehrer));
+                $this->commit();
+            }
+            else {
+                $this->rollback();
+                echo "Username schon vorhanden Person wird nicht erstellt.";
+            }
         } catch (Exception $ex) {
             $this->rollback();
             throw new Exception(get_class($this).': Fehler beim Erstellen eines Lehrers: ' . $ex->getMessage());
-        }    
-        
+        }
         return $newLehrer;
     }
     

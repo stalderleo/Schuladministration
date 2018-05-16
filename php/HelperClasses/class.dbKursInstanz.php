@@ -73,7 +73,12 @@ class dbKursInstanz extends db {
         $sql = "INSERT INTO `lehrperson_klasse_fach`"
                 . "(`lid`, `kid`, `fid`) "
                 . "VALUES (?, ?, ?)";
-        $this->preparedStatementQuery($sql, $this->objToArray($kursInstanz));       // Insert Data into table KursInstanz
+        try {
+            $res = $this->preparedStatementQuery($sql, $this->objToArray($kursInstanz));       // Insert Data into table KursInstanz
+            return $kursInstanz;
+        } catch (Exception $ex) {
+            return null;
+        }
     }
     
     public function modifyKursInstanz(kursInstanz $kursInstanz) {

@@ -98,7 +98,9 @@ class dbAngestellter extends db {
     }
     
     public function insertAngestellter(angestellter $angestellte) {
+        $newAngestellte = null;
         basic::assertInstanceOf($angestellte, angestellter, true);
+        $sqlCheck = "SELECT username FROM person WHERE username = ?";
         $sql = "INSERT INTO `person` "
                 . "(`pid`, `username`, `password`, `name`, `vorname`, `geburtsdatum`, `geschlecht`, `kuerzel`, `mail`, `status`) "
                 . "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -106,13 +108,51 @@ class dbAngestellter extends db {
         
         $this->startTransaction();
         try {
-            $this->preparedStatementQuery($sql, $this->objToArray($angestellte, false));       // Insert Data into table person
-            $this->preparedStatementQuery($sql2, array($this->getIdfromDBorObj($angestellte)));   // Create entry on table schueler linked by foreign key
-            $this->commit();
+            $result = $this->preparedStatementSelect($sqlCheck, array($angestellte->getUsername()));
+            if (count($result) == 0) {
+                $this->preparedStatementQuery($sql, $this->objToArray($angestellte, false));       // Insert Data into table person
+                $this->preparedStatementQuery($sql2, array($this->getIdfromDBorObj($angestellte)));   // Create entry on table schueler linked by foreign key
+                $newAngestellte = $this->getIdfromDBorObj($angestellte);
+                $this->commit();
+            }
+            else {
+                $this->rollback();
+                echo "Username schon vorhanden Person wird nicht erstellt.";
+            }
         } catch (Exception $ex) {
             $this->rollback();
             throw new Exception(get_class($this).': Fehler beim Erstellen eines Angestellten: ' . $ex->getMessage());
-        }    
+        }   
+        return $newAngestellte;
+    }
+    
+    public function insertAngestellterAI(angestellter $angestellte) {
+        $newAngestellte = null;
+        basic::assertInstanceOf($angestellte, angestellter, true);
+        $sqlCheck = "SELECT username FROM person WHERE username = ?";
+        $sql = "INSERT INTO `person` "
+                . "(`username`, `password`, `name`, `vorname`, `geburtsdatum`, `geschlecht`, `kuerzel`, `mail`, `status`) "
+                . "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql2 = "INSERT INTO angestellte (aid) VALUES (?)";
+        
+        $this->startTransaction();
+        try {
+            $result = $this->preparedStatementSelect($sqlCheck, array($angestellte->getUsername()));
+            if (count($result) == 0) {
+                $this->preparedStatementQuery($sql, $this->objToArray($angestellte, false));       // Insert Data into table person
+                $this->preparedStatementQuery($sql2, array($this->getIdfromDBorObj($angestellte)));   // Create entry on table schueler linked by foreign key
+                $newAngestellte = $this->getIdfromDBorObj($angestellte);
+                $this->commit();
+            }
+            else {
+                $this->rollback();
+                echo "Username schon vorhanden Person wird nicht erstellt.";
+            }
+        } catch (Exception $ex) {
+            $this->rollback();
+            throw new Exception(get_class($this).': Fehler beim Erstellen eines Angestellten: ' . $ex->getMessage());
+        }   
+        return $newAngestellte;
     }
     
     public function deleteAngestellter(angestellter $angestellte) {
