@@ -9,7 +9,7 @@
 <table class="table tstacked">
     <thead>
         <tr>
-            <th>Name</th><th>Vorname</th><th>Email</th><th>Kürzel</th><th></th><th></th>
+            <th>Name</th><th>Vorname</th><th>Email<i title="Vergrössern/Verkleinern" data-extend class="fas fa-expand"></th><th>Kürzel</th><th>Status</th>
         </tr>
     </thead>
     <tbody>
@@ -19,7 +19,7 @@
             <tr>
                 <td data-label="Name"><a href="#"></a><?php echo $l->getName()?></td>
                 <td data-label="Vorname"><?php echo $l->getVorname()?></td>
-                <td data-label="Email"><?php echo $l->getMail()?></td>
+                <td data-label="Email" class="downsize"><?php echo $l->getMail()?></td>
                 <td data-label="Kuerzel"><?php echo $l->getKuerzel() ?></td>
             <?php echo $v->editEntry; ?>
         </tr>
