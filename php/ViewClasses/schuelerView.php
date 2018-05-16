@@ -24,8 +24,8 @@ class schuelerView implements subcontroller {
         $this->template_path = $template_path;
         $this->title = "Schüler";
         $this->editEntry = 
-            '<td data-label="Löschen"><a title="Löschen" class="fullsize" href=""><img src="'.config::IMAGE_PATH.'/delete.png" border=\"no\"></a></td>
-            <td data-label="Bearbeiten"><a title="Bearbeiten" class="fullsize" href="<?php /*echo $this->phpmodule?>&kid=<?php echo $kontakt->getKid()*/?>"><img src="'.config::IMAGE_PATH.'/edit.svg" border=\"no\"></a></td>';
+            '<td data-label="Löschen"><a title="Löschen" class="fullsize" href="<?php echo $this->phpmodule?>&pid=<?php echo $s->getPid()?>"><img src="'.config::IMAGE_PATH.'/delete.png" border=\"no\"></a></td>
+            <td data-label="Bearbeiten"><a title="Bearbeiten" class="fullsize" href="<?php echo $this->phpmodule?>&pid=<?php echo $s->getPid()?>"><img src="'.config::IMAGE_PATH.'/edit.svg" border=\"no\"></a></td>';
     }
 
     public function run() {
