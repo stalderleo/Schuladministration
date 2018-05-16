@@ -15,7 +15,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
     
     <div class="container">
-        <div class="text-left bg-light">
+        <div class="text-left">
             <div class="row align-items-center">
                 <h1 class="page-title"><?php echo $this->active_objects[array_keys($this->active_objects)[0]]->title ?></h1>
             </div>
