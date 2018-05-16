@@ -69,7 +69,7 @@ class login implements subcontroller {
             
             if($schuler != null || $lehrer != null)
             {
-                if( $schuler != null ) $_SESSION["role"] = "schueler";                
+                if( $schuler != null ) $_SESSION["role"] = "benutzer";                
                 if( $lehrer != null ) $_SESSION["role"] = "admin";
                 
                 $_SESSION["username"] = $this->username;
