@@ -5,26 +5,34 @@
  * Template Kontaktliste. Stil Stacked Table.
  *
 -->
-    <table class="tstacked">
-        <thead>
+<div class="table-container">
+<table class="table tstacked">
+    <thead>
+        <tr>
+            <th>Name</th><th>Vorname</th><th>Email</th><th>Kürzel</th><th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+<?php
+        foreach ( $v->lehrers as $l ): ?>
+            
             <tr>
-                <th></th><th>Name</th><th>Vorname</th><th>Strasse</th><th>PLZ</th><th>Ort</th><th>Email</th><th>Telefon privat</th><th>Telefon gesch.</th>
-            </tr>
-        </thead>
-        <tbody>
-<?php $test = array(1,2,3); //replace with get_kontakte()
-        foreach ( $test as $kontakt ):?>
-            <tr>
-                <td data-label="Löschen"><a href="<?php /*echo $this->phpmodule?>&kid=<?php echo $kontakt->getKid()*/?>"><img src="<?php echo config::IMAGE_PATH?>/delete.png" border=\"no\"></a>
-                <td data-label="Name"><a href="#">f</a><?php /*echo $kontakt->getName()*/?></td>
-                <td data-label="Vorname">f<?php /*echo $kontakt->getVorname()*/?></td>
-                <td data-label="Strasse">f<?php /*echo $kontakt->getStrasse()*/?></td>
-                <td data-label="PLZ">f<?php /*if(empty($kontakt->getPlz())) echo ""; else echo $kontakt->getPlz()*/?></td>
-                <td data-label="Ort">f<?php /*echo $kontakt->getOrt()*/?></td>
-                <td data-label="Email">f<?php /*echo $kontakt->getEmail()*/?></td>
-                <td data-label="Telefon privat">f<?php /*echo $kontakt->getTpriv()*/?></td>
-                <td data-label="Telefon gesch.">f<?php /*echo $kontakt->getTgesch()*/?></td>
-            </tr>
+                <td data-label="Name"><a href="#"></a><?php echo $l->getName()?></td>
+                <td data-label="Vorname"><?php echo $l->getVorname()?></td>
+                <td data-label="Email"><?php echo $l->getMail()?></td>
+                <td data-label="Kuerzel"><?php echo $l->getKuerzel() ?></td>
+                <td data-label="Status"><?php echo $l->getStatus()?></td>
+            <?php echo $v->editEntry; ?>
+        </tr>
 <?php endforeach; ?>
-        </tbody>
-    </table>
+    </tbody>
+</table>
+</div>
+
+<div class="btn-container">
+    <button title="Neuer Lehrer" data-toggle="modal" data-target="#teacher_modal" class="add"><i class="fas fa-chalkboard-teacher"></i></button>
+</div>
+
+<?php include $this->template_path.'/modals/modal-lehrer.html'; ?>
+<?php include $this->template_path.'/modals/modal-fach.html'; ?>
+<?php include $this->template_path.'/modals/modal-klasse.html'; ?>

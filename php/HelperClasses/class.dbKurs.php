@@ -28,8 +28,8 @@ class dbKurs extends db {
     
     public function selectAllKurse() {
         $liste = array();
-        $sql = "SELECT * FROM kurs "
-                . "ORDER BY kurs.fid";
+        $sql = "SELECT * FROM fach "
+                . "ORDER BY fach.fid";
         $result = $this->select($sql);
         if (count($result)) {
             foreach ($result as $row ) {

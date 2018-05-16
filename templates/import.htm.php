@@ -7,11 +7,9 @@
 -->
 
 <div class="col-sm-12 offset-sm-0 card upload-card">
-    <form enctype="multipart/form-data" action="<?php echo $_SERVER['SCRIPT_NAME'] ?>?id=importView" method="post" id="importDataForm">
-        <div class="form-group">
-            <label for="dataExport">Laden Sie ein File hoch:</label>
-            <input type="file" class="form-control-file" name="dataExport" id="dataExport">
-        </div>
+    <p class="upload-card__text">Import Datei Wählen</p>
+    <form method="post" id="import-form" enctype="multipart/form-data">
+    <input type="file" name="import">
     </form>
-</div> 
-<input name="submit" form="importDataForm" type="submit" value="Hochladen">
+</div>
+<input form="import-form" class="btn" value="Importieren" type="submit">
