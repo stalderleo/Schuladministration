@@ -25,6 +25,18 @@ class person {
         $this->mail = $mail;
         $this->status = $status;
     }
+    
+    function __constructOI($username, $password, $name, $vorname, $geburtstag, $geschlecht, $kuerzel, $mail, $status) {
+        $this->username = $username;
+        $this->password = $password;
+        $this->name = $name;
+        $this->vorname = $vorname;
+        $this->geburtstag = $geburtstag;
+        $this->geschlecht = $geschlecht;
+        $this->kuerzel = $kuerzel;
+        $this->mail = $mail;
+        $this->status = $status;
+    }
 
     public function getOutput() {
         

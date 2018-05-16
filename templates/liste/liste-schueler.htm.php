@@ -12,19 +12,19 @@
             </tr>
         </thead>
         <tbody>
-<?php $test = array(1,2,3,4,5); //replace with get_kontakte()
-        foreach ( $test as $kontakt ):?>
+<?php
+        foreach ( $v->schuelers as $s ): ?>
+            
             <tr>
-                <td data-label="Name"><a href="#">f</a><?php /*echo $kontakt->getName()*/?></td>
-                <td data-label="Vorname">f<?php /*echo $kontakt->getVorname()*/?></td>
-                <td data-label="Strasse">f<?php /*echo $kontakt->getStrasse()*/?></td>
-                <td data-label="PLZ">f<?php /*if(empty($kontakt->getPlz())) echo ""; else echo $kontakt->getPlz()*/?></td>
-                <td data-label="Ort">f<?php /*echo $kontakt->getOrt()*/?></td>
-                <td data-label="Email">f<?php /*echo $kontakt->getEmail()*/?></td>
-                <td data-label="Telefon privat">f<?php /*echo $kontakt->getTpriv()*/?></td>
-                <td data-label="Telefon gesch.">f<?php /*echo $kontakt->getTgesch()*/?></td>
-                <td data-label="Löschen"><a title="Löschen" class="fullsize" href="<?php /*echo $this->phpmodule?>&kid=<?php echo $kontakt->getKid()*/?>"><img src="<?php echo config::IMAGE_PATH?>/delete.png" border=\"no\"></a></td>
-                <td data-label="Bearbeiten"><a title="Bearbeiten" class="fullsize" href="<?php /*echo $this->phpmodule?>&kid=<?php echo $kontakt->getKid()*/?>"><img src="<?php echo config::IMAGE_PATH?>/edit.svg" border=\"no\"></a></td>
+                <td data-label="Löschen"><a href="<?php echo $this->phpmodule?>&kid=<?php echo $s->getPid()?>"><img src="<?php echo config::IMAGE_PATH?>/delete.png" border=\"no\"></a>
+                <td data-label="Name"><a href="#">f</a><?php echo $s->getName()?></td>
+                <td data-label="Vorname">f<?php echo $s->getVorname()?></td>
+                <td data-label="Strasse">f<?php echo $s->getStrasse()?></td>
+                <td data-label="PLZ">f<?php if(empty($s->getPlz())) echo ""; else echo $s->getPlz()?></td>
+                <td data-label="Ort">f<?php echo $s->getOrt()?></td>
+                <td data-label="Email">f<?php echo $s->getEmail()?></td>
+                <td data-label="Telefon privat">f<?php echo $s->getTpriv()?></td>
+                <td data-label="Telefon gesch.">f<?php echo $s->getTgesch()?></td>
             </tr>
 <?php endforeach; ?>
         </tbody>

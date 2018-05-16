@@ -69,19 +69,11 @@ class login implements subcontroller {
             
             if($schuler != null || $lehrer != null)
             {
-                if( $schuler != null ) 
-                {
-                    $_SESSION["role"] = "schueler";
-                    $_SESSION["username"] = $this->username;
-                    $_SESSION["password"] = $this->password;
-                }
+                if( $schuler != null ) $_SESSION["role"] = "benutzer";                
+                if( $lehrer != null ) $_SESSION["role"] = "admin";
                 
-                if( $lehrer != null ) 
-                {
-                    $_SESSION["role"] = "admin";
-                    $_SESSION["username"] = $this->username;
-                    $_SESSION["password"] = $this->password;
-                }
+                $_SESSION["username"] = $this->username;
+                $_SESSION["password"] = $this->password;
                 
                 $this->login = true;
             }
@@ -104,15 +96,8 @@ class login implements subcontroller {
             
             if($schuler != null || $lehrer != null)
             {
-                if( $schuler != null ) 
-                {
-                    $_SESSION["role"] = "schueler";
-                }
-                
-                if( $lehrer != null ) 
-                {
-                    $_SESSION["role"] = "admin";
-                }
+                if( $schuler != null ) $_SESSION["role"] = "Benutzer";
+                if( $lehrer != null ) $_SESSION["role"] = "Admin";
                 
                 $this->login = true;
             }

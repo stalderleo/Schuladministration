@@ -12,10 +12,12 @@
  * @author larschristian.berg
  */
 require_once("interface.subcontroller.php");
+require_once("./HelperClasses/class.dbLehrperson.php");
 
 class lehrerView implements subcontroller {
     //put your code here
     private $template_path;
+    private $lehrers = array();
     public $title;
     public function __construct( $template_path ) {
         $this->template_path = $template_path;
@@ -25,9 +27,13 @@ class lehrerView implements subcontroller {
         //a person object should be returned here
     }
     public function run() {
+        $db = new dbLehrperson();
+        
+        $this->lehrers = $db->selectAllLehrer();
     }
     
     public function getOutput(){
+        $v =& $this;
         include($this->template_path."/liste/liste-lehrer.htm.php");
     }
 }
