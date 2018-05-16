@@ -14,7 +14,7 @@
 require_once("interface.subcontroller.php");
 require_once("./HelperClasses/class.dbKlasse.php");
 
-class lehrerView implements subcontroller {
+class klasseView implements subcontroller {
     //put your code here
     private $template_path;
     private $klassen = array();
@@ -34,6 +34,6 @@ class lehrerView implements subcontroller {
     
     public function getOutput(){
         $v =& $this;
-        include($this->template_path."/liste/liste-lehrer.htm.php");
+        include($this->template_path."/liste/liste-klasse.htm.php");
     }
 }

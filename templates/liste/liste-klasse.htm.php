@@ -5,9 +5,19 @@
  * Template Kontaktliste. Stil Stacked Table.
  *
 -->
-<ul class="">
+<table class="tstacked">
+        <thead>
+            <tr>
+                <th></th><th>Bezeichnung</th><th>Kürzel</th>
+            </tr>
+        </thead>
+        
+        <tbody>
 <?php foreach ( $v->klassen as $klasse ): ?>
-                <li><a href="#<?php echo $klasse->getKid() ?>"><?= $klasse->getBezeichnung() ?></a></li>
-                <li><?= $klasse->getKuerzel() ?></li>
+            <tr>
+                <td><a href="#<?php echo $klasse->getKid() ?>"><?= $klasse->getBezeichnung() ?></td>
+                <td><?= $klasse->getKuerzel() ?></td>
+            </tr>
 <?php endforeach; ?>
-</ul>
+       </tbody>
+</table>

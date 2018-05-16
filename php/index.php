@@ -37,7 +37,7 @@ $c = new controller("index.htm.php", config::TEMPLATE_PATH );
 $c->registerSubcontroller("lehrerView", "Lehrer", false);
 $c->registerSubcontroller("schuelerView", "Schüler", false);
 $c->registerSubcontroller("faecherView", "Fächer", false);
-$c->registerSubcontroller("klassenView", "Klassen", false);
+$c->registerSubcontroller("klasseView", "Klassen", false);
 $c->registerSubcontroller("importView", "Import", false);
 if( isset($_SESSION["role"] ))
 {
