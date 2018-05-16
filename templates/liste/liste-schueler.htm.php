@@ -17,14 +17,14 @@
             
             <tr>
                 <td data-label="Löschen"><a href="<?php echo $this->phpmodule?>&kid=<?php echo $s->getPid()?>"><img src="<?php echo config::IMAGE_PATH?>/delete.png" border=\"no\"></a>
-                <td data-label="Name"><a href="#">f</a><?php echo $s->getName()?></td>
-                <td data-label="Vorname">f<?php echo $s->getVorname()?></td>
-                <td data-label="Strasse">f<?php echo $s->getStrasse()?></td>
-                <td data-label="PLZ">f<?php if(empty($s->getPlz())) echo ""; else echo $s->getPlz()?></td>
-                <td data-label="Ort">f<?php echo $s->getOrt()?></td>
-                <td data-label="Email">f<?php echo $s->getEmail()?></td>
-                <td data-label="Telefon privat">f<?php echo $s->getTpriv()?></td>
-                <td data-label="Telefon gesch.">f<?php echo $s->getTgesch()?></td>
+                <td data-label="Name"><a href="#"></a><?php echo $s->getName()?></td>
+                <td data-label="Vorname"><?php echo $s->getVorname()?></td>
+                <td data-label="Strasse"><?php echo $s->getStrasse()?></td>
+                <td data-label="PLZ"><?php if(empty($s->getPlz())) echo ""; else echo $s->getPlz()?></td>
+                <td data-label="Ort"><?php echo $s->getOrt()?></td>
+                <td data-label="Email"><?php echo $s->getEmail()?></td>
+                <td data-label="Telefon privat"><?php echo $s->getTpriv()?></td>
+                <td data-label="Telefon gesch."><?php echo $s->getTgesch()?></td>
             </tr>
 <?php endforeach; ?>
         </tbody>
