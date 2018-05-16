@@ -29,7 +29,7 @@
         </tbody>
     </table>
     <div class="btn-container">
-        <button title="Neuer Lehrer" data-toggle="modal" data-target="#teacher_modal" class="add"><i class="fas fa-plus"></i></button>
+        <button title="Neuer Lehrer" data-toggle="modal" data-target="#teacher_modal" class="add"><i class="fas fa-chalkboard-teacher"></i></button>
     </div>
 
     <!-- Button trigger modal -->
@@ -55,8 +55,8 @@
               </form>
           </div>
           <div class="modal-footer">
-            <button title="Neue Klasse" data-toggle="modal" data-target="#class_modal" class="add"><i class="fas fa-plus"></i></button>
-            <button title="Neues Fach" data-toggle="modal" data-target="#subject_modal" class="add"><i class="fas fa-plus"></i></button>
+            <button title="Neue Klasse" data-toggle="modal" data-target="#class_modal" class="add"><i class="fas fa-users"></i></button>
+            <button title="Neues Fach" data-toggle="modal" data-target="#subject_modal" class="add"><i class="fas fa-notes-medical"></i>
             <span class="seperator"></span>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <input form="modal-form" type="submit" class="btn btn-primary" value="Save changes">

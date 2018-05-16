@@ -12,7 +12,9 @@
 <?php endforeach; ?>
 </ul>
 <div class="btn-container">
-    <button title="Neues Fach" data-toggle="modal" data-target="#subject_modal" class="add"><i class="fas fa-plus"></i></button>
+    <button title="Neues Fach" data-toggle="modal" data-target="#subject_modal" class="add">
+        <i class="fas fa-notes-medical"></i>
+    </button>
 </div>
 <!-- Modal -->
 <div class="modal fade" id="subject_modal" tabindex="-1" role="dialog" aria-labelledby="Subject-Modal" aria-hidden="true">

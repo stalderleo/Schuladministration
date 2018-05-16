@@ -25,6 +25,7 @@ $c = new controller("index.htm.php", config::TEMPLATE_PATH );
 $c->registerSubcontroller("lehrerView", "Lehrer", false);
 $c->registerSubcontroller("schuelerView", "Schüler", false);
 $c->registerSubcontroller("faecherView", "Fächer", false);
+$c->registerSubcontroller("klassenView", "Klassen", false);
 $c->registerSubcontroller("importView", "Import", false);
 $c->registerSubcontroller("logout", "Logout", false);
 
@@ -32,4 +33,6 @@ $c->registerSubcontroller("logout", "Logout", false);
 
 $c->dispatch();
 $c->sendOutput();
+
+var_dump(time());
 ?>

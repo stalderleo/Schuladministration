@@ -60,6 +60,11 @@ table.tstacked th {
 	background:#eee;
 	font-weight: bold;
 }
+table.tstacked td img {
+    display: block;
+    width: 30px;
+    height: 30px;
+}
 
 @media screen and (max-width:700px) {
 	
@@ -176,4 +181,26 @@ a {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+}
+
+.modal-body form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.modal-body form input,  .modal-body form select {
+    width: calc(50% - 0.5rem);
+    border: 1px solid  lightgray;
+    padding: 0 5px;
+    margin-bottom: 10px;
+}
+.modal-body form select {
+    height: 24px;
+    color: gray;
+    padding: 0;
+}
+
+.btn.btn-secondary {
+    margin-left: auto;
 }
