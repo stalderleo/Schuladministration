@@ -12,7 +12,4 @@ $(document).ready(function() {
            $(this).toggleClass('downsize');
        });
     });
-    
-    console.log("awd");
-    $('.tstacked').DataTable();
 } );

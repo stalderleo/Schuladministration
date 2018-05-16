@@ -5,7 +5,7 @@
  * Template Kontaktliste. Stil Stacked Table.
  *
 -->
-<div class="table-container">
+<div class="table-container dragscroll">
 <table class="table tstacked">
     <thead>
         <tr>
