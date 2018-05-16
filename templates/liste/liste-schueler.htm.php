@@ -11,7 +11,7 @@
 <table class="table tstacked">
     <thead>
         <tr>
-            <th>Name</th><th>Vorname</th><th>Email<i title="Vergrössern/Verkleinern" data-extend class="fas fa-expand"></th><th>Kürzel</th><th>Status</th>
+            <th>Name</th><th>Vorname</th><th>Email<i title="Vergrössern/Verkleinern" data-extend class="fas fa-expand"></th><th>Kürzel</th><th></th><th></th>
         </tr>
     </thead>
     <tbody>
