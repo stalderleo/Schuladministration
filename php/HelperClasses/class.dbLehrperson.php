@@ -47,7 +47,7 @@ class dbLehrperson extends db {
     public function selectAllLehrer() {
         $liste = array();
         $result = $this->select( "SELECT * FROM lehrperson "
-                . "LEFT JOIN person ON lehrperson.lid = person.pid "
+                . "LEFT JOIN person ON lehrperson.lid = person.pid WHERE person.status = true "
                 . "order by pid");
         if (count($result)) {
             foreach ($result as $row ) {

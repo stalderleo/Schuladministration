@@ -23,7 +23,6 @@
                 <td data-label="Vorname"><?php echo $s->getVorname()?></td>
                 <td data-label="Email" class="downsize"><?php echo $s->getMail()?></td>
                 <td data-label="Kuerzel"><?php echo $s->getKuerzel() ?></td>
-                <td data-label="Status"><?php echo $s->getStatus()?></td>
             <?php echo $v->editEntry; ?>
         </tr>
 <?php endforeach; ?>
