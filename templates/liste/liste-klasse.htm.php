@@ -8,22 +8,54 @@
     <table class="tstacked">
         <thead>
             <tr>
-                <th></th><th>Name</th><th>Vorname</th><th>Strasse</th><th>PLZ</th><th>Ort</th><th>Email</th><th>Telefon privat</th><th>Telefon gesch.</th>
+                <th>Name</th><th>Vorname</th><th>Strasse</th><th>PLZ</th><th>Ort</th><th>Email</th><th>Telefon privat</th><th>Telefon gesch.</th>
             </tr>
         </thead>
-        <tbody
-<?php foreach ( $this->data->getKontaktListe() as $kontakt ): ?>
+        <tbody>
+        <?php $test = array(1,2,3); //replace with get_kontakte()
+        foreach ( $test as $kontakt ):?>
             <tr>
-                <td data-label="Löschen"><a href="<?php echo $this->phpmodule?>&kid=<?php echo $kontakt->getKid()?>"><img src="<?php echo config::IMAGE_PATH?>/delete.png" border=\"no\"></a>
-                <td data-label="Name"><?php echo $kontakt->getName()?></td>
-                <td data-label="Vorname"><?php echo $kontakt->getVorname()?></td>
-                <td data-label="Strasse"><?php echo $kontakt->getStrasse()?></td>
-                <td data-label="PLZ"><?php if(empty($kontakt->getPlz())) echo ""; else echo $kontakt->getPlz()?></td>
-                <td data-label="Ort"><?php echo $kontakt->getOrt()?></td>
-                <td data-label="Email"><?php echo $kontakt->getEmail()?></td>
-                <td data-label="Telefon privat"><?php echo $kontakt->getTpriv()?></td>
-                <td data-label="Telefon gesch."><?php echo $kontakt->getTgesch()?></td>
+                <td data-label="Name"><a href="#">f</a><?php /*echo $kontakt->getName()*/?></td>
+                <td data-label="Vorname">f<?php /*echo $kontakt->getVorname()*/?></td>
+                <td data-label="Strasse">f<?php /*echo $kontakt->getStrasse()*/?></td>
+                <td data-label="PLZ">f<?php /*if(empty($kontakt->getPlz())) echo ""; else echo $kontakt->getPlz()*/?></td>
+                <td data-label="Ort">f<?php /*echo $kontakt->getOrt()*/?></td>
+                <td data-label="Email">f<?php /*echo $kontakt->getEmail()*/?></td>
+                <td data-label="Telefon privat">f<?php /*echo $kontakt->getTpriv()*/?></td>
+                <td data-label="Telefon gesch.">f<?php /*echo $kontakt->getTgesch()*/?></td>
+                <td data-label="Löschen"><a title="Löschen" class="fullsize" href="<?php /*echo $this->phpmodule?>&kid=<?php echo $kontakt->getKid()*/?>"><img src="<?php echo config::IMAGE_PATH?>/delete.png" border=\"no\"></a></td>
+                <td data-label="Bearbeiten"><a title="Bearbeiten" class="fullsize" href="<?php /*echo $this->phpmodule?>&kid=<?php echo $kontakt->getKid()*/?>"><img src="<?php echo config::IMAGE_PATH?>/edit.svg" border=\"no\"></a></td>
             </tr>
-<?php endforeach; ?>
+        <?php endforeach; ?>
         </tbody>
     </table>
+    <div class="btn-container">
+        <button title="Neue Klasse" data-toggle="modal" data-target="#class_modal" class="add"><i class="fas fa-users"></i></button>
+    </div>
+
+    <!-- Button trigger modal -->
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="class_modal" tabindex="-1" role="dialog" aria-labelledby="Class-Modal" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="Class-Modal">Neue Klasse</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <form method="post" name="class" id="modal-form-class" >
+                  <input type="text" placeholder="Bezeichnung" name="c_name">
+                  <input type="text" placeholder="Kürzel" name="c_kuerz">
+              </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <input form="modal-form-class" type="submit" class="btn btn-primary" value="Save changes">
+          </div>
+        </div>
+      </div>
+    </div>
