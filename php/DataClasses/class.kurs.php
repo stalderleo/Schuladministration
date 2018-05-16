@@ -17,15 +17,10 @@ class kurs {
     private $kuerzel;
     private $bezeichnung;
     
-    function __construct($fid, $kuerzel, $bezeichnung) {
+    function __construct($kuerzel, $bezeichnung, $fid=NULL) {
         $this->fid = $fid;
-        $this->kuerzel = $kuerzel;
-        $this->bezeichnung = $bezeichnung;
-    }
-    
-    function __constructOI($kuerzel, $bezeichnung) {
-        $this->kuerzel = $kuerzel;
-        $this->bezeichnung = $bezeichnung;
+        $this->kuerzel = (String) $kuerzel;
+        $this->bezeichnung = (String) $bezeichnung;
     }
     
     function getFid() {
