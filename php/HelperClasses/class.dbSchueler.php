@@ -47,7 +47,7 @@ class dbSchueler extends db {
     public function selectAllSchueler() {
         $liste = array();
         $result = $this->select( "SELECT * FROM schueler "
-                . "LEFT JOIN person ON schueler.sid = person.pid "
+                . "LEFT JOIN person ON schueler.sid = person.pid WHERE person.status = true "
                 . "order by pid");
         if (count($result)) {
             foreach ($result as $row ) {
@@ -55,20 +55,6 @@ class dbSchueler extends db {
             }
         }
         return $liste;
-    }
-    
-    public function selectSchueler($sid) {
-        $schueler = null;
-        $sql = "SELECT * FROM schueler "
-                . "LEFT JOIN person ON schueler.sid = person.pid "
-                . "WHERE schueler.sid = ?";
-        $params = array($sid);
-        $result = $this->preparedStatementSelect($sql, $params);
-        if (sizeof($result) == 1) {
-            $row = reset($result);
-            $schueler = $this->newObjSchueler($row);
-        }
-        return $schueler;
     }
     
     public function checkUser($username, $password) {
