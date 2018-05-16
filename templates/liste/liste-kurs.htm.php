@@ -6,8 +6,7 @@
  *
 -->
 <ul class="">
-<?php $faecher = array('Math', 'Englisch', 'Physik', 'Französisch');//replace with real fächer (name/url)?>
-<?php foreach ( /*$this->data->getKontaktListe() --> getFaecher*/$faecher as $fach ): ?>
-                <li><a href="#"><?= $fach ?></a></li>
+<?php foreach ( $v->kurse as $fach ): ?>
+                <li><a href="#<?php $fach->getFid() ?>"><?= $fach->getBezeichnung() ?></a></li>
 <?php endforeach; ?>
 </ul>
