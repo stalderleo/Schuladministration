@@ -60,55 +60,6 @@ table.tstacked th {
 	background:#eee;
 	font-weight: bold;
 }
-table.tstacked td img {
-    display: block;
-    width: 30px;
-    height: 30px;
-}
-
-@media screen and (max-width:700px) {
-	
-	table.tstacked, table.tstacked tr, table.tstacked td {
-		padding:0;
-		border:1px solid black;
-	}
-
-	table.tstacked {
-		border:none;
-	}
-
-	table.tstacked thead {
-		display:none;
-	}
-
-	table.tstacked tr {
-		float: left;
-		width: 100%;
-		margin-bottom: 2em;
-	}
-
-	table.tstacked td {
-		float: left;
-		width: 100%;
-		padding:1em;
-                word-break: break-all;
-                /* display: block; */
-                /* display: flex; */
-	}
-
-	table.tstacked td::before {
-		content:attr(data-label);
-		background: #eee;
-		border-right:2px solid black;
-		width: 45%;
-		float:left;
-		padding:1em;
-		font-weight: bold;
-		margin:-1em 1em -1em -1em;
-                /* display: inline-block; */
-                /* min-width: 100px; */
-	}
-}
 
 /* End Stacked Table */
 .upload-card {
@@ -144,7 +95,8 @@ table.tstacked td img {
 }
 body {
     position: relative;
-    height: 100vh;
+    height: auto;
+    min-height: 100vh;
 }
 
 /*buttons*/
@@ -203,4 +155,76 @@ a {
 
 .btn.btn-secondary {
     margin-left: auto;
+}
+
+
+
+.fullsize {
+    display: block;
+    width: 100%;
+    padding: 10px 5px;
+}
+table.tstacked [data-label="Löschen"], table.tstacked [data-label="Bearbeiten"] {
+    padding: 0;
+}
+[title="Löschen"] img, [title="Bearbeiten"] img {
+    width: 20px;
+    height: 20px;
+    display: block;
+}
+
+@media(min-width: 768px){
+    .p-4_mobile-only {
+        padding: 0;
+    }
+    .navbar {
+        display: none;
+    }
+    .pos-f-t .collapse {
+        display: block !important;
+    }
+}
+@media(max-width: 768px){
+    .p-4_mobile-only {
+        padding: 1.5rem !important;
+    }
+    
+    .nav-item:last-of-type {
+        position: relative;
+    }
+    .nav-tabs {
+        height: auto;
+    }
+    .page-title {
+        padding-bottom: 15px;
+    }
+    .content {
+        margin-top: 70px;
+        margin-bottom: 50px;
+    }
+    .add {
+        margin-top: 15px;
+    }
+    .table-container {
+        width: 100%;
+    }
+    .upload-card {
+        padding: 20px 30px;
+    }
+}
+
+.navbar {
+    background-color: lightgray;
+    padding-left: 1.5rem;
+}
+
+.table-container {
+    overflow: auto;
+}
+
+.pos-f-t {
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 999;
 }

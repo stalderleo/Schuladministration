@@ -19,9 +19,13 @@ class klasseView implements subcontroller {
     private $template_path;
     private $klassen = array();
     public $title;
+    public $editEntry;
     public function __construct( $template_path ) {
         $this->template_path = $template_path;
         $this->title = "Klasse";
+        $this->editEntry = 
+            '<td data-label="Löschen"><a title="Löschen" class="fullsize" href="<?php /*echo $this->phpmodule?>&kid=<?php echo $kontakt->getKid()*/?>"><img src="'.config::IMAGE_PATH.'/delete.png" border=\"no\"></a></td>
+            <td data-label="Bearbeiten"><a title="Bearbeiten" class="fullsize" href="<?php /*echo $this->phpmodule?>&kid=<?php echo $kontakt->getKid()*/?>"><img src="'.config::IMAGE_PATH.'/edit.svg" border=\"no\"></a></td>';
     }
     public function getKontaktListe(){
         //a person object should be returned here
