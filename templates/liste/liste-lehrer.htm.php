@@ -5,7 +5,8 @@
  * Template Kontaktliste. Stil Stacked Table.
  *
 -->
-<table class="tstacked">
+<div class="table-container">
+<table class="table tstacked">
     <thead>
         <tr>
             <th>Name</th><th>Vorname</th><th>Email</th><th>Kürzel</th><th>Status</th>
@@ -26,6 +27,7 @@
 <?php endforeach; ?>
     </tbody>
 </table>
+</div>
 
 <div class="btn-container">
     <button title="Neuer Lehrer" data-toggle="modal" data-target="#teacher_modal" class="add"><i class="fas fa-chalkboard-teacher"></i></button>
