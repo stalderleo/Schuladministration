@@ -9,7 +9,7 @@
 <table class="table tstacked">
     <thead>
         <tr>
-            <th>Name</th><th>Vorname</th><th>Email</th><th>Kürzel</th><th>Status</th>
+            <th>Name</th><th>Vorname</th><th>Email<i class="fal fa-expand-alt"></i></th><th>Kürzel</th><th>Status</th>
         </tr>
     </thead>
     <tbody>
@@ -21,7 +21,6 @@
                 <td data-label="Vorname"><?php echo $s->getVorname()?></td>
                 <td data-label="Email"><?php echo $s->getMail()?></td>
                 <td data-label="Kuerzel"><?php echo $s->getKuerzel() ?></td>
-                <td data-label="Status"><?php echo $s->getStatus()?></td>
             <?php echo $v->editEntry; ?>
         </tr>
 <?php endforeach; ?>
