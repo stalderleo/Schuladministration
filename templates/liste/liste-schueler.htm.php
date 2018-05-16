@@ -9,7 +9,7 @@
 <table class="table tstacked">
     <thead>
         <tr>
-            <th>Name</th><th>Vorname</th><th>Email<i class="fal fa-expand-alt"></i></th><th>Kürzel</th><th>Status</th>
+            <th>Name</th><th>Vorname</th><th>Email<i class="fal fa-expand-alt"></i></th><th>Kürzel</th><th></th><th></th>
         </tr>
     </thead>
     <tbody>
