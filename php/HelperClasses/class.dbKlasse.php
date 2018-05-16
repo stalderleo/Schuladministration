@@ -2,7 +2,7 @@
 
 class dbKlasse extends db {
     private function newObjKlasse($row) {
-        return new klasse($row->kid, $row->kuerzel, $row->bezeichnung);
+        return new klasse($row->kuerzel, $row->bezeichnung, $row->kid);
     }
     
     private function objToArray(klasse $klasse, $kidLast) {
@@ -65,26 +65,42 @@ class dbKlasse extends db {
         return $klasse;
     }
     
+    public function selectKlasseByBezeichnung($bezeichnung) {
+        $klasse = null;
+        $sql = "SELECT * FROM klasse "
+                . "WHERE klasse.bezeichnung = ?";
+        $params = array($bezeichnung);
+        $result = $this->preparedStatementSelect($sql, $params);
+        if (sizeof($result) == 1) {
+            $row = reset($result);
+            $klasse = $this->newObjKlasse($row);
+        }
+        return $klasse;
+    }
+    
     public function insertKlasse(klasse $klasse) {
+        $newKlasse = null;
         basic::assertInstanceOf($klasse, klasse, true);
         $sql = "INSERT INTO `klasse`"
                 . "(`kid`, `kuerzel`, `bezeichnung`) "
                 . "VALUES (?, ?, ?)";
         $this->preparedStatementQuery($sql, $this->objToArray($klasse, false));       // Insert Data into table klasse
+        $newKlasse = $this->selectKlasse($this->getIdfromDBorObj($klasse));
+        return $newKlasse;
     }
     
     public function insertKlasseAI(klasse $klasse) {
         basic::assertInstanceOf($klasse, klasse, true);
-        $klasse = selectKlasseByKuerzel($klasse->getKuerzel());
+        $klasseCheck = $this->selectKlasseByBezeichnung($klasse->getBezeichnung());
         
-        if($klasse == null) return;
+        if($klasseCheck != null) return $klasseCheck;
         
         $sql = "INSERT INTO `klasse`"
                 . "(`kuerzel`, `bezeichnung`) "
                 . "VALUES (?, ?)";
         $this->preparedStatementQuery($sql, array($klasse->getKuerzel(), $klasse->getBezeichnung()));       // Insert Data into table klasse
     
-        $newKlasse = selectKlasseByKuerzel($klasse->getKuerzel());
+        $newKlasse = $this->selectKlasseByBezeichnung($klasse->getBezeichnung());
         
         return $newKlasse;
     }

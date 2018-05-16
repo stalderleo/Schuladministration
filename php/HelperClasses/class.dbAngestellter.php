@@ -112,7 +112,7 @@ class dbAngestellter extends db {
             if (count($result) == 0) {
                 $this->preparedStatementQuery($sql, $this->objToArray($angestellte, false));       // Insert Data into table person
                 $this->preparedStatementQuery($sql2, array($this->getIdfromDBorObj($angestellte)));   // Create entry on table schueler linked by foreign key
-                $newAngestellte = $this->getIdfromDBorObj($angestellte);
+                $newAngestellte = $this->selectAngestellte($this->getIdfromDBorObj($angestellte));
                 $this->commit();
             }
             else {
@@ -141,7 +141,7 @@ class dbAngestellter extends db {
             if (count($result) == 0) {
                 $this->preparedStatementQuery($sql, $this->objToArray($angestellte, false));       // Insert Data into table person
                 $this->preparedStatementQuery($sql2, array($this->getIdfromDBorObj($angestellte)));   // Create entry on table schueler linked by foreign key
-                $newAngestellte = $this->getIdfromDBorObj($angestellte);
+                $newAngestellte = $this->selectAngestellte($this->getIdfromDBorObj($angestellte));
                 $this->commit();
             }
             else {
