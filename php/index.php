@@ -24,13 +24,14 @@ require_once("DataClasses/class.kurs.php");
 require_once("DataClasses/class.klassenBesuch.php");
 
 require_once("HelperClasses/class.db.php");
+require_once("HelperClasses/class.passwordHandler.php");
 require_once("HelperClasses/class.dbSchueler.php");
 require_once("HelperClasses/class.dbAngestellter.php");
 require_once("HelperClasses/class.dbLehrperson.php");
 require_once("HelperClasses/class.dbKurs.php");
 require_once("HelperClasses/class.dbKlasse.php");
 require_once("HelperClasses/class.dbKursInstanz.php");
-
+require_once("HelperClasses/class.dbKlassenBesuch.php");
 
 $c = new controller("index.htm.php", config::TEMPLATE_PATH );
 $c->registerSubcontroller("lehrerView", "Lehrer", false);
