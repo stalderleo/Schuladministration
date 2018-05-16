@@ -54,5 +54,4 @@ else
 $c->dispatch();
 $c->sendOutput();
 
-var_dump(time());
 ?>
