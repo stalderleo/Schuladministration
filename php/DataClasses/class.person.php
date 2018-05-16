@@ -1,7 +1,7 @@
 <?php
 require_once("interface.subcontroller.php");
 
-class person /*implements subcontroller */{
+class person {
     private $pid;
     private $username;
     private $password;

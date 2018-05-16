@@ -12,7 +12,7 @@
  *
  * @author aaron.studer
  */
-class klasse implements subcontroller {
+class klasse {
     private $kid;
     private $kuerzel;
     private $bezeichnung;
@@ -21,14 +21,6 @@ class klasse implements subcontroller {
         $this->kid = $kid;
         $this->kuerzel = $kuerzel;
         $this->bezeichnung = $bezeichnung;
-    }
-
-    public function getOutput() {
-        
-    }
-
-    public function run() {
-        
     }
 
     function getKid() {
