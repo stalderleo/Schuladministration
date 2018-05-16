@@ -18,13 +18,16 @@ class dbSchueler extends db {
      */
     private function objToArray(schueler $schueler, $pidLast) {
         basic::assertInstanceOf($schueler, schueler, true);
+        $passwordHandler = new passwordHandler($schueler->getUsername());
+        $password = $passwordHandler->hashPW($schueler->getPassword());
+        
         if (!$pidLast) {
-            return array($schueler->getPid(), $schueler->getUsername(), $schueler->getPassword(), $schueler->getName(), 
+            return array($schueler->getPid(), $schueler->getUsername(), $password, $schueler->getName(), 
                 $schueler->getVorname(), $schueler->getGeburtstag(), $schueler->getGeschlecht(), $schueler->getKuerzel(), $schueler->getMail(),
                 $schueler->getStatus());
         }
         else {
-            return array($schueler->getUsername(), $schueler->getPassword(), $schueler->getName(), 
+            return array($schueler->getUsername(), $password, $schueler->getName(), 
                 $schueler->getVorname(), $schueler->getGeburtstag(), $schueler->getGeschlecht(), $schueler->getKuerzel(), $schueler->getMail(),
                 $schueler->getStatus(), $schueler->getPid());
         }
@@ -69,18 +72,19 @@ class dbSchueler extends db {
     }
     
     public function checkUser($username, $password) {
-        $schueler = null;
         $sql = "SELECT *  FROM schueler "
                 . "LEFT JOIN person ON schueler.sid = person.pid "
-                . "WHERE person.username = ? "
-                . "AND person.password = ?";
-        $params = array($username, $password);
+                . "WHERE person.username = ? ";
+        $params = array($username);
         $result = $this->preparedStatementSelect($sql, $params);
         if (sizeof($result) == 1) {
             $row = reset($result);
-            $schueler = $this->newObjSchueler($row);
+            $passwordHandler = new passwordHandler($row->username);
+            if ($passwordHandler->isPWCorrect($password, $row->password)) {
+                return $row->sid;
+            }
         }
-        return $schueler;
+        return -1;
     }
     
     public function modifySchueler(schueler $schueler) {
@@ -93,7 +97,9 @@ class dbSchueler extends db {
     }
     
     public function insertSchueler(schueler $schueler) {
+        $newSchueler = null;
         basic::assertInstanceOf($schueler, schueler, true);
+        $sqlCheck = "SELECT username FROM person WHERE username = ?";
         $sql = "INSERT INTO `person` "
                 . "(`pid`, `username`, `password`, `name`, `vorname`, `geburtsdatum`, `geschlecht`, `kuerzel`, `mail`, `status`) "
                 . "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -101,13 +107,51 @@ class dbSchueler extends db {
         
         $this->startTransaction();
         try {
-            $this->preparedStatementQuery($sql, $this->objToArray($schueler, false));       // Insert Data into table person
-            $this->preparedStatementQuery($sql2, array($this->getIdfromDBorObj($schueler)));   // Create entry on table schueler linked by foreign key
-            $this->commit();
+            $result = $this->preparedStatementSelect($sqlCheck, array($schueler->getUsername()));
+            if (count($result) == 0) {
+                $this->preparedStatementQuery($sql, $this->objToArray($schueler, false));       // Insert Data into table person
+                $this->preparedStatementQuery($sql2, array($this->getIdfromDBorObj($schueler)));   // Create entry on table schueler linked by foreign key
+                $newSchueler = $this->getIdfromDBorObj($schueler);
+                $this->commit();
+            }
+            else {
+                $this->rollback();
+                echo "Username schon vorhanden Person wird nicht erstellt.";
+            }
         } catch (Exception $ex) {
             $this->rollback();
             throw new Exception(get_class($this).': Fehler beim Erstellen eines Schuelers: ' . $ex->getMessage());
         }    
+        return $newSchueler;
+    }
+    
+    public function insertSchuelerAI(schueler $schueler) {
+        $newSchueler = null;
+        basic::assertInstanceOf($schueler, schueler, true);
+        $sqlCheck = "SELECT username FROM person WHERE username = ?";
+        $sql = "INSERT INTO `person` "
+                . "(`username`, `password`, `name`, `vorname`, `geburtsdatum`, `geschlecht`, `kuerzel`, `mail`, `status`) "
+                . "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql2 = "INSERT INTO angestellte (aid) VALUES (?)";
+        
+        $this->startTransaction();
+        try {
+            $result = $this->preparedStatementSelect($sqlCheck, array($schueler->getUsername()));
+            if (count($result) == 0) {
+                $this->preparedStatementQuery($sql, $this->objToArray($schueler, false));       // Insert Data into table person
+                $this->preparedStatementQuery($sql2, array($this->getIdfromDBorObj($schueler)));   // Create entry on table schueler linked by foreign key
+                $newSchueler = $this->getIdfromDBorObj($schueler);
+                $this->commit();
+            }
+            else {
+                $this->rollback();
+                echo "Username schon vorhanden Person wird nicht erstellt.";
+            }
+        } catch (Exception $ex) {
+            $this->rollback();
+            throw new Exception(get_class($this).': Fehler beim Erstellen eines Angestellten: ' . $ex->getMessage());
+        }   
+        return $newSchueler;
     }
     
     public function deleteSchueler(schueler $schueler) {

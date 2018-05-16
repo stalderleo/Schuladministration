@@ -3,6 +3,7 @@
     width: 100%;
     display: inline-block;
     padding: 30px 0;
+    background-color: transparent;
 }
 
 /* Bootstrap Navigation */
@@ -42,7 +43,7 @@ table.tstacked * {
 }
 
 table.tstacked {
-	width:100%;
+	width:80%;
 }
 
 table.tstacked, table.tstacked td, table.tstacked tr, table.tstacked th {
@@ -60,55 +61,12 @@ table.tstacked th {
 	font-weight: bold;
 }
 
-@media screen and (max-width:700px) {
-	
-	table.tstacked, table.tstacked tr, table.tstacked td {
-		padding:0;
-		border:1px solid black;
-	}
-
-	table.tstacked {
-		border:none;
-	}
-
-	table.tstacked thead {
-		display:none;
-	}
-
-	table.tstacked tr {
-		float: left;
-		width: 100%;
-		margin-bottom: 2em;
-	}
-
-	table.tstacked td {
-		float: left;
-		width: 100%;
-		padding:1em;
-                word-break: break-all;
-                /* display: block; */
-                /* display: flex; */
-	}
-
-	table.tstacked td::before {
-		content:attr(data-label);
-		background: #eee;
-		border-right:2px solid black;
-		width: 45%;
-		float:left;
-		padding:1em;
-		font-weight: bold;
-		margin:-1em 1em -1em -1em;
-                /* display: inline-block; */
-                /* min-width: 100px; */
-	}
-}
-
 /* End Stacked Table */
 .upload-card {
     display: block;
     padding: 60px;
     box-shadow: 0px 0px 10px 2px gray;
+    margin-bottom: 20px;    
 }
 .upload-card__text {
     font-size: 25px;
@@ -137,5 +95,136 @@ table.tstacked th {
 }
 body {
     position: relative;
-    height: 100vh;
+    height: auto;
+    min-height: 100vh;
+}
+
+/*buttons*/
+.btn-container {
+    max-width: 20%;
+}
+
+button.add {
+    display: block;
+    width: 50px;
+    height: 50px;
+    color: black;
+    background-color: white;
+    border: 1px solid;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.btn {
+    background-color: lightgray;
+    color: #495057;
+}
+.btn:hover {
+    background-color: gray;
+}
+a {
+    transition: all 350ms ease-in-out;
+}
+.nav-item:hover > a {
+    background-color: gray;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.modal-body form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.modal-body form input,  .modal-body form select {
+    width: calc(50% - 0.5rem);
+    border: 1px solid  lightgray;
+    padding: 0 5px;
+    margin-bottom: 10px;
+}
+.modal-body form select {
+    height: 24px;
+    color: gray;
+    padding: 0;
+}
+
+.btn.btn-secondary {
+    margin-left: auto;
+}
+
+
+
+.fullsize {
+    display: block;
+    width: 100%;
+    padding: 10px 5px;
+}
+table.tstacked [data-label="Löschen"], table.tstacked [data-label="Bearbeiten"] {
+    padding: 0;
+}
+[title="Löschen"] img, [title="Bearbeiten"] img {
+    width: 20px;
+    height: 20px;
+    display: block;
+}
+
+@media(min-width: 768px){
+    .p-4_mobile-only {
+        padding: 0;
+    }
+    .navbar {
+        display: none;
+    }
+    .pos-f-t .collapse {
+        display: block !important;
+    }
+}
+@media(max-width: 768px){
+    .p-4_mobile-only {
+        padding: 1.5rem !important;
+    }
+    
+    .nav-item:last-of-type {
+        position: relative;
+    }
+    .nav-tabs {
+        height: auto;
+    }
+    .page-title {
+        padding-bottom: 15px;
+    }
+    .content {
+        margin-top: 70px;
+        margin-bottom: 50px;
+    }
+    .add {
+        margin-top: 15px;
+    }
+    .table-container {
+        width: 100%;
+    }
+    .upload-card {
+        padding: 20px 30px;
+    }
+}
+
+.navbar {
+    background-color: lightgray;
+    padding-left: 1.5rem;
+}
+
+.table-container {
+    overflow: auto;
+}
+
+.pos-f-t {
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 999;
 }

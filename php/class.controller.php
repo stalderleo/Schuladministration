@@ -100,7 +100,8 @@ class controller {
 	 * @param $class Subcontroller (Klasse), welcher den Inhalt liefert
 	 */
 	function content( $class=NULL ) {
-            if ( $class == NULL ) return $this->active_objects[$this->requested_subcontroller]->getOutput();
+            if ( $class == NULL )
+                return $this->active_objects[$this->requested_subcontroller]->getOutput();
             else {
                 return $this->active_objects[$class]->getOutput();
             }

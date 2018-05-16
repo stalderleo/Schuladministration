@@ -11,13 +11,13 @@ class dbKlassenBesuch extends db {
         $this->dbKlasse = new dbKlasse();
     }
 
-    private function newObjKursInstanz($schueler, $klasse, $isZweitausbildung) {
+    private function newObjKursInstanz(schueler $schueler, klasse $klasse, $isZweitausbildung) {
         basic::assertInstanceOf($schueler, schueler, true);
         basic::assertInstanceOf($klasse, klasse, true);
         return new klassenBesuch($schueler, $klasse, $isZweitausbildung);
     }
     
-    private function objToArray($klassenBesuch) {
+    private function objToArray(klassenBesuch $klassenBesuch) {
         basic::assertInstanceOf($klassenBesuch, klassenBesuch, true);
         return array($klassenBesuch->getSchueler()->getPid(), $klassenBesuch->getKlasse()->getKid(), $klassenBesuch->getIsZweitausbildung());
     }
@@ -26,7 +26,7 @@ class dbKlassenBesuch extends db {
         $liste = array();
         if (count($result)) {
             foreach ($result as $row ) {
-                $schueler = $this->dbSchueler->selectLehrer($row->lid);
+                $schueler = $this->dbSchueler->selectSchueler($row->sid);
                 $klasse = $this->dbKlasse->selectKlasse($row->kid);
                 array_push($liste, $this->newObjKursInstanz($schueler, $klasse, $row->isZweitausbildung));
             }
@@ -61,7 +61,7 @@ class dbKlassenBesuch extends db {
         $sql = "INSERT INTO schueler_has_klasse "
                 . "(`sid`, `kid`, `isZweitausbildung`) "
                 . "VALUES (?, ?, ?)";
-        $this->preparedStatementQuery($sql, $this->objToArray($kursInstanz));       // Insert Data into table schueler_has_klasse
+        $this->preparedStatementQuery($sql, $this->objToArray($klassenBesuch));       // Insert Data into table schueler_has_klasse
     }
     
     public function modifyKlassenBesuch(klassenBesuch $klassenBesuch) {
