@@ -17,17 +17,11 @@ class klasse {
     private $kuerzel;
     private $bezeichnung;
     
-    function __construct($kid, $kuerzel, $bezeichnung) {
+    function __construct($kuerzel, $bezeichnung,$kid=NULL) {
         $this->kid = $kid;
         $this->kuerzel = $kuerzel;
         $this->bezeichnung = $bezeichnung;
     }
-    
-    function __constructOI($kuerzel, $bezeichnung) {
-        $this->kuerzel = $kuerzel;
-        $this->bezeichnung = $bezeichnung;
-    }
-
 
     function getKid() {
         return $this->kid;

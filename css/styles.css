@@ -43,7 +43,7 @@ table.tstacked * {
 }
 
 table.tstacked {
-	width:80%;
+	width:100%;
 }
 
 table.tstacked, table.tstacked td, table.tstacked tr, table.tstacked th {
@@ -220,6 +220,7 @@ table.tstacked [data-label="Löschen"], table.tstacked [data-label="Bearbeiten"]
 
 .table-container {
     overflow: auto;
+    width: 80%;
 }
 
 .pos-f-t {
@@ -227,4 +228,19 @@ table.tstacked [data-label="Löschen"], table.tstacked [data-label="Bearbeiten"]
     left: 0;
     right: 0;
     z-index: 999;
+}
+
+th [data-extend]{
+    float: right;
+    position: relative;
+    top: 3px;
+    cursor: pointer;
+}
+
+.downsize {
+    max-width: 100px;
+    overflow: hidden;
+}
+.white {
+    color: gray;
 }
