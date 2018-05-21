@@ -2,6 +2,7 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< Updated upstream
         <group>
             <file>file:/C:/xampp/htdocs/Schuladministration/php/HelperClasses/class.dbLehrperson.php</file>
             <file>file:/C:/xampp/htdocs/Schuladministration/php/HelperClasses/class.dbSchueler.php</file>
@@ -29,5 +30,8 @@
             <file>file:/C:/xampp/htdocs/projects/Schuladministration/templates/sidebar.html</file>
             <file>file:/C:/xampp/htdocs/projects/Schuladministration/php/DataClasses/class.lehrer.php</file>
         </group>
+=======
+        <group/>
+>>>>>>> Stashed changes
     </open-files>
 </project-private>
