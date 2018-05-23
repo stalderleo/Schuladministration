@@ -30,6 +30,8 @@ class importView implements subcontroller {
     // Datei
     private $target = NULL;
     
+    private $errorimport = NULL;
+    
     public function __construct( $template_path ) {
         $this->params = $_REQUEST;
         $this->template_path = $template_path;
@@ -47,7 +49,7 @@ class importView implements subcontroller {
             
             // Allow certain file formats
             if(strtolower(pathinfo($_FILES['dataExport']['name'],PATHINFO_EXTENSION)) != "xml") {
-                die ("Sorry, Nur XML-Datei sind zugelassen");
+                $this->errorimport = "Sorry, Nur XML-Datei sind zugelassen";
             }
             
             $this->target = $_FILES['dataExport']['tmp_name'];
@@ -69,10 +71,9 @@ class importView implements subcontroller {
      * @param type $target 
      */
     private function insertIntoDB($target) {
-        //try {
+        if (empty($this->dbLehrer->selectAllLehrer())) { //Schauen ob DB leer ist
             ini_set('max_execution_time', 600);
-            //$this->dbKlasse->startTransaction();
-            
+
             $this->writeToLog(date('m.d.Y h:i:s a', time()). ": Import started"."<hr>\n");
             $xml = simplexml_load_file($target);
             foreach ($xml->lehrer as $lp) {   
@@ -137,7 +138,7 @@ class importView implements subcontroller {
                 } else {
                     $this->dbKlassenBesuch->insertBesuch(new klassenBesuch($schueler, $klasse, false));
                 }
-                
+
 
                 if (isset($sl->profile->profil->zweitausbildung_kuerzel)) {
                     $klasse = $this->dbKlasse->selectKlasseByBezeichnung($sl->profile->profil->zweitausbildung_stammklasse);
@@ -146,7 +147,7 @@ class importView implements subcontroller {
                     } else {
                         $this->dbKlassenBesuch->insertBesuch(new klassenBesuch($schueler, $klasse, true));
                     }
-                    
+
                 }
             }
 
@@ -161,12 +162,9 @@ class importView implements subcontroller {
 
             $this->writeToLog(date('m.d.Y h:i:s a', time()). ": Import abgeschlossen"."<hr>\n");
             unlink("../res/data/log.txt"); //Logfile nach import löschen
-            //$this->dbKlasse->commit();
-        //} catch (Exception $ex) {
-            //echo $ex;
-            //$this->dbKlasse->rollback();
-        //}
-        
+        } else {
+            $this->errorimport = "Datenbank muss lehr sein!";
+        }
     }
     
     function convertStringToDate( $string )

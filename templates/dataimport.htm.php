@@ -5,11 +5,13 @@
  * Template für den Datenimport
  *
 -->
-<?php if (true) ://(isset($_FILES['dataExport'])) : ?>
+<?php if (isset($_FILES['dataExport'])) : ?>
     <script type="text/javascript">
+        console.log("afs");
         if(typeof(EventSource) !== "undefined") {
-            var source = new EventSource("import_progress.php");
-            source.addEventListener('message', function(e) {
+            console.log("afs1");
+            var source = new EventSource("import_progress.php").addEventListener('message', function(e) {
+                console.log("afs2");
                 if (!(e.data.includes("Import abgeschlossen"))) {
                     if (e.data.includes("inserted")) { 
                         document.getElementById("log").innerHTML += "<span class=\"inserted\">"+e.data+"</span>";
@@ -20,6 +22,7 @@
                         document.getElementById("log").innerHTML += "<span class=\"failed\">"+e.data+"</span>";
                     }
                 } else {
+                    console.log("WTF");
                     document.getElementById("log").innerHTML += "<span><strong>Import completet</strong></span>";
                 }
             }, false);
@@ -34,7 +37,6 @@
         
         var scrolled = false;
         
-        //once a second
         setInterval(function() {
             if (!scrolled) updateScroll();
         },50);
@@ -48,4 +50,8 @@
         <input name="submit" type="submit" value="Hochladen">
     </div>
 </form>
-<div id="log" onscroll="scrolled = true"></div>
+<?php if (isset($v->errorimport)) { 
+    echo "<div id=\"error\">"+$v->errorimport+"</div>"; 
+} else { ?>
+    <div id="log" ></div>
+<?php } ?>
