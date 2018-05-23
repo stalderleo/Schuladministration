@@ -244,3 +244,19 @@ th [data-extend]{
 .white {
     color: gray;
 }
+
+.dragscroll {
+    cursor: all-scroll;
+}
+
+.no-padding {
+    padding: 0;
+}
+
+.content > form > label {
+    display: inline-block;
+    width: 50%;
+}
+label > input {
+    float: right;
+}
