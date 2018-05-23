@@ -1,5 +1,5 @@
  <!-- Modal -->
-<form action="<?php echo $_SERVER['SCRIPT_NAME']."?id=schuelerView" ?>" method="post">
+<form action="<?php echo $_SERVER['SCRIPT_NAME']."?id=schuelerView" ?>" id="modal-form-schueler" method="post">
     <div class="modal fade" id="student_modal" tabindex="-1" role="dialog" aria-labelledby="Schüler-Modal" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -37,7 +37,7 @@
           <div class="modal-footer">
             <span class="seperator"></span>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <input form="modal-form" type="submit" name="safe" class="btn btn-primary" value="Save changes">
+            <input form="modal-form-schueler" type="submit" name="safe" class="btn btn-primary" value="Save changes">
           </div>
         </div>
       </div>

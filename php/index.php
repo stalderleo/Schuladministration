@@ -48,9 +48,6 @@ else
     $c->registerSubcontroller("login", "Log In", false);
 }
 
-
-//$c->registerSubcontroller("datum", "", true);
-
 $c->dispatch();
 $c->sendOutput();
 ?>

@@ -1,5 +1,5 @@
 <!-- Modal -->
-<form action="<?php echo $_SERVER['SCRIPT_NAME']."?id=faecherView" ?>" method="post">
+<form action="<?php echo $_SERVER['SCRIPT_NAME']."?id=faecherView" ?>" id="modal-form-subject" method="post">
     <div class="modal fade" id="subject_modal" tabindex="-1" role="dialog" aria-labelledby="Subject-Modal" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">

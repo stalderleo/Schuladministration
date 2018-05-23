@@ -49,7 +49,8 @@ class importView implements subcontroller {
             if(strtolower(pathinfo($_FILES['dataExport']['name'],PATHINFO_EXTENSION)) != "xml") {
                 die ("Sorry, Nur XML-Datei sind zugelassen");
             }
-            
+            var_dump($_REQUEST);
+            var_dump($_FILES);
             $this->target = $_FILES['dataExport']['tmp_name'];
         }
         
