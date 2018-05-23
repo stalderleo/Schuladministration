@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Db-Klasse für das Handling der CRUD-Funktionen für
+ * die Angestellter Tabelle.
+ * 
+ * @date 23. May 2018
+ */
 class dbAngestellter extends db {
     
     /**
@@ -57,6 +63,12 @@ class dbAngestellter extends db {
         return $liste;
     }
     
+    /**
+     * Selektiert ein Angestellter mit der ID der Person.
+     * 
+     * @param type $aid
+     * @return type
+     */
     public function selectAngestellte($aid) {
         $angestellte = null;
         $sql = "SELECT * FROM angestellte "
@@ -70,23 +82,6 @@ class dbAngestellter extends db {
         }
         return $angestellte;
     }
-    /*
-    public function checkUser($username, $password) {
-        $angestellte = null;
-        $sql = "SELECT * FROM angestellte "
-                . "LEFT JOIN person ON angestellte.aid = person.pid "
-                . "WHERE person.username = ? ";
-        $params = array($username, $password);
-        $result = $this->preparedStatementSelect($sql, $params);
-        if (sizeof($result) == 1) {
-            $row = reset($result);
-            $passwordHandler = new passwordHandler($row->username);
-            if ($passwordHandler->isPWCorrect($password(), $row->password)) {
-                return $row->aid;
-            }
-        }
-        return -1;
-    }*/
     
     public function modifyAngestellter(angestellter $angestellte) {
         basic::assertInstanceOf($angestellte, angestellter, true);

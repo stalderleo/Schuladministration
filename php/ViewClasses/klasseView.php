@@ -1,15 +1,12 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- * Description of lehrerView
- *
- * @author larschristian.berg
+ * Darstellung einer Liste voller Lehrer.
+ * Dabei hat man ein paar weitere Buttons für die Verwaltung
+ * der Daten.
+ * 
+ * @autor Aaron Studer
+ * @date 23. May 2018
  */
 require_once("interface.subcontroller.php");
 require_once("./HelperClasses/class.dbKlasse.php");
@@ -24,16 +21,19 @@ class klasseView implements subcontroller {
         $this->template_path = $template_path;
         $this->title = "Klasse";
         $this->editEntry = 
-            '<td data-label="Löschen"><a title="Löschen" class="fullsize" href="<?php /*echo $this->phpmodule?>&kid=<?php echo $kontakt->getKid()*/?>"><img src="'.config::IMAGE_PATH.'/delete.png" border=\"no\"></a></td>
-            <td data-label="Bearbeiten"><a title="Bearbeiten" class="fullsize" href="<?php /*echo $this->phpmodule?>&kid=<?php echo $kontakt->getKid()*/?>"><img src="'.config::IMAGE_PATH.'/edit.svg" border=\"no\"></a></td>';
+            '<td data-label="Löschen"><a title="Löschen" class="fullsize" href="'.$this->phpmodule.'&kid='.$kontakt->getKid().'"><img src="'.config::IMAGE_PATH.'/delete.png" border=\"no\"></a></td>
+            <td data-label="Bearbeiten"><a title="Bearbeiten" class="fullsize" href="'.$this->phpmodule.'&kid='. $kontakt->getKid().'"><img src="'.config::IMAGE_PATH.'/edit.svg" border=\"no\"></a></td>';
     }
-    public function getKontaktListe(){
-        //a person object should be returned here
-    }
+    
     public function run() {
         $db = new dbKlasse();
         
         $this->klassen = $db->selectAllKlassen();
+        
+        if(isset($_POST["safe"]))
+        {
+            $db->insertKlasseAI(new klasse($_POST["k_ku"], $_POST["k_bez"]));
+        }
     }
     
     public function getOutput(){
