@@ -161,6 +161,7 @@ class importView implements subcontroller {
             }
 
             $this->writeToLog(date('m.d.Y h:i:s a', time()). ": Import abgeschlossen"."<hr>\n");
+            sleep(500);
             unlink("../res/data/log.txt"); //Logfile nach import löschen
         } else {
             $this->errorimport = "Datenbank muss lehr sein!";
