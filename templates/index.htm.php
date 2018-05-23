@@ -19,9 +19,14 @@
 
 
     <div class="container">
-        <div class="text-left">
-            <div class="row align-items-center">
-                <h1 class="page-title"><?php echo $this->active_objects[array_keys($this->active_objects)[0]]->title ?></h1>
+        <div class="row">
+            <div class="text-left col-sm-12">
+                <div class="row align-items-center">
+                    <h1 class="page-title"><?php echo $this->active_objects[array_keys($this->active_objects)[0]]->title ?></h1>
+                </div>
+            </div>
+            <div class="search-container col-sm-12 no-padding">
+                <input type="text" class="col-sm-3" style="margin-bottom: 20px" placeholder="Suche">
             </div>
         </div>
         <div class="row">
