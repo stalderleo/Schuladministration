@@ -1,16 +1,15 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 require_once("interface.subcontroller.php");
 
 /**
- * Description of class
- *
- * @author aaron.studer
+ * Klasse für das Login der Web App, dabei werden
+ * verschiedene Parameter gesetzt, die verfizieren was deine
+ * Rolle ist.
+ * 
+ * @autor Aaron Studer
+ * @date 23. May 2018
  */
 class login implements subcontroller {
     // Assoziativer Array mit Parametern (Ueblicherweise $_REQUEST)

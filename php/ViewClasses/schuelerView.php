@@ -1,15 +1,10 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- * Description of schuelerView
- *
- * @author larschristian.berg
+ * Klasse für die Darstellung aller Schüler in einer Liste.
+ * 
+ * @autor Aaron Studer
+ * @date 23. May 2018
  */
 require_once("interface.subcontroller.php");
 require_once("HelperClasses/class.dbSchueler.php");
@@ -32,6 +27,11 @@ class schuelerView implements subcontroller {
         $db = new dbSchueler();
         
         $this->schuelers = $db->selectAllSchueler();
+        
+        if(isset($_POST["safe"]))
+        {
+            $db->insertSchuelerAI(new schueler(null, $_POST["s_username"], $_POST["s_pw"], $_POST["s_name"], $_POST["s_prename"], $_POST["s_birth"], $_POST["gender"], $_POST["Kuerzel"], $_POST["Mail"], $_POST["status"]));
+        }
     }
     
     public function getOutput(){

@@ -1,15 +1,10 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- * Description of schuelerView
- *
- * @author larschristian.berg
+ * Klasse für die Logout Funktion
+ * 
+ * @autor Aaron Studer
+ * @date 23. May 2018
  */
 require_once("interface.subcontroller.php");
 
@@ -26,6 +21,7 @@ class logout implements subcontroller {
     }
     
     public function getOutput(){
+        session_destroy();
         include($this->template_path."/logout.htm.php");
     }
 }

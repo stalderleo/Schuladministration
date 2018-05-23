@@ -2,8 +2,14 @@
 require_once("interface.subcontroller.php");
 
 /**
- * Gibt das aktuelle Datum aus
+ * Klasse: importView
+ * 
+ * Die Klasse sorgt für das Funktionieren des XML - Import.
+ * Dabei wird der DatenTyp überprüft und die Daten in die DB
+ * gespeichert.
+ * 
  */
+
 class importView implements subcontroller {
     
     // Assoziativer Array mit Parametern (Ueblicherweise $_REQUEST)
@@ -61,6 +67,11 @@ class importView implements subcontroller {
         include($this->template_path."/"."dataimport.htm.php");
     }
     
+    /**
+     * Funktion zur Speicherung der Daten in die DB.
+     * 
+     * @param type $target 
+     */
     private function insertIntoDB($target) {
         //try {
             
