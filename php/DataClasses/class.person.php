@@ -100,6 +100,7 @@ class person {
 
     function setName($name) {
         $this->name = $name;
+        var_dump("huh");
     }
 
     function setVorname($vorname) {

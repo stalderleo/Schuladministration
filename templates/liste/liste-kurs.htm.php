@@ -6,7 +6,8 @@
  *
 -->
 <ul class="">
-<?php foreach ( $v->kurse as $fach ): ?>
+<?php foreach ( $v->kurse as $fach ):     var_dump($fach);
+?>
                 <li><a href="#<?php $fach->getFid() ?>"><?= $fach->getBezeichnung() ?></a></li>
 <?php endforeach; ?>
 </ul>

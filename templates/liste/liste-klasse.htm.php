@@ -18,7 +18,8 @@
             <tr>
                 <td><a href="#<?php echo $klasse->getKid() ?>"><?= $klasse->getBezeichnung() ?></td>
                 <td><?= $klasse->getKuerzel() ?></td>
-                <?php echo $v->editEntry; ?>
+                <td><form method="post"><input type="submit" name="kid" class="edit" value='<?php echo $klasse->getKid() ?>'></form></td>
+                <td><form method="post"><input type="submit" name="kid_del" class="delete" value='<?php echo $klasse->getKid() ?>'></form></td>
             </tr>
 <?php endforeach; ?>
        </tbody>

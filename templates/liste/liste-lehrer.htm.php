@@ -21,7 +21,9 @@
                 <td data-label="Vorname"><?php echo $l->getVorname()?></td>
                 <td data-label="Email" class="downsize"><?php echo $l->getMail()?></td>
                 <td data-label="Kuerzel"><?php echo $l->getKuerzel() ?></td>
-            <?php echo $v->editEntry; ?>
+                <td><form method="post"><input type="submit" name="pid" class="edit" value='<?php echo $l->getPid() ?>'></form></td>
+                <td><form method="post"><input type="submit" name="pid_del" class="delete" value='<?php echo $l->getPid() ?>'></form></td>
+
         </tr>
 <?php endforeach; ?>
     </tbody>

@@ -20,13 +20,10 @@ class schuelerView implements subcontroller {
     private $schuelers = array();
     private $schueler;
     public $title;
-    public $editEntry;
+    
     public function __construct( $template_path ) {
         $this->template_path = $template_path;
         $this->title = "Schüler";
-       /* $this->editEntry = 
-            '<td data-label="Löschen"><a title="Löschen" class="fullsize" href="'.$this->phpmodule.'&kid='.$kontakt->getKid().'"><img src="'.config::IMAGE_PATH.'/delete.png" border=\"no\"></a></td>
-            <td data-label="Bearbeiten"><a title="Bearbeiten" class="fullsize" href="'.$this->phpmodule.'&kid='. $kontakt->getKid().'"><img src="'.config::IMAGE_PATH.'/edit.svg" border=\"no\"></a></td>';*/
     }
 
     public function run() {
@@ -36,6 +33,36 @@ class schuelerView implements subcontroller {
         
         if(isset($_POST['pid'])){
             $this->schueler = $db->selectSchueler($_POST['pid']);
+        }
+        
+        if(isset($_POST['setSchueler']) && $this->schueler instanceof schueler && $this->schueler != NULL){
+            if(!empty($_POST['p_name'])){
+                $this->schueler->setName($_POST['p_name']);
+            }
+            if(!empty($_POST['p_vorname'])){
+                $this->schueler->setVorname($_POST['p_vorname']);
+            }
+            if(!empty($_POST['p_bday'])){
+                $this->schueler->setGeburtstag($_POST['p_bday']);
+            }
+            if(!empty($_POST['p_geschlecht'])){
+                $this->schueler->setGeschlecht($_POST['p_geschlecht']);
+            }
+            if(!empty($_POST['p_mail'])){
+                $this->schueler->setMail($_POST['p_mail']);
+            }
+            if(!empty($_POST['p_kuerzel'])){
+                $this->schueler->setKuerzel($_POST['p_kuerzel']);
+            }
+            if(!empty($_POST['p_status'])){
+                $this->schueler->setStatus($_POST['p_status']);
+            }
+        }
+        
+        if(isset($_POST['pid_del']) && $_POST['pid_del'] != null){
+            $db->deleteSchueler($db->selectSchueler($_POST['pid_del']));
+            header('Location: '.$_SERVER['PHP_SELF']);
+            die;
         }
     }
     

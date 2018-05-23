@@ -23,8 +23,8 @@
                 <td data-label="Vorname"><?php echo $s->getVorname()?></td>
                 <td data-label="Email" class="downsize"><?php echo $s->getMail()?></td>
                 <td data-label="Kuerzel"><?php echo $s->getKuerzel() ?></td>
-                <td><form method="post"><input type="submit" name="pid" class="" value='<?php echo $s->getPid() ?>'></form></td>
-                <td>test</td>
+                <td><form method="post"><input type="submit" name="pid" class="edit" value='<?php echo $s->getPid() ?>'></form></td>
+                <td><form method="post"><input type="submit" name="pid_del" class="delete" value='<?php echo $s->getPid() ?>'></form></td>
         </tr>
 <?php endforeach; ?>
     </tbody>
