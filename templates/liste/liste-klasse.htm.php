@@ -9,7 +9,7 @@
 <table class="table tstacked">
         <thead>
             <tr>
-               <th>Bezeichnung</th><th>Kürzel</th>
+                <th>Bezeichnung</th><th>Kürzel</th><th></th><th></th>
             </tr>
         </thead>
         
