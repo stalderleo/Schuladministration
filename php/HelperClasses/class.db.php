@@ -114,5 +114,23 @@ class db {
         public function rollback() {
             self::$dbhandle->rollBack();
         }
+        
+        public function checkWritePermission() {
+            $givePermission = false;
+            if (isset($_SESSION['role']) && isset($_SESSION['username'])) {
+                $role = $_SESSION['role'];
+                $username = $_SESSION['username'];
+                if ($role == "admin") {
+                    $sql = "SELECT * FROM lehrperson "
+                            . "INNER JOIN person ON lehrperson.lid = person.pid "
+                            . "WHERE person.username = ?";
+                    $result = $this->preparedStatementSelect($sql, array($username));
+                    if (count($result) == 1) {
+                        $givePermission = true;
+                    }
+                }
+            }
+            return $givePermission;
+        }
 }
 

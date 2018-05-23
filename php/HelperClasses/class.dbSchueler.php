@@ -8,7 +8,7 @@ class dbSchueler extends db {
      * @return \schueler - returns object from type schueler
      */
     private function newObjSchueler($row) {
-        return new schueler($row->pid, $row->username, $row->password, $row->name, $row->vorname, $row->geburtstag, $row->geschlecht, $row->kuerzel, $row->mail, $row->status);
+        return new schueler($row->pid, $row->username, $row->password, $row->name, $row->vorname, $row->geburtsdatum, $row->geschlecht, $row->kuerzel, $row->mail, $row->status);
     }
     
     /**
@@ -23,12 +23,12 @@ class dbSchueler extends db {
         
         if (!$pidLast) {
             return array($schueler->getPid(), $schueler->getUsername(), $password, $schueler->getName(), 
-                $schueler->getVorname(), $schueler->getGeburtstag(), $schueler->getGeschlecht(), $schueler->getKuerzel(), $schueler->getMail(),
+                $schueler->getVorname(), $schueler->getGeburtstagDB(), $schueler->getGeschlecht(), $schueler->getKuerzel(), $schueler->getMail(),
                 $schueler->getStatus());
         }
         else {
             return array($schueler->getUsername(), $password, $schueler->getName(), 
-                $schueler->getVorname(), $schueler->getGeburtstag(), $schueler->getGeschlecht(), $schueler->getKuerzel(), $schueler->getMail(),
+                $schueler->getVorname(), $schueler->getGeburtstagDB(), $schueler->getGeschlecht(), $schueler->getKuerzel(), $schueler->getMail(),
                 $schueler->getStatus(), $schueler->getPid());
         }
     }
@@ -71,6 +71,20 @@ class dbSchueler extends db {
         return $liste;
     }
     
+    public function selectSchueler($sid) { 
+        $schueler = null; 
+        $sql = "SELECT * FROM schueler " 
+                . "LEFT JOIN person ON schueler.sid = person.pid " 
+                . "WHERE schueler.sid = ?"; 
+        $params = array($sid); 
+        $result = $this->preparedStatementSelect($sql, $params); 
+        if (sizeof($result) == 1) { 
+            $row = reset($result); 
+            $schueler = $this->newObjSchueler($row); 
+        } 
+        return $schueler; 
+    }
+    
     public function checkUser($username, $password) {
         $sql = "SELECT *  FROM schueler "
                 . "LEFT JOIN person ON schueler.sid = person.pid "
@@ -93,7 +107,10 @@ class dbSchueler extends db {
                 . "SET `username` = ?, `password` = ?, `name` = ?,`vorname` = ?, `geburtsdatum` = ?, "
                 . "`geschlecht` = ?, `kuerzel` = ?, `mail` = ?, `status` = ? "
                 . "WHERE person.pid = ?";
-        $this->preparedStatementQuery($sql, $this->objToArray($schueler, true));
+        
+        if ($this->checkWritePermission()) {
+            $this->preparedStatementQuery($sql, $this->objToArray($schueler, true));
+        }
     }
     
     public function insertSchueler(schueler $schueler) {
@@ -105,23 +122,25 @@ class dbSchueler extends db {
                 . "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $sql2 = "INSERT INTO schueler (sid) VALUES (?)";
         
-        $this->startTransaction();
-        try {
-            $result = $this->preparedStatementSelect($sqlCheck, array($schueler->getUsername()));
-            if (count($result) == 0) {
-                $this->preparedStatementQuery($sql, $this->objToArray($schueler, false));       // Insert Data into table person
-                $this->preparedStatementQuery($sql2, array($this->getIdfromDBorObj($schueler)));   // Create entry on table schueler linked by foreign key
-                $newSchueler = $this->selectSchueler($this->getIdfromDBorObj($schueler));
-                $this->commit();
-            }
-            else {
+        if ($this->checkWritePermission()) {
+            $this->startTransaction();
+            try {
+                $result = $this->preparedStatementSelect($sqlCheck, array($schueler->getUsername()));
+                if (count($result) == 0) {
+                    $this->preparedStatementQuery($sql, $this->objToArray($schueler, false));       // Insert Data into table person
+                    $this->preparedStatementQuery($sql2, array($this->getIdfromDBorObj($schueler)));   // Create entry on table schueler linked by foreign key
+                    $newSchueler = $this->selectSchueler($this->getIdfromDBorObj($schueler));
+                    $this->commit();
+                }
+                else {
+                    $this->rollback();
+                    echo "Username schon vorhanden Person wird nicht erstellt.";
+                }
+            } catch (Exception $ex) {
                 $this->rollback();
-                echo "Username schon vorhanden Person wird nicht erstellt.";
+                throw new Exception(get_class($this).': Fehler beim Erstellen eines Schuelers: ' . $ex->getMessage());
             }
-        } catch (Exception $ex) {
-            $this->rollback();
-            throw new Exception(get_class($this).': Fehler beim Erstellen eines Schuelers: ' . $ex->getMessage());
-        }    
+        }
         return $newSchueler;
     }
     
@@ -134,23 +153,25 @@ class dbSchueler extends db {
                 . "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $sql2 = "INSERT INTO angestellte (aid) VALUES (?)";
         
-        $this->startTransaction();
-        try {
-            $result = $this->preparedStatementSelect($sqlCheck, array($schueler->getUsername()));
-            if (count($result) == 0) {
-                $this->preparedStatementQuery($sql, $this->objToArray($schueler, false));       // Insert Data into table person
-                $this->preparedStatementQuery($sql2, array($this->getIdfromDBorObj($schueler)));   // Create entry on table schueler linked by foreign key
-                $newSchueler = $this->selectSchueler($this->getIdfromDBorObj($schueler));
-                $this->commit();
-            }
-            else {
+        if ($this->checkWritePermission()) {
+            $this->startTransaction();
+            try {
+                $result = $this->preparedStatementSelect($sqlCheck, array($schueler->getUsername()));
+                if (count($result) == 0) {
+                    $this->preparedStatementQuery($sql, $this->objToArray($schueler, false));       // Insert Data into table person
+                    $this->preparedStatementQuery($sql2, array($this->getIdfromDBorObj($schueler)));   // Create entry on table schueler linked by foreign key
+                    $newSchueler = $this->selectSchueler($this->getIdfromDBorObj($schueler));
+                    $this->commit();
+                }
+                else {
+                    $this->rollback();
+                    echo "Username schon vorhanden Person wird nicht erstellt.";
+                }
+            } catch (Exception $ex) {
                 $this->rollback();
-                echo "Username schon vorhanden Person wird nicht erstellt.";
-            }
-        } catch (Exception $ex) {
-            $this->rollback();
-            throw new Exception(get_class($this).': Fehler beim Erstellen eines Angestellten: ' . $ex->getMessage());
-        }   
+                throw new Exception(get_class($this).': Fehler beim Erstellen eines Angestellten: ' . $ex->getMessage());
+            }  
+        } 
         return $newSchueler;
     }
     
@@ -158,9 +179,11 @@ class dbSchueler extends db {
         basic::assertInstanceOf($schueler, schueler, true);
         $sql = "DELETE FROM person WHERE person.pid = ?";
         
-        if ($schueler->getPid() != null or $schueler->getPid() != 0) {
-            $params = array($schueler->getPid());
-            $this->preparedStatementQuery($sql, $params);
-        }   
+        if ($this->checkWritePermission()) {
+            if ($schueler->getPid() != null or $schueler->getPid() != 0) {
+                $params = array($schueler->getPid());
+                $this->preparedStatementQuery($sql, $params);
+            }   
+        }
     }
 }
