@@ -6,7 +6,7 @@
  *
 -->
 <div class="table-container dragscroll">
-<table class="table tstacked">
+<table id="lehrerList" class="table tstacked">
     <thead>
         <tr>
             <th>Name</th><th>Vorname</th><th>Email<i title="Vergrössern/Verkleinern" data-extend class="fas fa-expand"></th><th>Kürzel</th><th></th><th></th>
@@ -32,6 +32,26 @@
     <button title="Neuer Lehrer" data-toggle="modal" data-target="#teacher_modal" class="add"><i class="fas fa-chalkboard-teacher"></i></button>
 </div>
 
-<?php include $this->template_path.'/modals/modal-lehrer.html'; ?>
-<?php include $this->template_path.'/modals/modal-fach.html'; ?>
-<?php include $this->template_path.'/modals/modal-klasse.html'; ?>
+<?php include $this->template_path.'/modals/modal-lehrer.php'; ?>
+<?php include $this->template_path.'/modals/modal-fach.php'; ?>
+<?php include $this->template_path.'/modals/modal-klasse.php'; ?>
+
+
+<script>
+    function filterTable(event) {
+        var filter = event.target.value.toUpperCase();
+        var rows = document.querySelector("#lehrerList tbody").rows;
+
+        for (var i = 0; i < rows.length; i++) {
+            var firstCol = rows[i].cells[0].textContent.toUpperCase();
+            var secondCol = rows[i].cells[1].textContent.toUpperCase();
+            if (firstCol.indexOf(filter) > -1 || secondCol.indexOf(filter) > -1) {
+                rows[i].style.display = "";
+            } else {
+                rows[i].style.display = "none";
+            }      
+        }
+    }
+
+    document.querySelector('#searchList').addEventListener('keyup', filterTable, false);
+</script>
