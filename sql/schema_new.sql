@@ -118,13 +118,13 @@ CREATE  TABLE IF NOT EXISTS `schueler_has_klasse` (
   CONSTRAINT `fk_schueler_has_klasse_schueler1`
     FOREIGN KEY (`sid` )
     REFERENCES `schueler` (`sid` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_schueler_has_klasse_klasse1`
     FOREIGN KEY (`kid` )
     REFERENCES `klasse` (`kid` )
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -145,17 +145,17 @@ CREATE  TABLE IF NOT EXISTS `lehrperson_klasse_fach` (
     FOREIGN KEY (`lid` )
     REFERENCES `lehrperson` (`lid` )
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_lehrperson_has_klasse_klasse1`
     FOREIGN KEY (`kid` )
     REFERENCES `klasse` (`kid` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_lehrperson_has_klasse_fach1`
     FOREIGN KEY (`fid` )
     REFERENCES `fach` (`fid` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
