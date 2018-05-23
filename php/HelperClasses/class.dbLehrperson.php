@@ -8,7 +8,7 @@ class dbLehrperson extends db {
      * @return \schueler - returns object from type lehrer
      */
     private function newObjLehrer($row) {
-        return new lehrer($row->pid, $row->username, $row->password, $row->name, $row->vorname, $row->geburtstag, $row->geschlecht, $row->kuerzel, $row->mail, $row->status);
+        return new lehrer($row->pid, $row->username, $row->password, $row->name, $row->vorname, $row->geburtsdatum, $row->geschlecht, $row->kuerzel, $row->mail, $row->status);
     }
     
     /**
@@ -23,12 +23,12 @@ class dbLehrperson extends db {
         
         if (!$pidLast) {
             return array($lehrer->getPid(), $lehrer->getUsername(), $password, $lehrer->getName(), 
-                $lehrer->getVorname(), $lehrer->getGeburtstag(), $lehrer->getGeschlecht(), $lehrer->getKuerzel(), $lehrer->getMail(),
+                $lehrer->getVorname(), $lehrer->getGeburtstagDB(), $lehrer->getGeschlecht(), $lehrer->getKuerzel(), $lehrer->getMail(),
                 $lehrer->getStatus());
         }
         else {
             return array($lehrer->getUsername(), $password, $lehrer->getName(), 
-                $lehrer->getVorname(), $lehrer->getGeburtstag(), $lehrer->getGeschlecht(), $lehrer->getKuerzel(), $lehrer->getMail(),
+                $lehrer->getVorname(), $lehrer->getGeburtstagDB(), $lehrer->getGeschlecht(), $lehrer->getKuerzel(), $lehrer->getMail(),
                 $lehrer->getStatus(), $lehrer->getPid());
         }
     }
@@ -108,7 +108,10 @@ class dbLehrperson extends db {
                 . "SET `username` = ?, `password` = ?, `name` = ?,`vorname` = ?, `geburtsdatum` = ?, "
                 . "`geschlecht` = ?, `kuerzel` = ?, `mail` = ?, `status` = ? "
                 . "WHERE person.pid = ?";
-        $this->preparedStatementQuery($sql, $this->objToArray($lehrer, true));
+        
+        if ($this->checkWritePermission()) {
+            $this->preparedStatementQuery($sql, $this->objToArray($lehrer, true));
+        }
     }
     
     public function insertLehrer(lehrer $lehrer) {
@@ -120,23 +123,25 @@ class dbLehrperson extends db {
                 . "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $sql2 = "INSERT INTO lehrperson (lid) VALUES (?)";
         
-        $this->startTransaction();
-        try {
-            $result = $this->preparedStatementSelect($sqlCheck, array($lehrer->getUsername()));
-            if (count($result) == 0) {
-                $this->preparedStatementQuery($sql, $this->objToArray($lehrer, false));       // Insert Data into table person
-                $this->preparedStatementQuery($sql2, array($this->getIdfromDBorObj($lehrer)));   // Create entry on table schueler linked by foreign key
-                $newLehrer = $this->selectLehrer($this->getIdfromDBorObj($lehrer));
-                $this->commit();
-            }
-            else {
+        if ($this->checkWritePermission()) {
+            $this->startTransaction();
+            try {
+                $result = $this->preparedStatementSelect($sqlCheck, array($lehrer->getUsername()));
+                if (count($result) == 0) {
+                    $this->preparedStatementQuery($sql, $this->objToArray($lehrer, false));       // Insert Data into table person
+                    $this->preparedStatementQuery($sql2, array($this->getIdfromDBorObj($lehrer)));   // Create entry on table schueler linked by foreign key
+                    $newLehrer = $this->selectLehrer($this->getIdfromDBorObj($lehrer));
+                    $this->commit();
+                }
+                else {
+                    $this->rollback();
+                    echo "Username schon vorhanden Person wird nicht erstellt.";
+                }
+            } catch (Exception $ex) {
                 $this->rollback();
-                echo "Username schon vorhanden Person wird nicht erstellt.";
-            }
-        } catch (Exception $ex) {
-            $this->rollback();
-            throw new Exception(get_class($this).': Fehler beim Erstellen eines Lehrers: ' . $ex->getMessage());
-        }    
+                throw new Exception(get_class($this).': Fehler beim Erstellen eines Lehrers: ' . $ex->getMessage());
+            }    
+        }
         return $newLehrer;
     }
     
@@ -149,22 +154,24 @@ class dbLehrperson extends db {
                 . "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $sql2 = "INSERT INTO lehrperson (lid) VALUES (?)";
         
-        $this->startTransaction();
-        try {
-            $result = $this->preparedStatementSelect($sqlCheck, array($lehrer->getUsername()));
-            if (count($result) == 0) {
-                $this->preparedStatementQuery($sql, $this->objToArray($lehrer, false));       // Insert Data into table person
-                $this->preparedStatementQuery($sql2, array($this->getIdfromDBorObj($lehrer)));   // Create entry on table schueler linked by foreign key
-                $newLehrer = $this->selectLehrer($this->getIdfromDBorObj($lehrer));
-                $this->commit();
-            }
-            else {
+        if ($this->checkWritePermission()) {
+            $this->startTransaction();
+            try {
+                $result = $this->preparedStatementSelect($sqlCheck, array($lehrer->getUsername()));
+                if (count($result) == 0) {
+                    $this->preparedStatementQuery($sql, $this->objToArray($lehrer, false));       // Insert Data into table person
+                    $this->preparedStatementQuery($sql2, array($this->getIdfromDBorObj($lehrer)));   // Create entry on table schueler linked by foreign key
+                    $newLehrer = $this->selectLehrer($this->getIdfromDBorObj($lehrer));
+                    $this->commit();
+                }
+                else {
+                    $this->rollback();
+                    echo "Username schon vorhanden Person wird nicht erstellt.";
+                }
+            } catch (Exception $ex) {
                 $this->rollback();
-                echo "Username schon vorhanden Person wird nicht erstellt.";
+                throw new Exception(get_class($this).': Fehler beim Erstellen eines Lehrers: ' . $ex->getMessage());
             }
-        } catch (Exception $ex) {
-            $this->rollback();
-            throw new Exception(get_class($this).': Fehler beim Erstellen eines Lehrers: ' . $ex->getMessage());
         }
         return $newLehrer;
     }
@@ -173,9 +180,11 @@ class dbLehrperson extends db {
         basic::assertInstanceOf($lehrer, lehrer, true);
         $sql = "DELETE FROM person WHERE person.pid = ?";
         
-        if ($lehrer->getPid() != null or $lehrer->getPid() != 0) {
-            $params = array($lehrer->getPid());
-            $this->preparedStatementQuery($sql, $params);
-        }   
+        if ($this->checkWritePermission()) {
+            if ($lehrer->getPid() != null or $lehrer->getPid() != 0) {
+                $params = array($lehrer->getPid());
+                $this->preparedStatementQuery($sql, $params);
+            }   
+        }
     }
 }

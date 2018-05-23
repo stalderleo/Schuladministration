@@ -71,23 +71,27 @@ class dbKurs extends db {
         $sql = "INSERT INTO `fach`"
                 . "(`fid`, `kuerzel`, `bezeichnung`) "
                 . "VALUES (?, ?, ?)";
-        $this->preparedStatementQuery($sql, $this->objToArray($kurs, false));       // Insert Data into table klasse
-        $newKurs = $this->selectKurs($this->getIdfromDBorObj($kurs));
-        return $kurs;
+        
+        if ($this->checkWritePermission()) {
+            $this->preparedStatementQuery($sql, $this->objToArray($kurs, false));       // Insert Data into table klasse
+            $newKurs = $this->selectKurs($this->getIdfromDBorObj($kurs));
+        }
+        return $newKurs;
     }
     
     public function insertKursAI(kurs $kurs) {
         basic::assertInstanceOf($kurs, kurs, true);
-        $kursCheck = $this->selectKursByKuerzel($kurs->getKuerzel());
         
-        if($kursCheck != null) return $kursCheck;
-        
-        $sql = "INSERT INTO `fach`"
-                . "(`kuerzel`, `bezeichnung`) "
-                . "VALUES (?, ?)";
-        $this->preparedStatementQuery($sql, $this->objToArray($kurs, false));       // Insert Data into table klasse
-    
-        return $this->selectKursByKuerzel($kurs->getKuerzel());
+        if ($this->checkWritePermission()) {
+            $kursCheck = $this->selectKursByKuerzel($kurs->getKuerzel());
+            if($kursCheck != null) return $kursCheck;
+            $sql = "INSERT INTO `fach`"
+                    . "(`kuerzel`, `bezeichnung`) "
+                    . "VALUES (?, ?)";
+            $this->preparedStatementQuery($sql, $this->objToArray($kurs, false));       // Insert Data into table klasse
+            return $this->selectKursByKuerzel($kurs->getKuerzel());
+        }
+        return null;
     }
     
     public function modifyKurs(kurs $kurs) {
@@ -95,16 +99,21 @@ class dbKurs extends db {
         $sql = "UPDATE fach "
                 . "SET kuerzel = ?, bezeichnung = ? "
                 . "WHERE kid = ?";
-        $this->preparedStatementQuery($sql, $this->objToArray($klasse, true));
+        
+        if ($this->checkWritePermission()) {
+            $this->preparedStatementQuery($sql, $this->objToArray($klasse, true));
+        }
     }
     
     public function deleteKurs(kurs $kurs) {
         basic::assertInstanceOf($kurs, kurs, true);
         $sql = "DELETE FROM fach WHERE kurs.fid = ?";
         
-        if ($klasse->getFid() != null or $klasse->getFid() != 0) {
-            $params = array($klasse->getFid());
-            $this->preparedStatementQuery($sql, $params);
-        }   
+        if ($this->checkWritePermission()) {
+            if ($klasse->getFid() != null or $klasse->getFid() != 0) {
+                $params = array($klasse->getFid());
+                $this->preparedStatementQuery($sql, $params);
+            }   
+        }
     }
 }

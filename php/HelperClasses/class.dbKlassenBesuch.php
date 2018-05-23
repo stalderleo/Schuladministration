@@ -61,19 +61,25 @@ class dbKlassenBesuch extends db {
         $sql = "INSERT INTO schueler_has_klasse "
                 . "(`sid`, `kid`, `isZweitausbildung`) "
                 . "VALUES (?, ?, ?)";
-        $this->preparedStatementQuery($sql, $this->objToArray($klassenBesuch));       // Insert Data into table schueler_has_klasse
+        
+        if ($this->checkWritePermission()) {
+            $this->preparedStatementQuery($sql, $this->objToArray($klassenBesuch));       // Insert Data into table schueler_has_klasse
+        }
     }
     
     public function modifyKlassenBesuch(klassenBesuch $klassenBesuch) {
         basic::assertInstanceOf($klassenBesuch, klassenBesuch, true);
-        $this->startTransaction();
-        try {
-            $this->deleteBesuch($klassenBesuch);
-            $this->insertBesuch($klassenBesuch);
-            $this->commit();
-        } catch (Exception $ex) {
-            $this->rollback();
-            throw new Exception(get_class($this).': Fehler beim Modifiziern der Zwischentabelle schueler_has_klasse: ' . $ex->getMessage());
+        
+        if ($this->checkWritePermission()) {
+            $this->startTransaction();
+            try {
+                $this->deleteBesuch($klassenBesuch);
+                $this->insertBesuch($klassenBesuch);
+                $this->commit();
+            } catch (Exception $ex) {
+                $this->rollback();
+                throw new Exception(get_class($this).': Fehler beim Modifiziern der Zwischentabelle schueler_has_klasse: ' . $ex->getMessage());
+            }
         }
     }
     
@@ -81,6 +87,9 @@ class dbKlassenBesuch extends db {
         basic::assertInstanceOf($klassenBesuch, klassenBesuch, true);
         $sql = "DELETE FROM schueler_has_klasse "
                 . "WHERE sid = ? AND kid = ? AND isZweitausbildung = ?";
-        $this->preparedStatementQuery($sql, $klassenBesuch->getOldKeys());
+        
+        if ($this->checkWritePermission()) {
+            $this->preparedStatementQuery($sql, $klassenBesuch->getOldKeys());
+        }
     }
 }

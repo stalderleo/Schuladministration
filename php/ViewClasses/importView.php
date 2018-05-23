@@ -63,13 +63,13 @@ class importView implements subcontroller {
     
     private function insertIntoDB($target) {
         //try {
-            
+            ini_set('max_execution_time', 600); // um die daten einlesen zu können.
             //$this->dbKlasse->startTransaction();
             
             $logstr = date('m.d.Y h:i:s a', time()). ": Import started"."<hr>\n";
             $xml = simplexml_load_file($target);
             foreach ($xml->lehrer as $lp) {   
-                $lehrer = $this->dbLehrer->insertLehrer(new lehrer(str_replace('gibsso','',$lp->id), $lp->username, $lp->initpw, $lp->name, $lp->vorname, $this->convertStringToDate($lp->geburtsdatum), $lp->geschlecht, $lp->kuerzel, $lp->mail, $lp->status));
+                $lehrer = $this->dbLehrer->insertLehrer(new lehrer(str_replace('gibsso','',$lp->id), $lp->username, $lp->initpw, $lp->name, $lp->vorname, $lp->geburtsdatum, $lp->geschlecht, $lp->kuerzel, $lp->mail, $lp->status));
                 if (!empty($lehrer)) {
                     $logstr .= date('m.d.Y h:i:s a', time()). ": Lehrer (".$lehrer->getPid().") inserted"."<hr>\n";
                 } else {
@@ -116,7 +116,7 @@ class importView implements subcontroller {
             }
 
             foreach ($xml->schueler as $sl) {
-                $schueler = $this->dbSchueler->insertSchueler(new schueler(str_replace('gibsso','',$sl->id), $sl->username, $sl->initpw, $sl->name, $sl->vorname, $this->convertStringToDate($sl->geburtsdatum), $sl->geschlecht, $sl->kuerzel, $sl->mail, $sl->status));
+                $schueler = $this->dbSchueler->insertSchueler(new schueler(str_replace('gibsso','',$sl->id), $sl->username, $sl->initpw, $sl->name, $sl->vorname, $sl->geburtsdatum, $sl->geschlecht, $sl->kuerzel, $sl->mail, $sl->status));
 
                 if (!empty($schueler)) {
                     $logstr .= date('m.d.Y h:i:s a', time()). ": Schueler (".$schueler->getPid().") inserted"."<hr>\n";
@@ -144,7 +144,7 @@ class importView implements subcontroller {
             }
 
             foreach ($xml->angestellte as $ag) {
-                $angestellter = $this->dbAngestellte->insertAngestellter(new angestellter(str_replace('gibsso','',$ag->id), $ag->username, $ag->initpw, $ag->name, $ag->vorname, $this->convertStringToDate($ag->geburtsdatum), $ag->geschlecht, $ag->kuerzel, $ag->mail, $ag->status));
+                $angestellter = $this->dbAngestellte->insertAngestellter(new angestellter(str_replace('gibsso','',$ag->id), $ag->username, $ag->initpw, $ag->name, $ag->vorname, $ag->geburtsdatum, $ag->geschlecht, $ag->kuerzel, $ag->mail, $ag->status));
                 if (!empty($angestellter)) {
                     $logstr .= date('m.d.Y h:i:s a', time()). ": Angestellter (".$angestellter->getPid().") inserted"."<hr>\n";
                 } else {
@@ -162,15 +162,5 @@ class importView implements subcontroller {
             //$this->dbKlasse->rollback();
         //}
         
-    }
-    
-    function convertStringToDate( $string )
-    {
-        if( $string != null ) {
-            $time = strtotime($string);
-            return date('Y-m-d',$time);
-        }
-
-        return "";
     }
 }
