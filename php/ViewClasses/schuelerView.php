@@ -59,9 +59,13 @@ class schuelerView implements subcontroller {
             }
         }
         
+        if(isset($_POST["safe"])){
+            $db->insertSchuelerAI(new schueler(null, $_POST["s_username"], $_POST["s_pw"], $_POST["s_name"], $_POST["s_prename"], $_POST["s_birth"], $_POST["gender"], $_POST["Kuerzel"], $_POST["Mail"], $_POST["status"]));
+        }
+        
         if(isset($_POST['pid_del']) && $_POST['pid_del'] != null){
             $db->deleteSchueler($db->selectSchueler($_POST['pid_del']));
-            header('Location: '.$_SERVER['PHP_SELF']);
+            header('Location: '.$_SERVER['PHP_SELF'].'?id=schuelerView');
             die;
         }
     }

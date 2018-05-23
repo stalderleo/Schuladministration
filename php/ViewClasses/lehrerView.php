@@ -1,15 +1,9 @@
 <?php
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- * Description of lehrerView
- *
- * @author larschristian.berg
+ * Darstellung einer Liste voller Klassen.
+ * 
+ * @autor Aaron Studer
+ * @date 23. May 2018
  */
 require_once("interface.subcontroller.php");
 require_once("./HelperClasses/class.dbLehrperson.php");
@@ -25,9 +19,7 @@ class lehrerView implements subcontroller {
         $this->template_path = $template_path;
         $this->title = "Lehrer";
     }
-    public function getKontaktListe(){
-        //a person object should be returned here
-    }
+    
     public function run() {
         $db = new dbLehrperson();
         
@@ -61,10 +53,35 @@ class lehrerView implements subcontroller {
             }
         }
         
+        if(isset($_POST["safe"])){
+            $db->insertLehrerAI(new lehrer(null, $_POST["s_username"], $_POST["s_pw"], $_POST["s_name"], $_POST["s_prename"], $_POST["s_birth"], $_POST["gender"], $_POST["Kuerzel"], $_POST["Mail"], $_POST["status"]));
+        }
+        
         if(isset($_POST['pid_del']) && $_POST['pid_del'] != null){
             $db->deleteLehrer($db->selectLehrer($_POST['pid_del']));
             header('Location: '.$_SERVER['PHP_SELF']);
             die;
+        }
+        
+        if(isset($_POST['class']) && isset($_POST['fach_bez']) && isset($_POST['fach_kur'])){
+            //check if fach already exists
+            //create class, fach and get teacher by lid
+            $dbKurs = new dbKurs();
+            $dbKlasse = new dbKlasse();
+            $dbKursInstanz = new dbKursInstanz();
+            $kurse = $dbKurs->selectAllKurse();
+            $f_kurs;
+            foreach($kurse as $kurs){
+                if($kurs->getBezeichnung() == $_POST['fach_bez'] || $kurs->getKuerzel() == $_POST['fach_kur']){
+                    $f_kurs = $kurs;
+                }else{
+                    $f_kurs = new kurs($_POST['fach_kur'], $_POST['fach_bez']);
+                }
+            }
+            
+            $f_klasse = $dbKlasse->selectKlasse($_POST['kid']);
+            //$kursInstanz = new kursInstanz($this->lehrer, $f_klasse, $f_kurs);
+            //$dbKursInstanz->insertInstanz($kursInstanz);
         }
     }
     

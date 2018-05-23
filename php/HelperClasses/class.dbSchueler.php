@@ -111,7 +111,7 @@ class dbSchueler extends db {
             if (count($result) == 0) {
                 $this->preparedStatementQuery($sql, $this->objToArray($schueler, false));       // Insert Data into table person
                 $this->preparedStatementQuery($sql2, array($this->getIdfromDBorObj($schueler)));   // Create entry on table schueler linked by foreign key
-                $newSchueler = $this->getIdfromDBorObj($schueler);
+                $newSchueler = $this->selectSchueler($this->getIdfromDBorObj($schueler));
                 $this->commit();
             }
             else {
@@ -140,7 +140,7 @@ class dbSchueler extends db {
             if (count($result) == 0) {
                 $this->preparedStatementQuery($sql, $this->objToArray($schueler, false));       // Insert Data into table person
                 $this->preparedStatementQuery($sql2, array($this->getIdfromDBorObj($schueler)));   // Create entry on table schueler linked by foreign key
-                $newSchueler = $this->getIdfromDBorObj($schueler);
+                $newSchueler = $this->selectSchueler($this->getIdfromDBorObj($schueler));
                 $this->commit();
             }
             else {

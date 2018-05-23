@@ -8,7 +8,7 @@
 <div class="table-container dragscroll">
 
 
-<table class="table tstacked">
+<table id="schuelerList" class="table tstacked">
     <thead>
         <tr>
             <th>Name</th><th>Vorname</th><th>Email<i title="Vergrössern/Verkleinern" data-extend class="fas fa-expand"></th><th>Kürzel</th><th></th><th></th>
@@ -38,5 +38,24 @@
 </div>
 
 
-<?php include $this->template_path.'/modals/modal-schueler.html'; ?>
-<?php include $this->template_path.'/modals/modal-klasse.html'; ?>
+<?php include $this->template_path.'/modals/modal-schueler.php'; ?>
+<?php include $this->template_path.'/modals/modal-klasse.php'; ?>
+
+<script>
+    function filterTable(event) {
+        var filter = event.target.value.toUpperCase();
+        var rows = document.querySelector("#schuelerList tbody").rows;
+
+        for (var i = 0; i < rows.length; i++) {
+            var firstCol = rows[i].cells[0].textContent.toUpperCase();
+            var secondCol = rows[i].cells[1].textContent.toUpperCase();
+            if (firstCol.indexOf(filter) > -1 || secondCol.indexOf(filter) > -1) {
+                rows[i].style.display = "";
+            } else {
+                rows[i].style.display = "none";
+            }      
+        }
+    }
+
+    document.querySelector('#searchList').addEventListener('keyup', filterTable, false);
+</script>
