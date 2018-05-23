@@ -39,9 +39,6 @@
             if (!scrolled) updateScroll();
         },50);
         
-        document.getElementById("log").onscroll = function (e) {  
-            scrolled = true;
-        } 
     </script>
 <?php endif ?>
 <form enctype="multipart/form-data" action="<?php echo $_SERVER['SCRIPT_NAME']."?id=importView" ?>" method="post" id="importDataForm">
@@ -51,4 +48,4 @@
         <input name="submit" type="submit" value="Hochladen">
     </div>
 </form>
-<div id="log"></div>
+<div id="log" onscroll="scrolled = true"></div>
