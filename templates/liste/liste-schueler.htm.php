@@ -23,7 +23,8 @@
                 <td data-label="Vorname"><?php echo $s->getVorname()?></td>
                 <td data-label="Email" class="downsize"><?php echo $s->getMail()?></td>
                 <td data-label="Kuerzel"><?php echo $s->getKuerzel() ?></td>
-            <?php echo $v->editEntry; ?>
+                <td><form method="post"><input type="submit" name="pid" class="" value='<?php echo $s->getPid() ?>'></form></td>
+                <td>test</td>
         </tr>
 <?php endforeach; ?>
     </tbody>
