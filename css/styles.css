@@ -230,6 +230,26 @@ table.tstacked [data-label="Löschen"], table.tstacked [data-label="Bearbeiten"]
     z-index: 999;
 }
 
+#log {
+    height: 500px;
+    overflow-y: auto;
+    width: 100%;
+    display: block;
+    margin-bottom: 50px;
+}
+
+.inserted {
+    color: #4BB543;
+}
+
+.warning {
+    color: #FFCC00;
+}
+
+.failed {
+    color:#cc0000;
+}
+
 th [data-extend]{
     float: right;
     position: relative;
