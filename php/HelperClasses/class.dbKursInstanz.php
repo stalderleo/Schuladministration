@@ -73,33 +73,24 @@ class dbKursInstanz extends db {
         $sql = "INSERT INTO `lehrperson_klasse_fach`"
                 . "(`lid`, `kid`, `fid`) "
                 . "VALUES (?, ?, ?)";
-        
-        if ($this->checkWritePermission()) {
-            try {
-                $res = $this->preparedStatementQuery($sql, $this->objToArray($kursInstanz));       // Insert Data into table KursInstanz
-                return $kursInstanz;
-            } catch (Exception $ex) {
-                return null;
-            }
-        }
-        else {
+        try {
+            $res = $this->preparedStatementQuery($sql, $this->objToArray($kursInstanz));       // Insert Data into table KursInstanz
+            return $kursInstanz;
+        } catch (Exception $ex) {
             return null;
         }
     }
     
     public function modifyKursInstanz(kursInstanz $kursInstanz) {
         basic::assertInstanceOf($kursInstanz, kursInstanz, true);
-        
-        if ($this->checkWritePermission()) {
-            $this->startTransaction();
-            try {
-                $this->deleteInstanz($kursInstanz);
-                $this->insertInstanz($kursInstanz);
-                $this->commit();
-            } catch (Exception $ex) {
-                $this->rollback();
-                throw new Exception(get_class($this).': Fehler beim Modifiziern der Zwischentabelle lehrperson_klasse_fach: ' . $ex->getMessage());
-            }
+        $this->startTransaction();
+        try {
+            $this->deleteInstanz($kursInstanz);
+            $this->insertInstanz($kursInstanz);
+            $this->commit();
+        } catch (Exception $ex) {
+            $this->rollback();
+            throw new Exception(get_class($this).': Fehler beim Modifiziern der Zwischentabelle lehrperson_klasse_fach: ' . $ex->getMessage());
         }
     }
     
@@ -107,9 +98,6 @@ class dbKursInstanz extends db {
         basic::assertInstanceOf($kursInstanz, kursInstanz, true);
         $sql = "DELETE FROM lehrperson_klasse_fach "
                 . "WHERE lid = ? AND kid = ? AND fid = ?";
-        
-        if ($this->checkWritePermission()) {
-            $this->preparedStatementQuery($sql, $kursInstanz->getOldKeys());
-        }
+        $this->preparedStatementQuery($sql, $kursInstanz->getOldKeys());
     }
 }

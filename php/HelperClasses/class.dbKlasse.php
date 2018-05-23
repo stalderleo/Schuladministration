@@ -84,11 +84,8 @@ class dbKlasse extends db {
         $sql = "INSERT INTO `klasse`"
                 . "(`kid`, `kuerzel`, `bezeichnung`) "
                 . "VALUES (?, ?, ?)";
-        
-        if ($this->checkWritePermission()) {
-            $this->preparedStatementQuery($sql, $this->objToArray($klasse, false));       // Insert Data into table klasse
-            $newKlasse = $this->selectKlasse($this->getIdfromDBorObj($klasse));
-        }
+        $this->preparedStatementQuery($sql, $this->objToArray($klasse, false));       // Insert Data into table klasse
+        $newKlasse = $this->selectKlasse($this->getIdfromDBorObj($klasse));
         return $newKlasse;
     }
     
@@ -96,14 +93,15 @@ class dbKlasse extends db {
         basic::assertInstanceOf($klasse, klasse, true);
         $klasseCheck = $this->selectKlasseByBezeichnung($klasse->getBezeichnung());
         
-        if ($this->checkWritePermission()) {
-            if($klasseCheck != null) return $klasseCheck;
-            $sql = "INSERT INTO `klasse`"
-                    . "(`kuerzel`, `bezeichnung`) "
-                    . "VALUES (?, ?)";
-            $this->preparedStatementQuery($sql, array($klasse->getKuerzel(), $klasse->getBezeichnung()));       // Insert Data into table klasse
-            $newKlasse = $this->selectKlasseByBezeichnung($klasse->getBezeichnung());
-        }
+        if($klasseCheck != null) return $klasseCheck;
+        
+        $sql = "INSERT INTO `klasse`"
+                . "(`kuerzel`, `bezeichnung`) "
+                . "VALUES (?, ?)";
+        $this->preparedStatementQuery($sql, array($klasse->getKuerzel(), $klasse->getBezeichnung()));       // Insert Data into table klasse
+    
+        $newKlasse = $this->selectKlasseByBezeichnung($klasse->getBezeichnung());
+        
         return $newKlasse;
     }
     
@@ -112,21 +110,16 @@ class dbKlasse extends db {
         $sql = "UPDATE klasse "
                 . "SET kuerzel = ?, bezeichnung = ? "
                 . "WHERE kid = ?";
-        
-        if ($this->checkWritePermission()) {
-            $this->preparedStatementQuery($sql, $this->objToArray($klasse, true));
-        }
+        $this->preparedStatementQuery($sql, $this->objToArray($klasse, true));
     }
     
     public function deleteKlasse(klasse $klasse) {
         basic::assertInstanceOf($klasse, klasse, true);
         $sql = "DELETE FROM klasse WHERE klasse.kid = ?";
         
-        if ($this->checkWritePermission()) {
-            if ($klasse->getKid() != null or $klasse->getKid() != 0) {
-                $params = array($klasse->getKid());
-                $this->preparedStatementQuery($sql, $params);
-            }   
-        }
+        if ($klasse->getKid() != null or $klasse->getKid() != 0) {
+            $params = array($klasse->getKid());
+            $this->preparedStatementQuery($sql, $params);
+        }   
     }
 }

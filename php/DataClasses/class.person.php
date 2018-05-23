@@ -67,11 +67,6 @@ class person {
     }
 
     function getGeburtstag() {
-        $date = new DateTime($this->geburtstag);
-        return $date->format("d.m.Y");
-    }
-    
-    function getGeburtstagDB() {
         return $this->geburtstag;
     }
 
@@ -112,10 +107,7 @@ class person {
     }
 
     function setGeburtstag($geburtstag) {
-        if( $geburtstag != null ) {
-            $time = strtotime($geburtstag);
-            $this->geburtstag = date('Y-m-d',$time);
-        }
+        $this->geburtstag = $geburtstag;
     }
 
     function setGeschlecht($geschlecht) {

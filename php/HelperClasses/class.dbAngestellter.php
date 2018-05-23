@@ -14,7 +14,7 @@ class dbAngestellter extends db {
      * @return \schueler - returns object from type angestellter
      */
     private function newObjAngestellte($row) {
-        return new angestellter($row->pid, $row->username, $row->password, $row->name, $row->vorname, $row->geburtsdatum, $row->geschlecht, $row->kuerzel, $row->mail, $row->status);
+        return new angestellter($row->pid, $row->username, $row->password, $row->name, $row->vorname, $row->geburtstag, $row->geschlecht, $row->kuerzel, $row->mail, $row->status);
     }
     
     /**
@@ -29,12 +29,12 @@ class dbAngestellter extends db {
         
         if (!$pidLast) {
             return array($angestellter->getPid(), $angestellter->getUsername(), $password, $angestellter->getName(), 
-                $angestellter->getVorname(), $angestellter->getGeburtstagDB(), $angestellter->getGeschlecht(), $angestellter->getKuerzel(), $angestellter->getMail(),
+                $angestellter->getVorname(), $angestellter->getGeburtstag(), $angestellter->getGeschlecht(), $angestellter->getKuerzel(), $angestellter->getMail(),
                 $angestellter->getStatus());
         }
         else {
             return array($angestellter->getUsername(), $password, $angestellter->getName(), 
-                $angestellter->getVorname(), $angestellter->getGeburtstagDB(), $angestellter->getGeschlecht(), $angestellter->getKuerzel(), $angestellter->getMail(),
+                $angestellter->getVorname(), $angestellter->getGeburtstag(), $angestellter->getGeschlecht(), $angestellter->getKuerzel(), $angestellter->getMail(),
                 $angestellter->getStatus(), $angestellter->getPid());
         }
     }
@@ -89,10 +89,7 @@ class dbAngestellter extends db {
                 . "SET `username` = ?, `password` = ?, `name` = ?,`vorname` = ?, `geburtsdatum` = ?, "
                 . "`geschlecht` = ?, `kuerzel` = ?, `mail` = ?, `status` = ? "
                 . "WHERE person.pid = ?";
-        
-        if ($this->checkWritePermission()) {
-            $this->preparedStatementQuery($sql, $this->objToArray($angestellte, true));
-        }
+        $this->preparedStatementQuery($sql, $this->objToArray($angestellte, true));
     }
     
     public function insertAngestellter(angestellter $angestellte) {
@@ -104,25 +101,23 @@ class dbAngestellter extends db {
                 . "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $sql2 = "INSERT INTO angestellte (aid) VALUES (?)";
         
-        if ($this->checkWritePermission()) {
-            $this->startTransaction();
-            try {
-                $result = $this->preparedStatementSelect($sqlCheck, array($angestellte->getUsername()));
-                if (count($result) == 0) {
-                    $this->preparedStatementQuery($sql, $this->objToArray($angestellte, false));       // Insert Data into table person
-                    $this->preparedStatementQuery($sql2, array($this->getIdfromDBorObj($angestellte)));   // Create entry on table schueler linked by foreign key
-                    $newAngestellte = $this->selectAngestellte($this->getIdfromDBorObj($angestellte));
-                    $this->commit();
-                }
-                else {
-                    $this->rollback();
-                    echo "Username schon vorhanden Person wird nicht erstellt.";
-                }
-            } catch (Exception $ex) {
+        $this->startTransaction();
+        try {
+            $result = $this->preparedStatementSelect($sqlCheck, array($angestellte->getUsername()));
+            if (count($result) == 0) {
+                $this->preparedStatementQuery($sql, $this->objToArray($angestellte, false));       // Insert Data into table person
+                $this->preparedStatementQuery($sql2, array($this->getIdfromDBorObj($angestellte)));   // Create entry on table schueler linked by foreign key
+                $newAngestellte = $this->selectAngestellte($this->getIdfromDBorObj($angestellte));
+                $this->commit();
+            }
+            else {
                 $this->rollback();
-                throw new Exception(get_class($this).': Fehler beim Erstellen eines Angestellten: ' . $ex->getMessage());
-            }   
-        }
+                echo "Username schon vorhanden Person wird nicht erstellt.";
+            }
+        } catch (Exception $ex) {
+            $this->rollback();
+            throw new Exception(get_class($this).': Fehler beim Erstellen eines Angestellten: ' . $ex->getMessage());
+        }   
         return $newAngestellte;
     }
     
@@ -135,25 +130,23 @@ class dbAngestellter extends db {
                 . "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $sql2 = "INSERT INTO angestellte (aid) VALUES (?)";
         
-        if ($this->checkWritePermission()) {
-            $this->startTransaction();
-            try {
-                $result = $this->preparedStatementSelect($sqlCheck, array($angestellte->getUsername()));
-                if (count($result) == 0) {
-                    $this->preparedStatementQuery($sql, $this->objToArray($angestellte, false));       // Insert Data into table person
-                    $this->preparedStatementQuery($sql2, array($this->getIdfromDBorObj($angestellte)));   // Create entry on table schueler linked by foreign key
-                    $newAngestellte = $this->selectAngestellte($this->getIdfromDBorObj($angestellte));
-                    $this->commit();
-                }
-                else {
-                    $this->rollback();
-                    echo "Username schon vorhanden Person wird nicht erstellt.";
-                }
-            } catch (Exception $ex) {
+        $this->startTransaction();
+        try {
+            $result = $this->preparedStatementSelect($sqlCheck, array($angestellte->getUsername()));
+            if (count($result) == 0) {
+                $this->preparedStatementQuery($sql, $this->objToArray($angestellte, false));       // Insert Data into table person
+                $this->preparedStatementQuery($sql2, array($this->getIdfromDBorObj($angestellte)));   // Create entry on table schueler linked by foreign key
+                $newAngestellte = $this->selectAngestellte($this->getIdfromDBorObj($angestellte));
+                $this->commit();
+            }
+            else {
                 $this->rollback();
-                throw new Exception(get_class($this).': Fehler beim Erstellen eines Angestellten: ' . $ex->getMessage());
-            }   
-        }
+                echo "Username schon vorhanden Person wird nicht erstellt.";
+            }
+        } catch (Exception $ex) {
+            $this->rollback();
+            throw new Exception(get_class($this).': Fehler beim Erstellen eines Angestellten: ' . $ex->getMessage());
+        }   
         return $newAngestellte;
     }
     
@@ -161,11 +154,9 @@ class dbAngestellter extends db {
         basic::assertInstanceOf($angestellte, angestellter, true);
         $sql = "DELETE FROM person WHERE person.pid = ?";
         
-        if ($this->checkWritePermission()) {
-            if ($angestellte->getPid() != null or $angestellte->getPid() != 0) {
-                $params = array($angestellte->getPid());
-                $this->preparedStatementQuery($sql, $params);
-            }   
-        }
+        if ($angestellte->getPid() != null or $angestellte->getPid() != 0) {
+            $params = array($angestellte->getPid());
+            $this->preparedStatementQuery($sql, $params);
+        }   
     }
 }
