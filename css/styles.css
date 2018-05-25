@@ -316,3 +316,42 @@ label > input {
 .margin-50 {
     margin: 50px 0;
 }
+
+
+/* dropdown search */
+.ss_input {
+  position: absolute;
+  background-color: transparent;
+  width: 100%;
+  border: 0;
+}
+
+.select-search {
+  width: 100%;
+  position: relative;
+  z-index: 2;
+  padding: 15px 0;
+}
+
+.select-search > select {
+  width: 100%;
+  position: relative;
+  z-index: -1;
+}
+
+form {
+    width: 100%;
+}
+
+.edit, .delete {
+    text-align: center;
+    position: relative;
+}
+.edit input, .delete input {
+    position: absolute;
+    cursor: pointer;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    opacity: 0;
+}

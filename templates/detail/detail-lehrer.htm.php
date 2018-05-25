@@ -18,39 +18,24 @@
 </form>
 <?php  ?>
 <div class="row margin-50">
-    <form method="post">
-        <div class="class-selection col-sm-6">
-            <input type="text" placeholder="Suche" class="search">
-            <?php
-            $dbKlassen = new dbKlasse();
-            $klassen = $dbKlassen->selectAllKlassen();
-            $dbKurs = new dbKurs();
-
-            foreach($klassen as $klasse){
-            ?>
-                <label><?= $klasse->getBezeichnung() ?>
-                    <input type="radio" reguired name="kid" value="<?= $klasse->getKid() ?>"></label>
-            <?php
-            }
-            ?>
-        </div>
-        <div class="kurs-creation col-sm-6">
-            <input type="hidden" reguired name="lid" value="<?= $v->lehrer->getPid() ?>">
-            <input type="submit" value="Speichern">
-            <?php /*
-
-                       <select name="class" style="position:absolute;top:0px;left:0px;width:200px; height:25px;line-height:20px;margin:0;padding:0;" onchange="document.getElementById('displayValue').value=this.options[this.selectedIndex].text; document.getElementById('idValue').value=this.options[this.selectedIndex].value;">
-               <option></option>
-               <?php
-               foreach($dbKurs->selectAllKurse() as $kurs){
-                   ?>
-                    <option value="<?= $kurs->getKid()?>"><?= $kurs->getBezeichnung() ?></option>
-                   <?php
-               }
-
-               ?>
-            </select> 
-           */ ?>
-        </div>
-    </form>
+	<h2>Lehrer-Klasse-Kurs Bezeiehung</h2>
+	<form method="post">
+		<div class="class-selection col-sm-6">
+			<input type="text" placeholder="Suche" class="search">
+			<?php
+				$v->print_klassen_form();
+			?>
+		</div>
+		<div class="kurs-creation col-sm-6">
+			<div class="select-search">
+			  <input class="ss_input" type="text" data-select-search="kurse">
+			  <select name="fach-id" id="kurse">
+				<?php
+					$v->print_kurs_form();
+				?>
+			  </select>
+			</div>
+			<input type="submit" value="Speichern">
+		</div>
+	</form>
 </div>

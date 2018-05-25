@@ -33,19 +33,16 @@ require_once("HelperClasses/class.dbKlasse.php");
 require_once("HelperClasses/class.dbKursInstanz.php");
 require_once("HelperClasses/class.dbKlassenBesuch.php");
 
-$c = new controller("index.htm.php", config::TEMPLATE_PATH );
+$c = new controller("index.htm.php", config::TEMPLATE_PATH);
 $c->registerSubcontroller("lehrerView", "Lehrer", false);
 $c->registerSubcontroller("schuelerView", "Schüler", false);
 $c->registerSubcontroller("klasseView", "Klassen", false);
 $c->registerSubcontroller("faecherView", "Fächer", false);
 $c->registerSubcontroller("importView", "Import", false);
-if( isset($_SESSION["role"] ))
-{
-    $c->registerSubcontroller("logout", "Logout", false); 
-}
-else
-{
-    $c->registerSubcontroller("login", "Log In", false);
+if (isset($_SESSION["role"])) {
+	$c->registerSubcontroller("logout", "Logout", false);
+} else {
+	$c->registerSubcontroller("login", "Log In", false);
 }
 
 
@@ -53,4 +50,5 @@ else
 
 $c->dispatch();
 $c->sendOutput();
-?>
+
+var_Dump($_POST);

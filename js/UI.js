@@ -5,7 +5,6 @@
  */
 
 $(document).ready(function() {
-                console.log("awd");
 
     $('[data-extend]').click(function(){
         $(this).toggleClass('white');
@@ -19,7 +18,7 @@ $(document).ready(function() {
         var temp = $(this).val().toUpperCase();
         if($(this).val().length > 2){
             $('.class-selection > label').each(function(){
-                if(!$(this).text().match(temp)){
+                if(!$(this).text().toUpperCase().match(temp)){
                     $(this).hide();
                 }
             });
@@ -31,4 +30,61 @@ $(document).ready(function() {
             });
         }
     });
+
+
+    /*** dropdown with search ***/
+    $('[data-select-search]').on('keyup change', function(){
+      var search_val = $(this).val().toLowerCase();
+      var $select = '#'+$(this).data('selectSearch');
+      
+      if(search_val.length >= 2){
+          $($select).children().each(function(){
+            if(!$(this).text().toLowerCase().match(search_val)){
+              $(this).hide();
+            }else{
+              $(this).show();
+            }
+          });
+      }else{
+        
+        $($select).children().each(function(){
+          $(this).show();
+          $($select).attr('size', $($select).children().length)
+        });
+        
+      }
+    });
+
+    $('[data-select-search]').focus(function(){
+      var $select = '#'+$(this).data('selectSearch');
+      $($select).attr('size', $($select).children().length)
+      $($select).css('top', $(this).outerHeight());
+      $($select).css('z-idnex', '3');
+      $(this).css('color', 'inherit');
+      
+      function reset(){
+        var $select = '#'+$('[data-select-search]').data('selectSearch');
+        $($select).attr('size', 1)
+        $($select).css('top', 0);
+        $($select).css('z-idnex', '-1');
+        $('[data-select-search]').val($('option:selected').text())
+        $('[data-select-search]').css('color', 'transparent');
+      }
+      
+      //close the list
+      $('#'+$('[data-select-search]').data('selectSearch')).change(function(){
+        reset();
+      });
+      
+      $('[data-select-search]').blur(function(){
+        var $select = '#'+$(this).data('selectSearch');
+        setTimeout(function(){
+          if(!$($select).is(":focus")){
+            reset();
+          }
+        }, 50);
+      });
+      
+    });
+    /*** dropdown with search ***/   
 });
