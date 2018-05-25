@@ -16,7 +16,9 @@
     <input type="hidden" name="pid" value="<?= $v->lehrer->getPid() ?>">
     <input type="submit" value="Speichern" name="setLehrer">
 </form>
-<?php  ?>
+<?php
+$v->print_relations();
+?>
 <div class="row margin-50">
 	<h2>Lehrer-Klasse-Kurs Bezeiehung</h2>
 	<form method="post">
@@ -29,12 +31,13 @@
 		<div class="kurs-creation col-sm-6">
 			<div class="select-search">
 			  <input class="ss_input" type="text" data-select-search="kurse">
-			  <select name="fach-id" id="kurse">
+			  <select name="fach_id" id="kurse">
 				<?php
 					$v->print_kurs_form();
 				?>
 			  </select>
 			</div>
+			<input type="hidden" name="pid" value="<?= $v->lehrer->getPid() ?>">
 			<input type="submit" value="Speichern">
 		</div>
 	</form>

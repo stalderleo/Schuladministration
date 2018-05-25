@@ -50,5 +50,3 @@ if (isset($_SESSION["role"])) {
 
 $c->dispatch();
 $c->sendOutput();
-
-var_Dump($_POST);

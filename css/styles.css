@@ -312,9 +312,13 @@ label > input {
     width: 100%;
 }
 
-
 .margin-50 {
     margin: 50px 0;
+}
+
+.fullwidth {
+    width: 100%;
+    position: relative;
 }
 
 
@@ -354,4 +358,11 @@ form {
     bottom: 0;
     width: 100%;
     opacity: 0;
+}
+
+.same-line {
+    display: inline-block;
+    width: 50px;
+    float: right;
+    position: absolute;
 }
