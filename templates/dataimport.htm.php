@@ -5,12 +5,17 @@
  * Template für den Datenimport
  *
 -->
-<?php if (true) ://(isset($_FILES['dataExport'])) : ?>
+<?php if (isset($this->target) === TRUE) : ?>
     <script type="text/javascript">
+        
+        var interval = setInterval(function() {
+            updateScroll();
+        },50);
+        
         if(typeof(EventSource) !== "undefined") {
             var source = new EventSource("import_progress.php");
             source.addEventListener('message', function(e) {
-                if (!(e.data.includes("Import abgeschlossen"))) {
+                if (!(e.data.match("Import abgeschlossen"))) {
                     if (e.data.includes("inserted")) { 
                         document.getElementById("log").innerHTML += "<span class=\"inserted\">"+e.data+"</span>";
                     } 
@@ -21,6 +26,9 @@
                     }
                 } else {
                     document.getElementById("log").innerHTML += "<span><strong>Import completet</strong></span>";
+                    source.close();
+                    clearInterval(interval);
+                    updateScroll();
                 }
             }, false);
         } else {
@@ -31,17 +39,6 @@
             var element = document.getElementById("log");
             element.scrollTop = element.scrollHeight;
         }
-        
-        var scrolled = false;
-        
-        //once a second
-        setInterval(function() {
-            if (!scrolled) updateScroll();
-        },50);
-        
-        document.getElementById("log").onscroll = function (e) {  
-            scrolled = true;
-        } 
     </script>
 <?php endif ?>
 <form enctype="multipart/form-data" action="<?php echo $_SERVER['SCRIPT_NAME']."?id=importView" ?>" method="post" id="importDataForm">
@@ -51,4 +48,9 @@
         <input name="submit" type="submit" value="Hochladen">
     </div>
 </form>
-<div id="log"></div>
+<?php if (!empty($this->errorimport)) { 
+    echo "<div id=\"error\">".$this->errorimport."</div>"; 
+} else { ?>
+    <div id="log" ></div>
+<?php } ?>
+

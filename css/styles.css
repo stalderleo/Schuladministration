@@ -366,3 +366,8 @@ form {
     float: right;
     position: absolute;
 }
+
+div#error {
+    width: 100%;
+    color: #cc0000;
+}
