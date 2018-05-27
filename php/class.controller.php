@@ -63,7 +63,8 @@ class controller {
 	function dispatch($loggedIn) {
                 if(!$loggedIn){
                     $this->runSubcontroller( $this->dispatch_classes[5]['class'] );
-                    var_dump($this->dispatch_classes[5]['class']);
+                    $this->requested_subcontroller = $this->dispatch_classes[5]['class'];
+                    return;
                 }
             
                 $url_subcontroller = "";
