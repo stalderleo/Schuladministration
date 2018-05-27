@@ -267,6 +267,9 @@ th [data-extend]{
     flex-wrap: wrap;
     justify-content: space-between;
 }
+.content > form > label select {
+    width: 179px;
+}
 
 .class-selection, .kurs-creation {
     height: 300px;

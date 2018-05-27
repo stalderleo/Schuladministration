@@ -94,16 +94,15 @@ class dbKurs extends db {
         basic::assertInstanceOf($klasse, klasse, true);
         $sql = "UPDATE fach "
                 . "SET kuerzel = ?, bezeichnung = ? "
-                . "WHERE kid = ?";
+                . "WHERE fid = ?";
         $this->preparedStatementQuery($sql, $this->objToArray($klasse, true));
     }
     
     public function deleteKurs(kurs $kurs) {
         basic::assertInstanceOf($kurs, kurs, true);
-        $sql = "DELETE FROM fach WHERE kurs.fid = ?";
-        
-        if ($klasse->getFid() != null or $klasse->getFid() != 0) {
-            $params = array($klasse->getFid());
+        $sql = "DELETE FROM fach WHERE fid = ?";
+        if ($kurs->getFid() != null or $$kurs->getFid() != 0) {
+            $params = array($kurs->getFid());
             $this->preparedStatementQuery($sql, $params);
         }   
     }

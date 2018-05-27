@@ -68,10 +68,8 @@ class lehrerView implements subcontroller
 		if (isset($_POST["safe"])) {
 			$db->insertLehrerAI(new lehrer(null, $_POST["s_username"], $_POST["s_pw"], $_POST["s_name"], $_POST["s_prename"], $_POST["s_birth"], $_POST["s_gender"], $_POST["s_kuerzel"], $_POST["s_mail"], $_POST["s_status"]));
 		}
-
-		$this->lehrers = $db->selectAllLehrer();
 		
-		if (isset($_POST['pid_del']) && $_POST['pid_del'] != null) {
+		if (isset($_POST['pid_del']) && $db->selectLehrer($_POST['pid_del']) instanceof	lehrer) {
 			$db->deleteLehrer($db->selectLehrer($_POST['pid_del']));
 			header('Location: '.$_SERVER['PHP_SELF']);
 			die;
@@ -101,6 +99,8 @@ class lehrerView implements subcontroller
 			$this->relations[$_POST['del_instanz']] = null;
 			unset($_POST['del_instanz']);
 		}
+
+		$this->lehrers = $db->selectAllLehrer();
 	}
 
 	public function getOutput()

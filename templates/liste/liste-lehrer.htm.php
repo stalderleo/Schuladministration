@@ -35,23 +35,3 @@
 <?php include $this->template_path.'/modals/modal-lehrer.php'; ?>
 <?php include $this->template_path.'/modals/modal-fach.php'; ?>
 <?php include $this->template_path.'/modals/modal-klasse.php';?>
-
-
-<script>
-	function filterTable(event) {
-		var filter = event.target.value.toUpperCase();
-		var rows = document.querySelector("#lehrerList tbody").rows;
-
-		for (var i = 0; i < rows.length; i++) {
-			var firstCol = rows[i].cells[0].textContent.toUpperCase();
-			var secondCol = rows[i].cells[1].textContent.toUpperCase();
-			if (firstCol.indexOf(filter) > -1 || secondCol.indexOf(filter) > -1) {
-				rows[i].style.display = "";
-			} else {
-				rows[i].style.display = "none";
-			}      
-		}
-	}
-
-	document.querySelector('#searchList').addEventListener('keyup', filterTable, false);
-</script>

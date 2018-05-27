@@ -76,12 +76,6 @@ class schuelerView implements subcontroller {
             if(!empty($_POST['p_status'])){
                 $this->schueler->setStatus($_POST['p_status']);
             }
-                        var_dump($this->schueler->getUsername());
-                                    var_dump($this->schueler->getPassword());
-
-
-            var_dump($this->schueler->getGeschlecht());
-            var_dump($this->schueler->getStatus());
 
             $db->modifySchueler($this->schueler);
         }
@@ -91,7 +85,7 @@ class schuelerView implements subcontroller {
         }
 
         
-        if(isset($_POST['pid_del']) && $_POST['pid_del'] != null){
+        if(isset($_POST['pid_del']) && $db->selectSchueler($_POST['pid_del']) instanceof schueler){
             $db->deleteSchueler($db->selectSchueler($_POST['pid_del']));
             header('Location: '.$_SERVER['PHP_SELF'].'?id=schuelerView');
             die;

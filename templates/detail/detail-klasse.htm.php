@@ -4,7 +4,7 @@
     <label>Kürzel
     <input type="text" name="k_kur" value="<?= $v->klasse->getKuerzel(); ?>"></label>
     <input type="hidden" name="kid" value="<?= $v->klasse->getKid() ?>">
-    <input type="submit" value="Speichern" name="setKurs">
+    <input type="submit" class="btn" value="Speichern" name="setKurs">
 </form>
 <?php  ?>
 <div class="row margin-50">

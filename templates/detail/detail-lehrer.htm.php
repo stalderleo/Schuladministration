@@ -26,7 +26,7 @@
         </select>
     </label>
     <input type="hidden" name="pid" value="<?= $v->lehrer->getPid() ?>">
-    <input type="submit" value="Speichern" name="setLehrer">
+    <input type="submit" class="btn" value="Speichern" name="setLehrer">
 </form>
 <div class="row margin-50">
 	<?php if(!empty($v->relations)):?>
@@ -77,7 +77,7 @@
 			  </select>
 			</div>
 			<input type="hidden" name="pid" value="<?= $v->lehrer->getPid() ?>">
-			<input type="submit" value="Speichern">
+			<input type="submit" class="btn" value="Speichern">
 		</div>
 	</form>
 </div>

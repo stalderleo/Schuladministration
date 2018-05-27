@@ -57,7 +57,7 @@
         <?php
     }?>
     <input type="hidden" name="pid" value="<?= $v->schueler->getPid() ?>">
-    <input type="submit" value="Speichern" name="setSchueler">
+    <input type="submit" class="btn" value="Speichern" name="setSchueler">
 </form>
 
 <form class="edit" id="edit_klasse" action="<?php echo $_SERVER['SCRIPT_NAME']."?id=klasseView" ?>" method="post"></form>

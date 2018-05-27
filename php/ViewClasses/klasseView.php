@@ -56,8 +56,8 @@ class klasseView implements subcontroller
 		}
 
 		
-		if (isset($_POST["safe"]) && !empty($_POST["k_ku"]) && !empty($_POST["k_bez"])) {
-			$db->insertKlasse(new klasse($_POST["k_ku"], $_POST["k_bez"]));
+		if (isset($_POST["safe"]) && !empty($_POST["k_kur"]) && !empty($_POST["k_bez"])) {
+			$db->insertKlasse(new klasse($_POST["k_kur"], $_POST["k_bez"]));
 		}
 
 		$this->klassen = $db->selectAllKlassen();
