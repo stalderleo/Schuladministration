@@ -17,7 +17,7 @@
 	        <tbody>
 				<?php foreach ($v->klassen as $klasse) : ?>
 				<tr>
-					<td><?= $klasse->getBezeichnung() ?></td>
+					<td><form method="post"><a href="index.php?id=klasseView&kid=<?php echo $klasse->getKid()?>"><?= $klasse->getBezeichnung() ?></a></form></td>
 					<td><?= $klasse->getKuerzel() ?></td>
 					<td><form class="edit" method="post"><i class="fas fa-edit"></i><input type="submit" name="kid" value='<?php echo $klasse->getKid() ?>'></form></td>
 					<td><form class="delete" method="post"><i class="fas fa-trash"></i><input type="submit" name="kid_del" value='<?php echo $klasse->getKid() ?>'></form></td>

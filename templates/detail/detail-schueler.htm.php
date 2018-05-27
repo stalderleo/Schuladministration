@@ -1,35 +1,21 @@
 <?php 
 ?>
-
-<form method="post">
-    <label>Benutzername
-        <input type="text" name="p_username" value="<?= $v->schueler->getUsername()?>"></label>
-    <label>Passwort
-        <input type="password" name="p_password" placeholder="***" value=""></label>
-    <label>Name
-        <input type="text" name="p_name" value="<?= $v->schueler->getName()?>"></label>
-    <label>Vorname
-        <input type="text" name="p_vorname" value="<?= $v->schueler->getVorname()?>"></label>
-    <label>Geburtstag
-      <input type="text" name="p_bday" value="<?= $v->schueler->getGeburtstag()?>"></label>
-    <label>Gender
-        <select required name="p_geschlecht">
-          <option value="m">Männlich</option>
-          <option value="f">Weiblich</option>
-          <option value="u">Anderes</option>
-        </select></label>
-    <label>E-Mail
-        <input type="mail" name="p_mail" value="<?= $v->schueler->getMail()?>"></label>
-    <label>Kürzel
-        <input type="text" name="p_kuerzel" value="<?= $v->schueler->getKuerzel()?>"></label>
-    <label>Status
-        <select name="p_status">
-          <option value="1">Aktiv</option>
-          <option value="0" <?php if($v->schueler->getStatus() == 0){echo "selected"; } ?>>Inaktiv</option>
-        </select>
-    </label>
-    <label>Klasse
-        <select disabled name="class">
+    <label class="detail-row">Name
+        <label type="text" class="detail-row-float" name="p_name" value=""><?= $v->schueler->getName()?></label></label><br>
+    <label class="detail-row">Vorname
+        <label type="text" name="p_vorname" class="detail-row-float" value=""><?= $v->schueler->getVorname()?></label></label><br>
+    <label class="detail-row">Geburtstag
+      <label type="text" class="detail-row-float" name="p_bday" value=""><?= $v->schueler->getGeburtstag()?></label></label><br>
+    <label class="detail-row">Gender
+      <label type="text" class="detail-row-float" name="p_bday" value=""><?= $v->schueler->getGeschlecht()?></label></label><br>
+    <label class="detail-row">E-Mail
+        <label type="mail"class="detail-row-float" name="p_mail" value=""><?= $v->schueler->getMail()?></label></label><br>
+    <label class="detail-row">Kürzel
+        <label type="text"class="detail-row-float" name="p_kuerzel" value=""><?= $v->schueler->getKuerzel()?></label></label><br>
+    <label class="detail-row">Status
+        <label type="text"class="detail-row-float" name="p_kuerzel" value=""><?php if($v->schueler->getStatus() == 0){echo "InAktiv"; } else { echo "Aktiv"; } ?></label></label><br>
+    <label class="detail-row">Klasse
+        <select class="detail-row-float" disabled name="class">
         <?php
           foreach($v->klassen as $klasse){
             ?>
@@ -38,13 +24,12 @@
           }
         ?>
         </select>
-        <div class="hidden-button"><i class="fas fa-edit"></i><input form="edit_klasse" type="submit" name="kid" value="<?= $v->getKlassenBesuch()['kid'] ?>"></div>
-    </label>
+    </label><br>
     <?php
     if($v->getKlassenBesuch()['isZweitklasse']){
         ?>
-        <label>Zweitausbildung Klasse
-            <select name="class">
+        <label class="detail-row">Zweitausbildung Klasse
+            <select class="detail-row-float" name="class">
             <?php
               foreach($v->klassen as $klasse){
                 ?>
@@ -53,11 +38,6 @@
               }
             ?>
             </select>
-        </label>
+        </label><br>
         <?php
     }?>
-    <input type="hidden" name="pid" value="<?= $v->schueler->getPid() ?>">
-    <input type="submit" value="Speichern" name="setSchueler">
-</form>
-
-<form class="edit" id="edit_klasse" action="<?php echo $_SERVER['SCRIPT_NAME']."?id=klasseView" ?>" method="post"></form>

@@ -47,6 +47,10 @@ class schuelerView implements subcontroller {
             }
         }
         
+        if (isset($_GET['pid'])) {
+            $this->schueler = $db->selectSchueler($_GET['pid']);
+        }
+        
         if(isset($_POST['setSchueler']) && $this->schueler instanceof schueler && $this->schueler != NULL){
 
             if(!empty($_POST['p_usename'])){
@@ -108,8 +112,10 @@ class schuelerView implements subcontroller {
     public function getOutput(){
         $v =& $this;
         if(isset($_POST['pid'])){
+            include($this->template_path."/update/update-schueler.htm.php");
+        } else if(isset($_GET["pid"])) { 
             include($this->template_path."/detail/detail-schueler.htm.php");
-        }else{
+        } else{
             include($this->template_path."/liste/liste-schueler.htm.php");
         }
         

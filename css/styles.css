@@ -308,6 +308,15 @@ th [data-extend]{
     position: relative;
 }
 
+.detail-row{
+    width: 200px;
+}
+
+.detail-row-float{
+    float: right;
+    width: 75px;
+    display: inline-block;
+}
 
 /* dropdown search */
 .ss_input {
