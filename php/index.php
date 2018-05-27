@@ -46,5 +46,5 @@ if (isset($_SESSION["role"])) {
 	$c->registerSubcontroller("login", "Log In", false);
 }
 
-$c->dispatch();
+$c->dispatch(isset($_SESSION["role"]));
 $c->sendOutput();

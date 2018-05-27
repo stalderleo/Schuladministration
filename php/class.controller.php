@@ -60,7 +60,12 @@ class controller {
 	 * Der Dispatcher instanziert die entsprechenden Subkontroller und führt
 	 * diese aus ( runSubcontroller() ).
 	 */
-	function dispatch() {
+	function dispatch($loggedIn) {
+                if(!$loggedIn){
+                    $this->runSubcontroller( $this->dispatch_classes[5]['class'] );
+                    var_dump($this->dispatch_classes[5]['class']);
+                }
+            
                 $url_subcontroller = "";
                 // Der Name des Subcontrollers wird über die URL, via Parameter "show" oder "id" übergeben
                 if ( isset($_REQUEST['show']) ) $url_subcontroller = $_REQUEST['show'];
