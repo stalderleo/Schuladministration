@@ -28,6 +28,7 @@
     <input type="hidden" name="pid" value="<?= $v->lehrer->getPid() ?>">
     <input type="submit" class="btn" value="Speichern" name="setLehrer">
 </form>
+
 <div class="row margin-50">
 	<?php if(!empty($v->relations)):?>
 	<h2>Klassen / Fächer</h2>

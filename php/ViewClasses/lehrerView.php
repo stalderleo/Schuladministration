@@ -34,7 +34,7 @@ class lehrerView implements subcontroller
             }
 		
             if (isset($_POST['setLehrer']) && $this->lehrer instanceof lehrer && $this->lehrer != null) {
-                if(!empty($_POST['p_usename'])){
+                if(!empty($_POST['p_username'])){
                     $this->lehrer->setUsername($_POST['p_username']);
                 }
                 if(!empty($_POST['p_password'])){
@@ -58,7 +58,7 @@ class lehrerView implements subcontroller
                 if (!empty($_POST['p_kuerzel'])) {
                         $this->lehrer->setKuerzel($_POST['p_kuerzel']);
                 }
-                if (!empty($_POST['p_status'])) {
+                if (!$_POST['p_status'] == 0 || !$_POST['p_status'] == 1 ) {
                         $this->lehrer->setStatus($_POST['p_status']);
                 }
             }

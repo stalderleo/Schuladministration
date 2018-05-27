@@ -1,6 +1,3 @@
-<?php 
-?>
-
 <form method="post">
     <label>Benutzername
         <input type="text" name="p_username" value="<?= $v->schueler->getUsername()?>"></label>
