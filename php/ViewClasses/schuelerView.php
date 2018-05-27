@@ -31,12 +31,28 @@ class schuelerView implements subcontroller {
     public function run() {
         $db = new dbSchueler();
         $dbKlasse = new dbKlasse();
+        $dbKlassenBesuch = new dbKlassenBesuch();
 
         $this->klassen = $dbKlasse->selectAllKlassen();
+
+        if(isset($_POST["safe"])){
+            $dbKlasse = new dbKlasse();
+            if(isset($_POST["s_class"]) && $dbKlasse->selectKlasse($_POST["s_class"]) instanceof klasse){
+
+                $schueler = new schueler(null, $_POST["s_username"], $_POST["s_pw"], $_POST["s_name"], $_POST["s_prename"], $_POST["s_birth"], $_POST["s_gender"], $_POST["s_kuerzel"], $_POST["s_mail"], $_POST["s_status"]);
+                $db->insertSchuelerAI($schueler);
+                foreach($db->selectAllSchueler() as $schueler){
+                    if($schueler->getUsername() == $_POST["s_username"] && $dbKlasse->selectKlasse($_POST["s_class"]) instanceof klasse){
+                        $dbKlassenBesuch->insertBesuch(new KlassenBesuch($schueler, $dbKlasse->selectKlasse($_POST["s_class"]), false));
+                    }
+                }
+
+            }
+        }
         
         if(isset($_POST['pid'])){
+
             $this->schueler = $db->selectSchueler($_POST['pid']);
-            $dbKlassenBesuch = new dbKlassenBesuch();
             if(count($dbKlassenBesuch->selectBesucheBySchueler( $this->schueler)) == 1){
                 $this->KlassenBesuch['isZweitklasse'] = false;
                 $this->KlassenBesuch['kid'] = $dbKlassenBesuch->selectBesucheBySchueler( $this->schueler)[0]->getKlasse()->getKid();
@@ -46,6 +62,7 @@ class schuelerView implements subcontroller {
                 $this->KlassenBesuch['z_kid'] = $dbKlassenBesuch->selectBesucheBySchueler( $this->schueler)[1]->getKlasse()->getKid();
             }
         }
+
         
         if (isset($_GET['pid'])) {
             $this->schueler = $db->selectSchueler($_GET['pid']);
@@ -80,11 +97,8 @@ class schuelerView implements subcontroller {
             if($_POST['p_status'] == 0 || $_POST['p_status'] == 1){
                 $this->schueler->setStatus($_POST['p_status']);
             }
+
             $db->modifySchueler($this->schueler);
-        }
-        
-        if(isset($_POST["safe"])){
-            $db->insertSchuelerAI(new schueler(null, $_POST["s_username"], $_POST["s_pw"], $_POST["s_name"], $_POST["s_prename"], $_POST["s_birth"], $_POST["s_gender"], $_POST["s_kuerzel"], $_POST["s_mail"], $_POST["s_status"]));
         }
 
         
@@ -95,7 +109,6 @@ class schuelerView implements subcontroller {
         }
 
         $this->schuelers = $db->selectAllSchueler();
-
     }
     
     private function getKlassenBesuch(){
