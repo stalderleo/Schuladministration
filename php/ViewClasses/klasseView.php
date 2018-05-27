@@ -32,7 +32,8 @@ class klasseView implements subcontroller
 	{
 		$db = new dbKlasse();
 		$dbKlassenBesuche = new dbKlassenBesuch();
-                $dbKursInstanz = new dbKursInstanz();
+        $dbKursInstanz = new dbKursInstanz();
+        $dbSchueler = new dbSchueler();
 
 		if(isset($_POST["k_bez"]) && isset($_POST["k_kur"]) && $db->selectKlasse($_POST["kid"]) instanceof klasse){
             $klasse = $db->selectKlasse($_POST["kid"]);
@@ -81,14 +82,16 @@ class klasseView implements subcontroller
                     {
                         $db->deleteKlasse($klasse);
                     }else{
-                        echo "<script>alert('Diese Element hat noch eine laufende Verknüpfung.');</script>";
+                        echo "<script>alert('Diese Element hat noch eine laufende Verknüpfung.');window.location = window.location.href;</script>";
                     }
 		}
 		
 		if (isset($_POST['del_schueler-klasse'])){
 			foreach($this->schueler as $index=>$besuch){
-				if($_POST['del_schueler-klasse'] == $besuch->getSchueler()->getPid()){
-					$dbKlassenBesuche->deleteBesuch($besuch);
+				if($_POST['del_schueler-klasse'] == $besuch->getSchueler()->getPid() &&
+					$dbKlassenBesuche->selectBesucheBySchueler($dbSchueler->selectSchueler($_POST['del_schueler-klasse']))[0] instanceof klassenBesuch){
+
+					$dbKlassenBesuche->deleteBesuch($dbKlassenBesuche->selectBesucheBySchueler($dbSchueler->selectSchueler($_POST['del_schueler-klasse']))[0]);
 					$this->schueler[$index] = null;
 					$this->schueler = array_filter($this->schueler);
 				}

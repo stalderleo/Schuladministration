@@ -57,7 +57,6 @@ class dbKlassenBesuch extends db {
     }
     
     public function insertBesuch(klassenBesuch $klassenBesuch) {
-        var_dump($klassenBesuch);
         basic::assertInstanceOf($klassenBesuch, klassenBesuch, true);
         $sql = "INSERT INTO schueler_has_klasse "
                 . "(`sid`, `kid`, `isZweitausbildung`) "

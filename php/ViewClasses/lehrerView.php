@@ -133,7 +133,7 @@ class lehrerView implements subcontroller
 		$kurse = $dbKurse->selectAllKurse();
 		
 		foreach ($kurse as $kurs) {
-			echo '<option value="'.$kurs->getFid().'">'.$kurs->getBezeichnung().'</option>';
+			echo '<option value="'.$kurs->getFid().'">'.$kurs->getBezeichnung().' / '.$kurs->getKuerzel().'</option>';
 		}
 	}
 }
