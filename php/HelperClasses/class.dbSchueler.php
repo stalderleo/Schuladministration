@@ -126,6 +126,7 @@ class dbSchueler extends db {
     }
     
     public function insertSchuelerAI(schueler $schueler) {
+        var_dump($schueler);
         $newSchueler = null;
         basic::assertInstanceOf($schueler, schueler, true);
         $sqlCheck = "SELECT username FROM person WHERE username = ?";

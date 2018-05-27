@@ -112,6 +112,7 @@ class dbLehrperson extends db {
     }
     
     public function insertLehrer(lehrer $lehrer) {
+        var_dump($lehrer);
         $newLehrer = null;
         basic::assertInstanceOf($lehrer, lehrer, true);
         $sqlCheck = "SELECT username FROM person WHERE username = ?";

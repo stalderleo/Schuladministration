@@ -14,7 +14,7 @@ class lehrerView implements subcontroller
 	private $template_path;
 	private $lehrers = array();
 	private $lehrer;
-	private $relationships;
+	private $relations;
 	public $title;
 	
 	public function __construct($template_path)
@@ -28,13 +28,18 @@ class lehrerView implements subcontroller
 	{
 		$db = new dbLehrperson();
 		
-		$this->lehrers = $db->selectAllLehrer();
 		
 		if (isset($_POST['pid'])) {
 			$this->lehrer = $db->selectLehrer($_POST['pid']);
 		}
 		
 		if (isset($_POST['setLehrer']) && $this->lehrer instanceof lehrer && $this->lehrer != null) {
+			if(!empty($_POST['p_usename'])){
+                $this->lehrer->setUsername($_POST['p_username']);
+            }
+            if(!empty($_POST['p_password'])){
+                $this->lehrer->setPassword($_POST['p_password']);
+            }
 			if (!empty($_POST['p_name'])) {
 				$this->lehrer->setName($_POST['p_name']);
 			}
@@ -61,8 +66,10 @@ class lehrerView implements subcontroller
 		
 		
 		if (isset($_POST["safe"])) {
-			$db->insertLehrerAI(new lehrer(null, $_POST["s_username"], $_POST["s_pw"], $_POST["s_name"], $_POST["s_prename"], $_POST["s_birth"], $_POST["gender"], $_POST["Kuerzel"], $_POST["Mail"], $_POST["status"]));
+			$db->insertLehrerAI(new lehrer(null, $_POST["s_username"], $_POST["s_pw"], $_POST["s_name"], $_POST["s_prename"], $_POST["s_birth"], $_POST["s_gender"], $_POST["s_kuerzel"], $_POST["s_mail"], $_POST["s_status"]));
 		}
+
+		$this->lehrers = $db->selectAllLehrer();
 		
 		if (isset($_POST['pid_del']) && $_POST['pid_del'] != null) {
 			$db->deleteLehrer($db->selectLehrer($_POST['pid_del']));
@@ -85,13 +92,13 @@ class lehrerView implements subcontroller
 
 		if (isset($this->lehrer)) {
 			$dbKursInstanz = new dbKursInstanz();
-			$this->relationships = $dbKursInstanz->selectInstanzenByLehrer($this->lehrer);
+			$this->relations = $dbKursInstanz->selectInstanzenByLehrer($this->lehrer);
 		}
 
 		if (isset($_POST['del_instanz'])) {
 			$dbKursInstanz = new dbKursInstanz();
-			$dbKursInstanz->deleteInstanz($this->relationships[$_POST['del_instanz']]);
-			$this->relationships[$_POST['del_instanz']] = null;
+			$dbKursInstanz->deleteInstanz($this->relations[$_POST['del_instanz']]);
+			$this->relations[$_POST['del_instanz']] = null;
 			unset($_POST['del_instanz']);
 		}
 	}
@@ -123,18 +130,6 @@ class lehrerView implements subcontroller
 		
 		foreach ($kurse as $kurs) {
 			echo '<option value="'.$kurs->getFid().'">'.$kurs->getBezeichnung().'</option>';
-		}
-	}
-
-	private function print_relations()
-	{
-		if (isset($this->relationships) && !empty($this->relationships)) {
-			echo "<h2>Aktuelle Beziehungen</h2>";
-			foreach ($this->relationships as $key => $rel) {
-				if ($rel instanceof kursInstanz) {
-					echo "<div class='fullwidth'>".$rel->klasse->getBezeichnung()." / ".$rel->kurs->getBezeichnung()."<form class='delete same-line' method='post'><i class='fas fa-trash'></i><input type='hidden' name='pid' value='".$this->lehrer->getPid()."'><input type='submit' name='del_instanz' value='".$key."'></form></div>";
-				}
-			}
 		}
 	}
 }

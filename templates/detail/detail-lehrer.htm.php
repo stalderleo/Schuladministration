@@ -1,25 +1,64 @@
 <form method="post">
+    <label>Benutzername
+        <input required type="text" name="p_username" value="<?= $v->lehrer->getUsername()?>"></label>
+    <label>Passwort
+        <input type="password" name="p_password" placeholder="***" value=""></label>
     <label>Name
-    <input type="text" name="p_name" value="<?= $v->lehrer->getName()?>"></label>
+        <input required type="text" name="p_name" value="<?= $v->lehrer->getName()?>"></label>
     <label>Vorname
-    <input type="text" name="p_vorname" value="<?= $v->lehrer->getVorname()?>"></label>
+        <input required type="text" name="p_vorname" value="<?= $v->lehrer->getVorname()?>"></label>
     <label>Geburtstag
-    <input type="text" name="p_bday" value="<?= $v->lehrer->getGeburtstag()?>"></label>
+      <input required type="text" name="p_bday" value="<?= $v->lehrer->getGeburtstag()?>"></label>
     <label>Gender
-    <input type="text" name="p_geschlecht" value="<?= $v->lehrer->getGeschlecht()?>"></label>
+        <select required name="p_geschlecht">
+          <option value="m" <?php if($v->lehrer->getGeschlecht() == m){ echo "selected"; } ?>>Männlich</option>
+          <option value="w" <?php if($v->lehrer->getGeschlecht() == w){ echo "selected"; } ?>>Weiblich</option>
+          <option value="u" <?php if($v->lehrer->getGeschlecht() == u){ echo "selected"; } ?>>Anderes</option>
+        </select></label>
     <label>E-Mail
-    <input type="text" name="p_mail" value="<?= $v->lehrer->getMail()?>"></label>
+        <input required type="mail" name="p_mail" value="<?= $v->lehrer->getMail()?>"></label>
     <label>Kürzel
-    <input type="text" name="p_kuerzel" value="<?= $v->lehrer->getKuerzel()?>"></label>
+        <input required type="text" name="p_kuerzel" value="<?= $v->lehrer->getKuerzel()?>"></label>
     <label>Status
-    <input type="text" name="p_status" value="<?= $v->lehrer->getStatus()?>"></label>
+        <select required name="p_status">
+          <option value="1">Aktiv</option>
+          <option value="0" <?php if($v->lehrer->getStatus() == 0){echo "selected"; } ?>>Inaktiv</option>
+        </select>
+    </label>
     <input type="hidden" name="pid" value="<?= $v->lehrer->getPid() ?>">
     <input type="submit" value="Speichern" name="setLehrer">
 </form>
-<?php
-$v->print_relations();
-?>
 <div class="row margin-50">
+	<?php if(!empty($v->relations)):?>
+	<h2>Klassen / Kurse</h2>
+	<table id="" class="table tstacked">
+		<thead>
+			<tr>
+				<th>Klasse</th><th>Kurs</th><th>Löschen</th><th>Detail (Klasse)</th>
+			</tr>
+		</thead>
+		<tbody>
+		<?php foreach ( $v->relations as $index=>$rel ): ?>
+			<tr>
+				<td><?= $rel->getKlasse()->getBezeichnung(); ?></td>
+				<td><?= $rel->getKurs()->getBezeichnung(); ?></td>
+				<td>
+					<form class="delete" method="post">
+						<i class="fas fa-trash"></i><input type="submit" name="del_instanz" value="<?= $index ?>">
+						<input type="hidden" name="pid" value="<?= $v->lehrer->getPid(); ?>">
+					</form>
+				</td>
+				<td>
+					<form class="edit" action="<?php echo $_SERVER['SCRIPT_NAME']."?id=klasseView" ?>" method="post">
+						<i class="fas fa-edit"></i><input type="submit" name="kid" value="<?= $rel->getKlasse()->getKid(); ?>">
+					</form>
+				</td>
+			</tr>
+		<?php endforeach;?>
+		</tbody>
+	</table>
+	<?php endif; ?>
+
 	<h2>Lehrer-Klasse-Kurs Bezeiehung</h2>
 	<form method="post">
 		<div class="class-selection col-sm-6">

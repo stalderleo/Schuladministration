@@ -30,11 +30,11 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-sm-3">
+			<div class="col-md-3 col-sm-12">
 			<?php echo $this->menu_bootstrap(config::MENU_TEMPLATE);?>
 			</div>
-			<div class="col-sm-9">
-				<div class="col-12 flex content" style="overflow: visible">
+			<div class="col-md-9 col-sm-12">
+				<div class="col-12 content" style="overflow: visible">
 					<?php $this->content(); ?>
 				</div>
 			</div>

@@ -86,5 +86,23 @@ $(document).ready(function() {
       });
       
     });
-    /*** dropdown with search ***/   
+    /*** dropdown with search ***/
+
+    $('[data-table-search]').keyup(function(){
+      var val  = $(this).val().toLowerCase();
+      var listId = $(this).data()['tableSearch'];
+      if(val.length >= 2){
+        $(listId).children('tbody').children().each(function(){
+           if(!$(this).find('td:nth-of-type(1)').text().toLowerCase().match(val) && !$(this).find('td:nth-of-type(2)').text().toLowerCase().match(val)){
+              $(this).hide();
+            }else if($(this).find('td:nth-of-type(1)').text().toLowerCase().match(val) || $(this).find('td:nth-of-type(2)').text().toLowerCase().match(val)){
+              $(this).show();
+            }
+        });
+      }else{
+        $(listId).children('tbody').children('tr').each(function(){
+          $(this).show();
+        });
+      }
+    });
 });

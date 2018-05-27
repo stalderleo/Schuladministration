@@ -19,6 +19,8 @@ class schuelerView implements subcontroller {
     private $template_path;
     private $schuelers = array();
     private $schueler;
+    private $klassen;
+    private $KlassenBesuch = array();
     public $title;
     
     public function __construct( $template_path ) {
@@ -28,14 +30,31 @@ class schuelerView implements subcontroller {
 
     public function run() {
         $db = new dbSchueler();
-        
-        $this->schuelers = $db->selectAllSchueler();
+        $dbKlasse = new dbKlasse();
+
+        $this->klassen = $dbKlasse->selectAllKlassen();
         
         if(isset($_POST['pid'])){
             $this->schueler = $db->selectSchueler($_POST['pid']);
+            $dbKlassenBesuch = new dbKlassenBesuch();
+            if(count($dbKlassenBesuch->selectBesucheBySchueler( $this->schueler)) == 1){
+                $this->KlassenBesuch['isZweitklasse'] = false;
+                $this->KlassenBesuch['kid'] = $dbKlassenBesuch->selectBesucheBySchueler( $this->schueler)[0]->getKlasse()->getKid();
+            }else{
+                $this->KlassenBesuch['isZweitklasse'] = true;
+                $this->KlassenBesuch['kid'] = $dbKlassenBesuch->selectBesucheBySchueler( $this->schueler)[0]->getKlasse()->getKid();
+                $this->KlassenBesuch['z_kid'] = $dbKlassenBesuch->selectBesucheBySchueler( $this->schueler)[1]->getKlasse()->getKid();
+            }
         }
         
         if(isset($_POST['setSchueler']) && $this->schueler instanceof schueler && $this->schueler != NULL){
+
+            if(!empty($_POST['p_usename'])){
+                $this->schueler->setUsername($_POST['p_username']);
+            }
+            if(!empty($_POST['p_password'])){
+                $this->schueler->setPassword($_POST['p_password']);
+            }
             if(!empty($_POST['p_name'])){
                 $this->schueler->setName($_POST['p_name']);
             }
@@ -57,19 +76,35 @@ class schuelerView implements subcontroller {
             if(!empty($_POST['p_status'])){
                 $this->schueler->setStatus($_POST['p_status']);
             }
+                        var_dump($this->schueler->getUsername());
+                                    var_dump($this->schueler->getPassword());
+
+
+            var_dump($this->schueler->getGeschlecht());
+            var_dump($this->schueler->getStatus());
+
+            $db->modifySchueler($this->schueler);
         }
         
         if(isset($_POST["safe"])){
-            $db->insertSchuelerAI(new schueler(null, $_POST["s_username"], $_POST["s_pw"], $_POST["s_name"], $_POST["s_prename"], $_POST["s_birth"], $_POST["gender"], $_POST["Kuerzel"], $_POST["Mail"], $_POST["status"]));
+            $db->insertSchuelerAI(new schueler(null, $_POST["s_username"], $_POST["s_pw"], $_POST["s_name"], $_POST["s_prename"], $_POST["s_birth"], $_POST["s_gender"], $_POST["s_kuerzel"], $_POST["s_mail"], $_POST["s_status"]));
         }
+
         
         if(isset($_POST['pid_del']) && $_POST['pid_del'] != null){
             $db->deleteSchueler($db->selectSchueler($_POST['pid_del']));
             header('Location: '.$_SERVER['PHP_SELF'].'?id=schuelerView');
             die;
         }
+
+        $this->schuelers = $db->selectAllSchueler();
+
     }
     
+    private function getKlassenBesuch(){
+        return $this->KlassenBesuch;
+    }
+
     public function getOutput(){
         $v =& $this;
         if(isset($_POST['pid'])){

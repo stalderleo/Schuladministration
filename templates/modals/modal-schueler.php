@@ -1,5 +1,4 @@
  <!-- Modal -->
-<form action="<?php echo $_SERVER['SCRIPT_NAME']."?id=schuelerView" ?>" method="post">
     <div class="modal fade" id="student_modal" tabindex="-1" role="dialog" aria-labelledby="Schüler-Modal" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -10,27 +9,32 @@
             </button>
           </div>
           <div class="modal-body">
-              <form method="post" id="modal-form">
-                  <input type="text" placeholder="Benutzername" name="s_username" value="">
-                  <input type="text" placeholder="Passwort" name="s_pw" value="">
-                  <input type="text" placeholder="Name" name="s_name" value="">
-                  <input type="text" placeholder="Vorname" name="s_prename" value="">
-                  <input type="text" placeholder="Geburtstag" name="s_birth" value="">
-                  <select name="gender">
+              <form action="<?php echo $_SERVER['SCRIPT_NAME']."?id=schuelerView" ?>" method="post" id="modal-form">
+                  <input required type="text" placeholder="Benutzername" name="s_username" value="">
+                  <input required type="password" placeholder="Passwort" name="s_pw" value="">
+                  <input required type="text" placeholder="Name" name="s_name" value="">
+                  <input required type="text" placeholder="Vorname" name="s_prename" value="">
+                  <input required type="text" placeholder="Geburtstag" name="s_birth" value="">
+                  <select required name="s_gender">
                       <option value="m">Männlich</option>
                       <option value="f">Weiblich</option>
                       <option value="u">Anderes</option>
                   </select>
-                  <input type="text" placeholder="Kuerzel" name="" value="">
-                  <input type="text" placeholder="Mail" name="" value="">
-                  <select name="status">
-                      <option value="LD">Ledig</option>
-                      <option value=VH">Verheiratet</option>
-                      <option value="VW">Verwitwet</option>
-                      <option value="GS">Geschieden</option>
-                      <option value="EA">Ehe aufgehoben</option>
-                      <option value="LP">Eingetragene Partnerschaft</option>
-                      <option value="NB">Nicht Bekannt</option>
+                  <input required type="text" placeholder="Kuerzel" name="s_kuerzel" value="">
+                  <input required type="email" placeholder="Mail" name="s_mail" value="">
+                  <select required name="s_status">
+                      <option value="1">Aktiv</option>
+                      <option value="0">Inaktiv</option>
+                  </select>
+
+                  <select required name="s_class">
+                    <?php
+                      foreach($v->klassen as $klasse){
+                        ?>
+                        <option value="<?= $klasse->getKid() ?>"><?= $klasse->getBezeichnung() ?></option>
+                        <?php
+                      }
+                    ?>
                   </select>
               </form>
           </div>
@@ -42,4 +46,3 @@
         </div>
       </div>
     </div>
-</form>

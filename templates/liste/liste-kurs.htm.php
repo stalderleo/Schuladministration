@@ -5,14 +5,25 @@
  * Template Kontaktliste. Stil Stacked Table.
  *
 -->
-
-<ul id="kursList" class="">
-<?php foreach ( $v->kurse as $fach ): ?>
-    <li><a href="#<?php $fach->getFid() ?>"><?= $fach->getBezeichnung() ?></a></li>
-<?php endforeach; ?>
-</ul>
-<div class="btn-container">
-    <button title="Neues Fach" data-toggle="modal" data-target="#subject_modal" class="add"><i class="fas fa-notes-medical"></i></button>
+<input uype="tyext" placeholder="Suche" class="form-search mb-20" data-table-search="#kursListe">
+<div class="flex">
+    <div class="table-container dragscroll mobile">
+        <table id="kursListe" class="table tstacked">
+            <thead>
+                <tr>
+                    <th>Bezeichnung</th><th>Kuerzel</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ( $v->kurse as $fach ): ?>
+                    <tr><td><?= $fach->getBezeichnung()."</td><td>". $fach->getKuerzel() ?></td></tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+    <div class="btn-container">
+        <button title="Neues Fach" data-toggle="modal" data-target="#subject_modal" class="add"><i class="fas fa-notes-medical"></i></button>
+    </div>
 </div>
 
 <?php include $this->template_path.'/modals/modal-fach.php'; ?>
