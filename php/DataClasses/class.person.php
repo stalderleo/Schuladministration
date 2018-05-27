@@ -74,10 +74,13 @@ class person
 		return $this->vorname;
 	}
 
-	function getGeburtstag()
-	{
-		return $this->geburtstag;
-	}
+    function getGeburtstag() {
+        return date("d.m.Y", strtotime($this->geburtstag));
+    }
+    
+    function getGeburtstagDB() {
+        return date("Y-m-d", strtotime($this->geburtstag));
+    }
 
 	function getGeschlecht()
 	{
@@ -124,10 +127,9 @@ class person
 		$this->vorname = $vorname;
 	}
 
-	function setGeburtstag($geburtstag)
-	{
-		$this->geburtstag = $geburtstag;
-	}
+    function setGeburtstag($geburtstag) {
+        $this->geburtstag = $geburtstag;
+    }
 
 	function setGeschlecht($geschlecht)
 	{

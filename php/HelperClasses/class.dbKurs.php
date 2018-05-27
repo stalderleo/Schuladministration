@@ -47,9 +47,9 @@ class dbKurs extends db {
         $result = $this->preparedStatementSelect($sql, $params);
         if (sizeof($result) == 1) {
             $row = reset($result);
-            $klasse = $this->newObjKurs($row);
+            $kurs = $this->newObjKurs($row);
         }
-        return $klasse;
+        return $kurs;
     }
     
     public function selectKursByKuerzel($kuerzel) {
@@ -91,11 +91,11 @@ class dbKurs extends db {
     }
     
     public function modifyKurs(kurs $kurs) {
-        basic::assertInstanceOf($klasse, klasse, true);
+        basic::assertInstanceOf($kurs, kurs, true);
         $sql = "UPDATE fach "
                 . "SET kuerzel = ?, bezeichnung = ? "
                 . "WHERE fid = ?";
-        $this->preparedStatementQuery($sql, $this->objToArray($klasse, true));
+        $this->preparedStatementQuery($sql, $this->objToArray($kurs, true));
     }
     
     public function deleteKurs(kurs $kurs) {

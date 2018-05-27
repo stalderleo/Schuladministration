@@ -7,6 +7,7 @@
  * Instanziert den Controller und registriert die Subcontroller.
  *
  */
+
 error_reporting(E_ALL & ~E_NOTICE);
 header('Content-Type: text/html; charset=UTF-8');
 session_start();
@@ -24,6 +25,7 @@ require_once("DataClasses/class.kurs.php");
 require_once("DataClasses/class.klassenBesuch.php");
 
 require_once("HelperClasses/class.db.php");
+require_once("HelperClasses/class.dbPerson.php");
 require_once("HelperClasses/class.passwordHandler.php");
 require_once("HelperClasses/class.dbSchueler.php");
 require_once("HelperClasses/class.dbAngestellter.php");
@@ -45,8 +47,5 @@ if (isset($_SESSION["role"])) {
 	$c->registerSubcontroller("login", "Log In", false);
 }
 
-
-//$c->registerSubcontroller("datum", "", true);
-
-$c->dispatch();
+$c->dispatch(isset($_SESSION["role"]));
 $c->sendOutput();

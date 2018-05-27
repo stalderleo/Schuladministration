@@ -33,6 +33,13 @@ class klasseView implements subcontroller
 		$db = new dbKlasse();
 		$dbKlassenBesuche = new dbKlassenBesuch();
 
+		if(isset($_POST["k_bez"]) && isset($_POST["k_kur"]) && $db->selectKlasse($_POST["kid"]) instanceof klasse){
+            $klasse = $db->selectKlasse($_POST["kid"]);
+            $klasse->setBezeichnung($_POST["k_bez"]);
+            $klasse->setKuerzel($_POST["k_kur"]);
+            $db->modifyKlasse($klasse);
+        }
+
 		if (isset($_POST['kid'])) {
 			$this->klasse = $db->selectKlasse($_POST['kid']);
 			$this->schueler = $dbKlassenBesuche->selectBesucheByKlasse($this->klasse);
@@ -62,24 +69,17 @@ class klasseView implements subcontroller
 				}
 			}
 		}
-
 		
 		if (isset($_POST["safe"]) && !empty($_POST["k_kur"]) && !empty($_POST["k_bez"])) {
 			$db->insertKlasse(new klasse($_POST["k_kur"], $_POST["k_bez"]));
 		}
 
+		if (isset($_POST['kid_del']) && !empty($_POST['kid_del']) && $db->selectKlasse($_POST['kid_del']) instanceof klasse){
+			$db->deleteKlasse($db->selectKlasse($_POST['kid_del']));
+		}
+
 		$this->klassen = $db->selectAllKlassen();
 
-		//add the selected fach/er to this klasse
-		if (isset($_POST['kurs_id'])) {
-			if (is_array($_POST['kurs_id'])) {
-				foreach ($_POST['kurs_id'] as $kurs_id) {
-					//
-				}
-			} else {
-				$kurs_id = $_POST['kurs_id'];
-			}
-		}
 	}
 	
 	public function getOutput()

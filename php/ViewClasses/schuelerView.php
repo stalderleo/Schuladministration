@@ -47,9 +47,8 @@ class schuelerView implements subcontroller {
             }
         }
         
-        if(isset($_POST['setSchueler']) && $this->schueler instanceof schueler && $this->schueler != NULL){
-
-            if(!empty($_POST['p_usename'])){
+        if(isset($_POST['setSchueler']) && $this->schueler instanceof schueler){
+            if(!empty($_POST['p_username'])){
                 $this->schueler->setUsername($_POST['p_username']);
             }
             if(!empty($_POST['p_password'])){
@@ -73,10 +72,9 @@ class schuelerView implements subcontroller {
             if(!empty($_POST['p_kuerzel'])){
                 $this->schueler->setKuerzel($_POST['p_kuerzel']);
             }
-            if(!empty($_POST['p_status'])){
+            if($_POST['p_status'] == 0 || $_POST['p_status'] == 1){
                 $this->schueler->setStatus($_POST['p_status']);
             }
-
             $db->modifySchueler($this->schueler);
         }
         

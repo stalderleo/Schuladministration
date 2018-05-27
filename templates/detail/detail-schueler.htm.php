@@ -15,7 +15,7 @@
     <label>Gender
         <select required name="p_geschlecht">
           <option value="m">Männlich</option>
-          <option value="f">Weiblich</option>
+          <option value="w" <?php if($v->schueler->getGeschlecht() == "w"){echo "selected"; } ?>>Weiblich</option>
           <option value="u">Anderes</option>
         </select></label>
     <label>E-Mail
@@ -25,7 +25,7 @@
     <label>Status
         <select name="p_status">
           <option value="1">Aktiv</option>
-          <option value="0" <?php if($v->schueler->getStatus() == 0){echo "selected"; } ?>>Inaktiv</option>
+          <option value="0" <?php if($v->schueler->getStatus() == "0"){echo "selected"; } ?>>Inaktiv</option>
         </select>
     </label>
     <label>Klasse
@@ -44,7 +44,7 @@
     if($v->getKlassenBesuch()['isZweitklasse']){
         ?>
         <label>Zweitausbildung Klasse
-            <select name="class">
+            <select disabled name="z_class">
             <?php
               foreach($v->klassen as $klasse){
                 ?>
@@ -53,6 +53,7 @@
               }
             ?>
             </select>
+            <div class="hidden-button"><i class="fas fa-edit"></i><input form="edit_klasse" type="submit" name="kid" value="<?= $v->getKlassenBesuch()['z_kid'] ?>"></div>
         </label>
         <?php
     }?>

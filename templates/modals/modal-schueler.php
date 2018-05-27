@@ -9,7 +9,7 @@
             </button>
           </div>
           <div class="modal-body">
-              <form action="<?php echo $_SERVER['SCRIPT_NAME']."?id=schuelerView" ?>" method="post" id="modal-form">
+              <form method="post" id="modal-form-schueler">
                   <input required type="text" placeholder="Benutzername" name="s_username" value="">
                   <input required type="password" placeholder="Passwort" name="s_pw" value="">
                   <input required type="text" placeholder="Name" name="s_name" value="">
@@ -41,7 +41,7 @@
           <div class="modal-footer">
             <span class="seperator"></span>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <input form="modal-form" type="submit" name="safe" class="btn btn-primary" value="Save changes">
+            <input form="modal-form-schueler" type="submit" name="safe" class="btn btn-primary" value="Save changes">
           </div>
         </div>
       </div>

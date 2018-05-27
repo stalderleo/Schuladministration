@@ -59,7 +59,7 @@
 	</table>
 	<?php endif; ?>
 
-	<h2>Klasse-Fach zuweisen</h2>
+	<h2>Neue Klasse mit Kurs</h2>
 	<form method="post">
 		<div class="class-selection col-sm-6">
 			<input type="text" placeholder="Suche" class="search">

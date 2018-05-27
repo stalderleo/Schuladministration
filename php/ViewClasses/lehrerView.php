@@ -33,35 +33,36 @@ class lehrerView implements subcontroller
 			$this->lehrer = $db->selectLehrer($_POST['pid']);
 		}
 		
-		if (isset($_POST['setLehrer']) && $this->lehrer instanceof lehrer && $this->lehrer != null) {
-			if(!empty($_POST['p_usename'])){
+        if(isset($_POST['setLehrer']) && $this->lehrer instanceof lehrer){
+            if(!empty($_POST['p_username'])){
                 $this->lehrer->setUsername($_POST['p_username']);
             }
             if(!empty($_POST['p_password'])){
                 $this->lehrer->setPassword($_POST['p_password']);
             }
-			if (!empty($_POST['p_name'])) {
-				$this->lehrer->setName($_POST['p_name']);
-			}
-			if (!empty($_POST['p_vorname'])) {
-				$this->lehrer->setVorname($_POST['p_vorname']);
-			}
-			if (!empty($_POST['p_bday'])) {
-				$this->lehrer->setGeburtstag($_POST['p_bday']);
-			}
-			if (!empty($_POST['p_geschlecht'])) {
-				$this->lehrer->setGeschlecht($_POST['p_geschlecht']);
-			}
-			if (!empty($_POST['p_mail'])) {
-				$this->lehrer->setMail($_POST['p_mail']);
-			}
-			if (!empty($_POST['p_kuerzel'])) {
-				$this->lehrer->setKuerzel($_POST['p_kuerzel']);
-			}
-			if (!empty($_POST['p_status'])) {
-				$this->lehrer->setStatus($_POST['p_status']);
-			}
-		}
+            if(!empty($_POST['p_name'])){
+                $this->lehrer->setName($_POST['p_name']);
+            }
+            if(!empty($_POST['p_vorname'])){
+                $this->lehrer->setVorname($_POST['p_vorname']);
+            }
+            if(!empty($_POST['p_bday'])){
+                $this->lehrer->setGeburtstag($_POST['p_bday']);
+            }
+            if(!empty($_POST['p_geschlecht'])){
+                $this->lehrer->setGeschlecht($_POST['p_geschlecht']);
+            }
+            if(!empty($_POST['p_mail'])){
+                $this->lehrer->setMail($_POST['p_mail']);
+            }
+            if(!empty($_POST['p_kuerzel'])){
+                $this->lehrer->setKuerzel($_POST['p_kuerzel']);
+            }
+            if($_POST['p_status'] == 0 || $_POST['p_status'] == 1){
+                $this->lehrer->setStatus($_POST['p_status']);
+            }
+            $db->modifyLehrer($this->lehrer);
+        }
 		
 		
 		
