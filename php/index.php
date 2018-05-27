@@ -24,6 +24,7 @@ require_once("DataClasses/class.kurs.php");
 require_once("DataClasses/class.klassenBesuch.php");
 
 require_once("HelperClasses/class.db.php");
+require_once("HelperClasses/class.dbPerson.php");
 require_once("HelperClasses/class.passwordHandler.php");
 require_once("HelperClasses/class.dbSchueler.php");
 require_once("HelperClasses/class.dbAngestellter.php");
