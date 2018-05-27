@@ -49,7 +49,7 @@ class dbSchueler extends dbPerson {
     
     public function insertSchuelerAI(schueler $schueler) {
         basic::assertInstanceOf($schueler, schueler, true);
-        $sqlPersonType = "INSERT INTO angestellte (aid) VALUES (?)";
+        $sqlPersonType = "INSERT INTO schueler (sid) VALUES (?)";
         return $this->insertPerson($schueler, self::$class, $sqlPersonType, true);
     }
     
