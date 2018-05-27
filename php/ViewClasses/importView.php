@@ -57,7 +57,6 @@ class importView implements subcontroller
                 if (count($this->dbLehrer->selectAllLehrer()) != 1) { //Schauen ob DB leer ist bis auf den IMPORTUSER
                     $this->errorimport = "Datenbank muss leer sein bis auf den Importuser (einlesen mit der Datei /sql/IMPORTUSER.sql)!";
                 }
-                var_dump($_FILES['dataExport']);
                 $this->target = $_FILES['dataExport']['tmp_name'];
             } else {
                 $this->errorimport = "Wählen Sie ein File!";

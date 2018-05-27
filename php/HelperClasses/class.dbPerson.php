@@ -34,7 +34,6 @@ class dbPerson extends db {
         else if ($withoutPid && !$pidLast) {
             array_shift($params);
         }
-        //var_dump($params);
         return $params;
     }
     
