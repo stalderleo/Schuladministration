@@ -52,7 +52,7 @@ class importView implements subcontroller {
                     $this->errorimport = "Sorry, Nur XML-Datei sind zugelassen";
                 }
 
-                if (!empty($this->dbLehrer->selectAllLehrer())) { //Schauen ob DB leer ist
+                if (count($this->dbLehrer->selectAllLehrer()) > 1) { //Schauen ob DB leer ist bis auf den IMPORTUSER
                     $this->errorimport = "Datenbank muss lehr sein!";
                 }
                 $this->target = $_FILES['dataExport']['tmp_name'];
