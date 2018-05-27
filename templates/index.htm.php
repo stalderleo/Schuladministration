@@ -26,7 +26,7 @@
 				</div>
 			</div>
 			<div class="search-container col-sm-12 no-padding">
-				<input type="text" id="searchList" class="col-sm-3" style="margin-bottom: 20px" placeholder="Suche">
+				<input data-table-search=".tstacked" type="text" id="searchList" class="col-sm-3" style="margin-bottom: 20px" placeholder="Suche">
 			</div>
 		</div>
 		<div class="row">

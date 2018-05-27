@@ -13,6 +13,7 @@ require_once("HelperClasses/class.dbKurs.php");
 class faecherView implements subcontroller {
     private $template_path;
     private $kurse;
+    private $kurs;
     public $title;
     
     /**
@@ -28,16 +29,33 @@ class faecherView implements subcontroller {
     public function run() {
         $db = new dbKurs();
         
-        $this->kurse =  $db->selectAllKurse();
-        
-        if(isset($_POST["safe"]))
-        {
-            //$db->insertKursAI(new kurs($kuerzel, $bezeichnung))
+        if(isset($_POST["safe"]) && !empty($_POST['f_kur']) && !empty($_POST['f_bez'])){
+            $db->insertKursAI(new kurs($_POST['f_kur'], $_POST['f_bez']));
         }
+
+        if(isset($_POST["fid_del"]) && $db->selectKurs($_POST["fid_del"]) instanceof kurs){
+            $db->deleteKurs($db->selectKurs($_POST["fid_del"]));
+        }
+
+        if(isset($_POST["fid"])){
+            $this->kurs = $db->selectKurs($_POST["fid"]);
+        }
+        if(isset($_POST["f_bez"]) && isset($_POST["f_kur"]) && $this->kurs instanceof kurs){
+            $this->kurs->setBezeichnung($_POST["f_bez"]);
+            $this->kurs->setKuerzel($_POST["f_kur"]);
+            $db->modifyKurs($this->kurs);
+        }
+
+        $this->kurse = $db->selectAllKurse();
+
     }
     
     public function getOutput(){
         $v =& $this;
-        include($this->template_path."/liste/liste-kurs.htm.php");
+        if (isset($this->kurs)) {
+            include($this->template_path."/detail/detail-kurs.htm.php");
+        } else {
+            include($this->template_path."/liste/liste-kurs.htm.php");
+        }
     }
 }

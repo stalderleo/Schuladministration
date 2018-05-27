@@ -93,11 +93,17 @@ $(document).ready(function() {
       var listId = $(this).data()['tableSearch'];
       if(val.length >= 2){
         $(listId).children('tbody').children().each(function(){
-           if(!$(this).find('td:nth-of-type(1)').text().toLowerCase().match(val) && !$(this).find('td:nth-of-type(2)').text().toLowerCase().match(val)){
-              $(this).hide();
-            }else if($(this).find('td:nth-of-type(1)').text().toLowerCase().match(val) || $(this).find('td:nth-of-type(2)').text().toLowerCase().match(val)){
-              $(this).show();
+          var schowRow = false;
+          $(this).children().each(function(){
+            if($(this).find('form').length == 0){
+                if($(this).text().toLowerCase().match(val) && schowRow == false){
+                  schowRow = true;
+                }
             }
+          });
+          if(!schowRow){
+              $(this).hide();
+          }
         });
       }else{
         $(listId).children('tbody').children('tr').each(function(){

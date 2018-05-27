@@ -5,18 +5,21 @@
  * Template Kontaktliste. Stil Stacked Table.
  *
 -->
-<input uype="tyext" placeholder="Suche" class="form-search mb-20" data-table-search="#kursListe">
 <div class="flex">
     <div class="table-container dragscroll mobile">
         <table id="kursListe" class="table tstacked">
             <thead>
                 <tr>
-                    <th>Bezeichnung</th><th>Kuerzel</th>
+                    <th>Bezeichnung</th><th>Kuerzel</th><th>Detail</th><th>Löschen</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ( $v->kurse as $fach ): ?>
-                    <tr><td><?= $fach->getBezeichnung()."</td><td>". $fach->getKuerzel() ?></td></tr>
+                    <tr>
+                        <td><?= $fach->getBezeichnung()."</td><td>". $fach->getKuerzel() ?></td>
+                        <td><form class="edit" method="post"><i class="fas fa-edit"></i><input type="submit" name="fid" value='<?php echo $fach->getFid() ?>'></form></td>
+                        <td><form class="delete" method="post"><i class="fas fa-trash"></i><input type="submit" name="fid_del" value='<?php echo $fach->getFid() ?>'></form></td>
+                    </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>

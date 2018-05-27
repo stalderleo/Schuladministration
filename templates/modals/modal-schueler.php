@@ -9,7 +9,7 @@
             </button>
           </div>
           <div class="modal-body">
-              <form action="<?php echo $_SERVER['SCRIPT_NAME']."?id=schuelerView" ?>" method="post" id="modal-form">
+              <form method="post" id="modal-form-schueler">
                   <input required type="text" placeholder="Benutzername" name="s_username" value="">
                   <input required type="password" placeholder="Passwort" name="s_pw" value="">
                   <input required type="text" placeholder="Name" name="s_name" value="">

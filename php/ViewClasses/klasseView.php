@@ -34,12 +34,27 @@ class klasseView implements subcontroller
 		$dbKlassenBesuche = new dbKlassenBesuch();
                 $dbKursInstanz = new dbKursInstanz();
 
+		if(isset($_POST["k_bez"]) && isset($_POST["k_kur"]) && $db->selectKlasse($_POST["kid"]) instanceof klasse){
+            $klasse = $db->selectKlasse($_POST["kid"]);
+            $klasse->setBezeichnung($_POST["k_bez"]);
+            $klasse->setKuerzel($_POST["k_kur"]);
+            $db->modifyKlasse($klasse);
+        }
+
 		if (isset($_POST['kid'])) {
 			$this->klasse = $db->selectKlasse($_POST['kid']);
 			$this->schueler = $dbKlassenBesuche->selectBesucheByKlasse($this->klasse);
 
 			$dbKursInstanz = new dbKursInstanz();
 			$klassenInstanz = $dbKursInstanz->selectInstanzenByKlasse($this->klasse);
+
+			if (isset($_POST['del_kurs-klasse']) && $klassenInstanz[$_POST['del_kurs-klasse']] instanceof kursInstanz){
+				$dbKursInstanz->deleteInstanz($klassenInstanz[$_POST['del_kurs-klasse']]);
+				$klassenInstanz[$_POST['del_kurs-klasse']] = null;
+				$klassenInstanz = array_filter($klassenInstanz);
+			}
+
+			
 			foreach( $klassenInstanz as $klasse){
 				$this->lehrer[] = $klasse->getLehrer();
 				$this->kurse[] = $klasse->getKurs();
@@ -74,29 +89,22 @@ class klasseView implements subcontroller
 			foreach($this->schueler as $index=>$besuch){
 				if($_POST['del_schueler-klasse'] == $besuch->getSchueler()->getPid()){
 					$dbKlassenBesuche->deleteBesuch($besuch);
-					unset($this->schueler[$index]);
+					$this->schueler[$index] = null;
+					$this->schueler = array_filter($this->schueler);
 				}
 			}
-			
+		}
+		
+		if (isset($_POST["safe"]) && !empty($_POST["k_kur"]) && !empty($_POST["k_bez"])) {
+			$db->insertKlasse(new klasse($_POST["k_kur"], $_POST["k_bez"]));
 		}
 
-		
-		if (isset($_POST["safe"]) && !empty($_POST["k_ku"]) && !empty($_POST["k_bez"])) {
-			$db->insertKlasse(new klasse($_POST["k_ku"], $_POST["k_bez"]));
+		if (isset($_POST['kid_del']) && !empty($_POST['kid_del']) && $db->selectKlasse($_POST['kid_del']) instanceof klasse){
+			$db->deleteKlasse($db->selectKlasse($_POST['kid_del']));
 		}
 
 		$this->klassen = $db->selectAllKlassen();
 
-		//add the selected fach/er to this klasse
-		if (isset($_POST['kurs_id'])) {
-			if (is_array($_POST['kurs_id'])) {
-				foreach ($_POST['kurs_id'] as $kurs_id) {
-					//
-				}
-			} else {
-				$kurs_id = $_POST['kurs_id'];
-			}
-		}
 	}
 	
 	public function getOutput()
