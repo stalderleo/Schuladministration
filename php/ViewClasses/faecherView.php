@@ -40,6 +40,11 @@ class faecherView implements subcontroller {
         if(isset($_POST["fid"])){
             $this->kurs = $db->selectKurs($_POST["fid"]);
         }
+        
+        if(isset($_GET["fid"])){
+            $this->kurs = $db->selectKurs($_GET["fid"]);
+        }
+        
         if(isset($_POST["f_bez"]) && isset($_POST["f_kur"]) && $this->kurs instanceof kurs){
             $this->kurs->setBezeichnung($_POST["f_bez"]);
             $this->kurs->setKuerzel($_POST["f_kur"]);
@@ -52,7 +57,9 @@ class faecherView implements subcontroller {
     
     public function getOutput(){
         $v =& $this;
-        if (isset($this->kurs)) {
+        if (isset($_POST["fid"])) {
+            include($this->template_path."/update/update-kurs.htm.php");
+        }else if(isset($_GET["fid"])){
             include($this->template_path."/detail/detail-kurs.htm.php");
         } else {
             include($this->template_path."/liste/liste-kurs.htm.php");

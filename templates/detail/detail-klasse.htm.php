@@ -1,9 +1,7 @@
-    <label>Bezeichnung
-        <label type="text" name="k_bez" value=""><?= $v->klasse->getBezeichnung(); ?></label></label><br>
-    <label>Kürzel
-    <input type="text" name="k_kur" value="<?= $v->klasse->getKuerzel(); ?>"></label>
-    <input type="hidden" name="kid" value="<?= $v->klasse->getKid() ?>">
-    <input type="submit" class="btn" value="Speichern" name="setKurs">
+    <label class="detail-row">Bezeichnung
+        <label type="text" name="k_bez" class="detail-row-float" value=""><?= $v->klasse->getBezeichnung(); ?></label></label><br>
+    <label class="detail-row">Kürzel
+        <label type="text" name="k_kur" class="detail-row-float" value=""><?= $v->klasse->getKuerzel(); ?></label></label><br>
 </form>
 <?php  ?>
 <div class="row margin-50">
