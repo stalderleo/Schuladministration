@@ -25,7 +25,6 @@
           }
         ?>
         </select>
-        <div class="hidden-button"><i class="fas fa-edit"></i><input form="edit_klasse" type="submit" name="kid" value="<?= $v->getKlassenBesuch()['kid'] ?>"></div>
     </label>
     <?php
     if($v->getKlassenBesuch()['isZweitklasse']){
