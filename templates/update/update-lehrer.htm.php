@@ -26,15 +26,15 @@
         </select>
     </label>
     <input type="hidden" name="pid" value="<?= $v->lehrer->getPid() ?>">
-    <input type="submit" value="Speichern" name="setLehrer">
+    <input type="submit" class="btn" value="Speichern" name="setLehrer">
 </form>
 <div class="row margin-50">
 	<?php if(!empty($v->relations)):?>
-	<h2>Klassen / Kurse</h2>
+	<h2>Klassen / Fächer</h2>
 	<table id="" class="table tstacked">
 		<thead>
 			<tr>
-				<th>Klasse</th><th>Kurs</th><th>Löschen</th><th>Detail (Klasse)</th>
+				<th>Klasse</th><th>Fach</th><th>Löschen</th><th>Detail (Klasse)</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -77,7 +77,7 @@
 			  </select>
 			</div>
 			<input type="hidden" name="pid" value="<?= $v->lehrer->getPid() ?>">
-			<input type="submit" value="Speichern">
+			<input type="submit" class="btn" value="Speichern">
 		</div>
 	</form>
 </div>

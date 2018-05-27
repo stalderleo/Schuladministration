@@ -7,6 +7,7 @@
  * Instanziert den Controller und registriert die Subcontroller.
  *
  */
+
 error_reporting(E_ALL & ~E_NOTICE);
 header('Content-Type: text/html; charset=UTF-8');
 session_start();

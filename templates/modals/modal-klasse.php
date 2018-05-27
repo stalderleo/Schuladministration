@@ -12,7 +12,7 @@
       <div class="modal-body">
           <form action="<?php echo $_SERVER['SCRIPT_NAME']."?id=klasseView" ?>" id="modal-form-class" method="post">
               <input type="text" placeholder="Bezeichnung" name="k_bez">
-              <input type="text" placeholder="Kürzel" name="k_ku">
+              <input type="text" placeholder="Kürzel" name="k_kur">
           </form>
       </div>
       <div class="modal-footer">

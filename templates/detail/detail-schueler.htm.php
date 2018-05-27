@@ -14,7 +14,8 @@
         <label type="text"class="detail-row-float" name="p_kuerzel" value=""><?= $v->schueler->getKuerzel()?></label></label><br>
     <label class="detail-row">Status
         <label type="text"class="detail-row-float" name="p_kuerzel" value=""><?php if($v->schueler->getStatus() == 0){echo "InAktiv"; } else { echo "Aktiv"; } ?></label></label><br>
-    <label class="detail-row">Klasse
+   
+    <label  class="detail-row">Klasse
         <select class="detail-row-float" disabled name="class">
         <?php
           foreach($v->klassen as $klasse){
@@ -24,7 +25,7 @@
           }
         ?>
         </select>
-    </label><br>
+    </label>
     <?php
     if($v->getKlassenBesuch()['isZweitklasse']){
         ?>
@@ -38,6 +39,9 @@
               }
             ?>
             </select>
-        </label><br>
+        </label>
         <?php
     }?>
+</form>
+
+<form class="edit" id="edit_klasse" action="<?php echo $_SERVER['SCRIPT_NAME']."?id=klasseView" ?>" method="post"></form>
