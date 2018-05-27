@@ -1,3 +1,4 @@
 <?php
+
+header("Refresh:0");
 ?>
-<h1>logged out</h1>

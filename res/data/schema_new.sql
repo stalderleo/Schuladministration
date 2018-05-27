@@ -12,7 +12,7 @@ USE `schulAdministration` ;
 DROP TABLE IF EXISTS `person` ;
 
 CREATE  TABLE IF NOT EXISTS `person` (
-  `pid` INT NOT NULL AUTO_INCREMENT,
+  `pid` INT NOT NULL ,
   `username` VARCHAR(100) NOT NULL ,
   `password` VARCHAR(100) NOT NULL ,
   `name` VARCHAR(50) NOT NULL ,
