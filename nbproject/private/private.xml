@@ -3,24 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/administration/Schuladministration/php/index.php</file>
-            <file>file:/C:/xampp/htdocs/administration/Schuladministration/php/ViewClasses/schuelerView.php</file>
-            <file>file:/C:/xampp/htdocs/administration/Schuladministration/templates/modals/modal-lehrer.php</file>
-            <file>file:/C:/xampp/htdocs/administration/Schuladministration/templates/modals/modal-fach.php</file>
-            <file>file:/C:/xampp/htdocs/administration/Schuladministration/php/ViewClasses/importView.php</file>
-            <file>file:/C:/xampp/htdocs/administration/Schuladministration/php/ViewClasses/login.php</file>
-            <file>file:/C:/xampp/htdocs/administration/Schuladministration/templates/import.htm.php</file>
-            <file>file:/C:/xampp/htdocs/administration/Schuladministration/php/class.basic.php</file>
-            <file>file:/C:/xampp/htdocs/administration/Schuladministration/templates/liste/liste-klasse.htm.php</file>
-            <file>file:/C:/xampp/htdocs/administration/Schuladministration/php/ViewClasses/klasseView.php</file>
-            <file>file:/C:/xampp/htdocs/administration/Schuladministration/php/class.controller.php</file>
-            <file>file:/C:/xampp/htdocs/administration/Schuladministration/templates/modals/modal-schueler.php</file>
-            <file>file:/C:/xampp/htdocs/administration/Schuladministration/templates/modals/modal-klasse.php</file>
-            <file>file:/C:/xampp/htdocs/administration/Schuladministration/templates/dataimport.htm.php</file>
-            <file>file:/C:/xampp/htdocs/administration/Schuladministration/php/ViewClasses/lehrerView.php</file>
-            <file>file:/C:/xampp/htdocs/administration/Schuladministration/php/ViewClasses/faecherView.php</file>
-            <file>file:/C:/xampp/htdocs/administration/Schuladministration/php/indexV.php</file>
-            <file>file:/C:/xampp/htdocs/administration/Schuladministration/php/class.liste.php</file>
+            <file>file:/C:/xampp/htdocs/Schuladministration/php/ViewClasses/importView.php</file>
+            <file>file:/C:/xampp/htdocs/Schuladministration/templates/dataimport.htm.php</file>
+            <file>file:/C:/xampp/htdocs/Schuladministration/css/styles.css</file>
         </group>
     </open-files>
 </project-private>

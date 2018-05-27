@@ -280,3 +280,8 @@ th [data-extend]{
 label > input {
     float: right;
 }
+
+div#error {
+    width: 100%;
+    color: #cc0000;
+}
