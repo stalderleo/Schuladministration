@@ -66,10 +66,10 @@ class login implements subcontroller {
             //Abfrage Lehrer
             $lehrer = $dblehrer->checkUser($this->username, $this->password);
             
-            if($schuler != null || $lehrer != null)
+            if($schuler != -1 || $lehrer != -1)
             {
-                if( $schuler != null ) $_SESSION["role"] = "benutzer";                
-                if( $lehrer != null ) $_SESSION["role"] = "admin";
+                if( $schuler != -1 ) $_SESSION["role"] = "benutzer";                
+                if( $lehrer != -1 ) $_SESSION["role"] = "admin";
                 
                 $_SESSION["username"] = $this->username;
                 $_SESSION["password"] = $this->password;
@@ -93,10 +93,10 @@ class login implements subcontroller {
             //Abfrage Lehrer
             $lehrer = $dblehrer->checkUser($this->username, $this->password);
             
-            if($schuler != null || $lehrer != null)
+            if($schuler != -1 || $lehrer != -1)
             {
-                if( $schuler != null ) $_SESSION["role"] = "Benutzer";
-                if( $lehrer != null ) $_SESSION["role"] = "Admin";
+                if( $schuler != -1 ) $_SESSION["role"] = "Benutzer";
+                if( $lehrer != -1 ) $_SESSION["role"] = "Admin";
                 
                 $this->login = true;
             }
