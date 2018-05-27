@@ -39,7 +39,7 @@
 			</tr>
 		</thead>
 		<tbody>
-		<?php foreach ( $v->relations as $index=>$rel ): ?>
+		<?php foreach ( $v->relations as $index=>$rel ): if($rel != null):?>
 			<tr>
 				<td><?= $rel->getKlasse()->getBezeichnung(); ?></td>
 				<td><?= $rel->getKurs()->getBezeichnung(); ?></td>
@@ -55,7 +55,7 @@
 					</form>
 				</td>
 			</tr>
-		<?php endforeach;?>
+		<?php endif; endforeach;?>
 		</tbody>
 	</table>
 	<?php endif; ?>
