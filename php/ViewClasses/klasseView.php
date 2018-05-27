@@ -32,6 +32,7 @@ class klasseView implements subcontroller
 	{
 		$db = new dbKlasse();
 		$dbKlassenBesuche = new dbKlassenBesuch();
+                $dbKursInstanz = new dbKursInstanz();
 
 		if (isset($_POST['kid'])) {
 			$this->klasse = $db->selectKlasse($_POST['kid']);
@@ -43,6 +44,30 @@ class klasseView implements subcontroller
 				$this->lehrer[] = $klasse->getLehrer();
 				$this->kurse[] = $klasse->getKurs();
 			}
+		}
+                
+                if (isset($_GET['kid'])) {
+                    $this->klasse = $db->selectKlasse($_GET['kid']);
+                    $this->schueler = $dbKlassenBesuche->selectBesucheByKlasse($this->klasse);
+                    
+                    $dbKursInstanz = new dbKursInstanz();
+                    $klassenInstanz = $dbKursInstanz->selectInstanzenByKlasse($this->klasse);
+                    foreach( $klassenInstanz as $klasse){
+                            $this->lehrer[] = $klasse->getLehrer();
+                            $this->kurse[] = $klasse->getKurs();
+                    }
+		}
+                
+                if (isset($_POST['kid_del'])) {
+                    $klasse = $db->selectKlasse($_POST['kid_del']);
+                    $besuche = $dbKlassenBesuche->selectBesucheByKlasse($klasse);
+                    $instanze = $dbKursInstanz->selectInstanzenByKlasse($klasse);
+                    if($besuche == null && $instanze == null)
+                    {
+                        $db->deleteKlasse($klasse);
+                    }else{
+                        echo "<script>alert('Diese Element hat noch eine laufende Verknüpfung.');</script>";
+                    }
 		}
 		
 		if (isset($_POST['del_schueler-klasse'])){
@@ -77,9 +102,11 @@ class klasseView implements subcontroller
 	public function getOutput()
 	{
 		$v =& $this;
-		if (isset($this->klasse)) {
-			include($this->template_path."/detail/detail-klasse.htm.php");
-		} else {
+		if (isset($_POST['kid'])) {
+			include($this->template_path."/update/update-klasse.htm.php");
+		} else if(isset($_GET["kid"])) { 
+                        include($this->template_path."/detail/detail-klasse.htm.php");
+                } else {
 			include($this->template_path."/liste/liste-klasse.htm.php");
 		}
 	}

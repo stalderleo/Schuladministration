@@ -16,7 +16,7 @@
 			<tbody>
 				<?php foreach ($v->lehrers as $l) : ?>
 				<tr>
-					<td data-label="Name"><a href="#"></a><?php echo $l->getName()?></td>
+                                        <td data-label="Name"><form method="post"><a href="index.php?id=lehrerView&pid=<?php echo $l->getPid(); ?>"><?php echo $l->getName(); ?></a></form></td>
 					<td data-label="Vorname"><?php echo $l->getVorname()?></td>
 					<td data-label="Email" class="downsize"><?php echo $l->getMail()?></td>
 					<td data-label="Kuerzel"><?php echo $l->getKuerzel() ?></td>

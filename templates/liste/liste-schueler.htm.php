@@ -17,7 +17,7 @@
 		<?php
 		foreach ($v->schuelers as $s) : ?>
 				<tr>
-						<td data-label="Name"><a href="#"></a><?php echo $s->getName()?></td>
+                                                <td data-label="Name"><form method="post"><a href="index.php?id=schuelerView&pid=<?php echo $s->getPid()?>"><?php echo $s->getName()?></a></form></td>
 						<td data-label="Vorname"><?php echo $s->getVorname()?></td>
 						<td data-label="Email" class="downsize"><?php echo $s->getMail()?></td>
 						<td data-label="Kuerzel"><?php echo $s->getKuerzel() ?></td>
