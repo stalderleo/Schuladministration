@@ -93,11 +93,12 @@ class lehrerView implements subcontroller
 			$this->relations = $dbKursInstanz->selectInstanzenByLehrer($this->lehrer);
 		}
 
-		if (isset($_POST['del_instanz'])) {
+		if (isset($_POST['del_instanz']) && !empty($_POST['del_instanz'])) {
 			$dbKursInstanz = new dbKursInstanz();
 			$dbKursInstanz->deleteInstanz($this->relations[$_POST['del_instanz']]);
 			$this->relations[$_POST['del_instanz']] = null;
-			unset($_POST['del_instanz']);
+			$_POST['del_instanz'] = null;
+			$this->relations = array_filter($this->relations);
 		}
 
 		$this->lehrers = $db->selectAllLehrer();

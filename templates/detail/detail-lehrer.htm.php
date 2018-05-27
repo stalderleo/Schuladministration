@@ -30,11 +30,11 @@
 </form>
 <div class="row margin-50">
 	<?php if(!empty($v->relations)):?>
-	<h2>Klassen / Kurse</h2>
+	<h2>Klassen / Fächer</h2>
 	<table id="" class="table tstacked">
 		<thead>
 			<tr>
-				<th>Klasse</th><th>Kurs</th><th>Löschen</th><th>Detail (Klasse)</th>
+				<th>Klasse</th><th>Fach</th><th>Löschen</th><th>Detail (Klasse)</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -59,7 +59,7 @@
 	</table>
 	<?php endif; ?>
 
-	<h2>Lehrer-Klasse-Kurs Bezeiehung</h2>
+	<h2>Klasse-Fach zuweisen</h2>
 	<form method="post">
 		<div class="class-selection col-sm-6">
 			<input type="text" placeholder="Suche" class="search">

@@ -35,53 +35,29 @@
 		</tbody>
 	</table>
 
-	<?php if(!empty($v->lehrer)):?>
+	<?php if(!empty($v->kurse)):?>
 
-	<h2>Lehrer</h2>
+	<h2>Fächer / Lehrer</h2>
 	<table id="" class="table tstacked">
 		<thead>
 			<tr>
-				<th>Benutzername</th><th>Löschen</th><th>Detail</th>
+				<th>Fach</th><th>Lehrer</th><th>Löschen</th><th>Detail (Lehrer)</th>
 			</tr>
 		</thead>
 		<tbody>
-		<?php foreach ( $v->lehrer as $lehrer ): ?>
+		<?php foreach ( $v->kurse as $index=>$fach ):?>
 			<tr>
-				<td><?= $lehrer->getUsername(); ?></td>
+				<td><?=  $fach->getBezeichnung(); ?></td>
+				<td><?= $v->lehrer[$index]->getUsername(); ?></td>
 				<td>
 					<form class="delete" method="post">
-						<i class="fas fa-trash"></i><input type="submit" name="del_lehrer-klasse" value="<?= $lehrer->getPid(); ?>">
+						<i class="fas fa-trash"></i><input type="submit" name="del_kurs-klasse" value="<?= $index ?>">
 						<input type="hidden" name="kid" value="<?= $v->klasse->getKid(); ?>">
 					</form>
 				</td>
 				<td>
 					<form class="edit" action="<?php echo $_SERVER['SCRIPT_NAME']."?id=lehrerView" ?>" method="post">
-						<i class="fas fa-edit"></i><input type="submit" name="pid" value="<?= $lehrer->getPid(); ?>">
-					</form>
-				</td>
-			</tr>
-		<?php endforeach; ?>
-		</tbody>
-	</table>
-
-	<?php endif; ?>
-	<?php if(!empty($v->kurse)):?>
-
-	<h2>Fächer</h2>
-	<table id="" class="table tstacked">
-		<thead>
-			<tr>
-				<th>Bezeichnung</th><th>Löschen</th>
-			</tr>
-		</thead>
-		<tbody>
-		<?php foreach ( $v->kurse as $fach ): ?>
-			<tr>
-				<td><?=  $fach->getBezeichnung(); ?></td>
-				<td>
-					<form class="delete" method="post">
-						<i class="fas fa-trash"></i><input type="submit" name="del_schueler-klasse" value="<?= $fach->getFid(); ?>">
-						<input type="hidden" name="kid" value="<?= $v->klasse->getKid() ?>">
+						<i class="fas fa-edit"></i><input type="submit" name="pid" value="<?= $v->lehrer[$index]->getPid(); ?>">
 					</form>
 				</td>
 			</tr>

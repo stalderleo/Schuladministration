@@ -39,20 +39,28 @@ class klasseView implements subcontroller
 
 			$dbKursInstanz = new dbKursInstanz();
 			$klassenInstanz = $dbKursInstanz->selectInstanzenByKlasse($this->klasse);
+
+			if (isset($_POST['del_kurs-klasse']) && $klassenInstanz[$_POST['del_kurs-klasse']] instanceof kursInstanz){
+				$dbKursInstanz->deleteInstanz($klassenInstanz[$_POST['del_kurs-klasse']]);
+				$klassenInstanz[$_POST['del_kurs-klasse']] = null;
+				$klassenInstanz = array_filter($klassenInstanz);
+			}
+
+			
 			foreach( $klassenInstanz as $klasse){
 				$this->lehrer[] = $klasse->getLehrer();
 				$this->kurse[] = $klasse->getKurs();
 			}
 		}
-		
+
 		if (isset($_POST['del_schueler-klasse'])){
 			foreach($this->schueler as $index=>$besuch){
 				if($_POST['del_schueler-klasse'] == $besuch->getSchueler()->getPid()){
 					$dbKlassenBesuche->deleteBesuch($besuch);
-					unset($this->schueler[$index]);
+					$this->schueler[$index] = null;
+					$this->schueler = array_filter($this->schueler);
 				}
 			}
-			
 		}
 
 		
