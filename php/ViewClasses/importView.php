@@ -3,28 +3,30 @@ require_once("interface.subcontroller.php");
 
 /**
  * Klasse: importView
- * 
+ *
  * Die Klasse sorgt für das Funktionieren des XML - Import.
  * Dabei wird der DatenTyp überprüft und die Daten in die DB
  * gespeichert.
- * 
+ *
  */
 
-class importView implements subcontroller {
-    
-    // Assoziativer Array mit Parametern (Ueblicherweise $_REQUEST)
-    private $params = NULL;
-    
-    //DB-Klassen
-    private $dbLehrer = NULL; 
-    private $dbKurs = NULL;
-    private $dbKursinstanz = NULL;
-    private $dbSchueler = NULL;
-    private $dbKlasse = NULL;
-    private $dbKlassenBesuch = NULL;
-    private $dbAngestellte = NULL;
+class importView implements subcontroller
+{
 	
-    // Pfad zum Template-Verzeichnis
+	// Assoziativer Array mit Parametern (Ueblicherweise $_REQUEST)
+	private $params = null;
+	
+	//DB-Klassen
+	private $dbLehrer = null;
+	private $dbKurs = null;
+	private $dbKursinstanz = null;
+	private $dbSchueler = null;
+	private $dbKlasse = null;
+	private $dbKlassenBesuch = null;
+	private $dbAngestellte = null;
+	public $title = "Import";
+	
+	// Pfad zum Template-Verzeichnis
     private $template_path = "";
     
     // Datei
@@ -55,6 +57,7 @@ class importView implements subcontroller {
                 if (!empty($this->dbLehrer->selectAllLehrer())) { //Schauen ob DB leer ist
                     $this->errorimport = "Datenbank muss lehr sein!";
                 }
+                var_dump($_FILES['dataExport']);
                 $this->target = $_FILES['dataExport']['tmp_name'];
             } else {
                 $this->errorimport = "Wählen Sie ein File!";
@@ -187,4 +190,5 @@ class importView implements subcontroller {
         fwrite ( $handle, $str );
         fclose ( $handle );
     }
+
 }
